@@ -1,23 +1,25 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class spawnManager : MonoBehaviour
 {
 
     [SerializeField] List<GameObject> obstacles = new List<GameObject>();
     [SerializeField] List<Transform> spawnPoints = new List<Transform>();
-    [SerializeField] Transform endPoint;
+    [SerializeField] int spawnDelay;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
         
-
+        StartCoroutine(spawnTimer(spawnDelay));
     }
 
     // Update is called once per frame
     void Update(){
 
-        if (Input.GetButtonDown("space")) {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame) {
 
             SpawnObstacle();
         
@@ -31,5 +33,14 @@ public class spawnManager : MonoBehaviour
         int randomSpawn = Random.Range(0, spawnPoints.Count);
 
         GameObject obstacle = Instantiate(obstacles[randomObstacle], spawnPoints[randomSpawn].position, spawnPoints[randomSpawn].rotation);
+    }
+
+    IEnumerator spawnTimer(int seconds) { 
+
+
+        yield return new WaitForSeconds(seconds);
+        SpawnObstacle();
+        StartCoroutine(spawnTimer(spawnDelay));
+    
     }
 }
