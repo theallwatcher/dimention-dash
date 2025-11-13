@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -7,14 +7,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _laneOffset;
     [SerializeField] private float _switchSpeed;
     [SerializeField] private float gravity = -10f;
+    [SerializeField] private float jumpHeight = 5f;
 
     public InputSystem_Actions PlayerControls;
+
     private Vector2 moveDirection;
     private InputAction jump;
     private InputAction duck;
     private InputAction move;
-    private bool isMoving = false;
 
+    private bool isMoving = false;
+    private float direction;
+    private Vector3 targetPos;
     private void Awake()
     {
         PlayerControls = new InputSystem_Actions();
@@ -55,32 +59,39 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = PlayerControls.Player.Move.ReadValue<Vector2>();
 
         //check if moving
-        if (moveDirection.x == Vector2.zero.x)
-        {
-            isMoving = false;
-        }
+        if(isMoving) return;
+
         //check if moving left
-        else if (moveDirection.x < -.1f)
+        if (moveDirection.x < -.1f)
         {
-            Debug.Log("move left");
-            MoveToTargetPos(-1);
+            targetPos = new Vector3(transform.position.x + -_laneOffset, transform.position.y, transform.position.z);
             isMoving = true;
         }
         //check if moving right
         else if (moveDirection.x > .1f)
         {
-            Debug.Log("move right");
-            MoveToTargetPos(1);
+            //set target pos
+            targetPos = new Vector3(transform.position.x + _laneOffset, transform.position.y, transform.position.z);
             isMoving = true;
         }
     }
-
-    private void MoveToTargetPos(float dir)
+    private void Update()
     {
+        //dont execute when moving
+        if (!isMoving) return;
+
+        //save player transform
         Transform t = transform;
-        Vector3 targetPos = new Vector3(t.position.x + (dir * _laneOffset) , t.position.y, t.position.z);
+
+        //update player position
         t.position = Vector3.Lerp(t.position, targetPos, _switchSpeed * Time.deltaTime);
-        isMoving = false;
+
+        //check if target pos is reached
+        if(Mathf.Abs(t.position.x - targetPos.x) < 0.01f)
+        {
+            t.position = targetPos;
+            direction = 0;
+            isMoving = false;
+        } 
     }
- 
 }
