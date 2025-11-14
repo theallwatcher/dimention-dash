@@ -7,20 +7,23 @@ public class PlayerMovement : MonoBehaviour
     public InputSystem_Actions PlayerControls;
     [SerializeField] PlayerObject _playerSO;
 
-    //jump
-    private bool isGrounded = true;
-    private Rigidbody rb;
-    private Vector3 startPos;
-
     //movement
     private Vector2 moveDirection;
     private InputAction jump;
     private InputAction duck;
     private InputAction move;
+    
+    //jump
+    private bool isGrounded = true;
+    private Rigidbody rb;
 
-    private bool isMoving = false;
-    private float direction;
-    private Vector3 targetPos;
+
+    private bool isMovingX = false;
+    private Vector3 targetPosX;
+
+    private bool isMovingZ = false;
+    private Vector3 targetPosZ;
+
     private void Awake()
     {
         PlayerControls = new InputSystem_Actions();
@@ -28,8 +31,8 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        startPos = transform.position;
     }
+    #region onEnableAndDisable
     private void OnEnable()
     {
         //enable all movement buttons
@@ -50,7 +53,8 @@ public class PlayerMovement : MonoBehaviour
         jump.Disable();
         duck.Disable();
     }
-
+    #endregion
+    #region Input
     private void Jump(InputAction.CallbackContext context)
     {
         if (!isGrounded) return;
@@ -64,9 +68,26 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Duck");
     }
 
+    #endregion
     private void FixedUpdate()
     {
-        if (!isMoving)
+        Debug.Log(isMovingZ);
+        Move();
+        SwitchLane();
+        if (isMovingZ) HandleForwardBackwardMovement();
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        //GROUNDCHECK
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void Move()
+    {
+        if (!isMovingX)
         {
             //read value from input system
             moveDirection = PlayerControls.Player.Move.ReadValue<Vector2>();
@@ -74,45 +95,31 @@ public class PlayerMovement : MonoBehaviour
 
             ///LEFT
             if (moveDirection.x < -.1f)
-                targetPos = new Vector3(rb.position.x - _playerSO.LaneOffset, rb.position.y, rb.position.z);
+                targetPosX = new Vector3(rb.position.x - _playerSO.LaneOffset, rb.position.y, rb.position.z);
 
             //RIGHT
             else if (moveDirection.x > .1f)
-                targetPos = new Vector3(rb.position.x + _playerSO.LaneOffset, rb.position.y, rb.position.z);
+                targetPosX = new Vector3(rb.position.x + _playerSO.LaneOffset, rb.position.y, rb.position.z);
 
             //CLAMP X POSITION
-            targetPos.x = Mathf.Clamp(targetPos.x, -_playerSO.LaneOffset, _playerSO.LaneOffset);
+            targetPosX.x = Mathf.Clamp(targetPosX.x, -_playerSO.LaneOffset, _playerSO.LaneOffset);
 
             // start movement if new target detected
             if (moveDirection.x > 0.1f || moveDirection.x < -0.1f)
-                isMoving = true;
-        }
-
-        HandleMovement();
-    }
-    private void Update()
-    {
-            Debug.Log(isMoving);
-    }
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
+                isMovingX = true;
         }
     }
-
-    private void HandleMovement()
+    private void SwitchLane()
     {
 
         //dont execute when moving
-        if (!isMoving) return;
+        if (!isMovingX) return;
 
         Vector3 currentPos = rb.position;
 
         float newX = Mathf.Lerp(
             currentPos.x,
-            targetPos.x,
+            targetPosX.x,
             _playerSO.MovementSpeed * Time.fixedDeltaTime
             );
 
@@ -123,10 +130,54 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(newPos);
 
         //check if target pos is reached
-        if (Mathf.Abs(newX - targetPos.x) < 0.01f)
+        if (Mathf.Abs(newX - targetPosX.x) < 0.01f)
         {
-            rb.MovePosition(new Vector3(targetPos.x, currentPos.y, currentPos.z));
-            isMoving = false;
+            rb.MovePosition(new Vector3(targetPosX.x, currentPos.y, currentPos.z));
+            isMovingX = false;
         }
     }
+    #region Z movement
+    private void HandleForwardBackwardMovement()
+    {
+            Vector3 currentPos = rb.position;
+
+            float newZ = Mathf.Lerp(
+                currentPos.z,
+                targetPosZ.z,
+                _playerSO.MovementSpeed * Time.fixedDeltaTime);
+
+            Vector3 newPos = new Vector3(
+                currentPos.x, currentPos.y, newZ);
+
+            rb.MovePosition(newPos);
+
+            if (Mathf.Abs(newZ - targetPosZ.z) < 0.01f)
+            {
+                rb.MovePosition(targetPosZ);
+                isMovingZ = false;
+            }
+    }
+
+    public void DamagePlayer()
+    {
+        if (isMovingZ) return;
+
+        targetPosZ = new Vector3(
+            rb.position.x,
+            rb.position.y,
+            rb.position.z - _playerSO.DamageOffset);
+        isMovingZ = true;
+    }
+
+    public void BoostPlayer()
+    {
+        if (isMovingZ) return;
+
+        targetPosZ = new Vector3(
+            rb.position.x,
+            rb.position.y,
+            rb.position.z + _playerSO.BoostOffset);
+        isMovingZ = true;
+    }
+    #endregion
 }
