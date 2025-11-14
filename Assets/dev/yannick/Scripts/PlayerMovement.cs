@@ -91,6 +91,8 @@ public class PlayerMovement : MonoBehaviour
         if (isMovingZ) HandleForwardBackwardMovement();
         HandleSlide();
 
+        
+        
     }
     private void OnCollisionEnter(Collision other)
     {
