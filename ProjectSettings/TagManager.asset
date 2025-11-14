@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - RoadSectionTrigger
   - Destroy
+  - Damage
   layers:
   - Default
   - TransparentFX
