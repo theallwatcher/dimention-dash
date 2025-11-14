@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private InputAction jump;
     private InputAction duck;
     private InputAction move;
-    
+    private Vector3 startPos;
     //jump
     private bool isGrounded = true;
     private Rigidbody rb;
@@ -24,13 +24,27 @@ public class PlayerMovement : MonoBehaviour
     private bool isMovingZ = false;
     private Vector3 targetPosZ;
 
+    //slide
+    private bool isSliding = false;
+    private float slideTimer = 0f;
+    [SerializeField] private CapsuleCollider playerCollider;
+    private float originalColliderHeight;
+    private Vector3 originalColliderCenter;
+
     private void Awake()
     {
         PlayerControls = new InputSystem_Actions();
     }
     private void Start()
     {
+        startPos = transform.position;
         rb = GetComponent<Rigidbody>();
+
+        if (playerCollider != null)
+        {
+            originalColliderHeight = playerCollider.height;
+            originalColliderCenter = playerCollider.center;
+        }
     }
     #region onEnableAndDisable
     private void OnEnable()
@@ -65,16 +79,18 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Duck(InputAction.CallbackContext context)
     {
-        Debug.Log("Duck");
+        StartSlide();
     }
 
     #endregion
     private void FixedUpdate()
     {
-        Debug.Log(isMovingZ);
+        Debug.Log(isSliding);
         Move();
         SwitchLane();
         if (isMovingZ) HandleForwardBackwardMovement();
+        HandleSlide();
+
     }
     private void OnCollisionEnter(Collision other)
     {
@@ -149,7 +165,9 @@ public class PlayerMovement : MonoBehaviour
             Vector3 newPos = new Vector3(
                 currentPos.x, currentPos.y, newZ);
 
-            rb.MovePosition(newPos);
+        targetPosZ.z = Mathf.Clamp(targetPosZ.z, startPos.z - 5, 50);
+
+        rb.MovePosition(newPos);
 
             if (Mathf.Abs(newZ - targetPosZ.z) < 0.01f)
             {
@@ -158,26 +176,53 @@ public class PlayerMovement : MonoBehaviour
             }
     }
 
-    public void DamagePlayer()
+    public void DamagePlayer(float amount)
     {
         if (isMovingZ) return;
 
         targetPosZ = new Vector3(
             rb.position.x,
             rb.position.y,
-            rb.position.z - _playerSO.DamageOffset);
-        isMovingZ = true;
-    }
-
-    public void BoostPlayer()
-    {
-        if (isMovingZ) return;
-
-        targetPosZ = new Vector3(
-            rb.position.x,
-            rb.position.y,
-            rb.position.z + _playerSO.BoostOffset);
+            rb.position.z - amount);
         isMovingZ = true;
     }
     #endregion
+
+
+    #region slide movement
+    private void StartSlide()
+    {
+        if (isSliding || playerCollider == null) return;
+
+        isSliding = true;
+        slideTimer = 0f;
+
+        // Lower collider
+        playerCollider.height = originalColliderHeight * _playerSO.slideHeight;
+        playerCollider.center = originalColliderCenter - new Vector3(0, originalColliderHeight * (1 - _playerSO.slideHeight) / 2f, 0);
+    }
+
+
+    private void HandleSlide()
+    {
+        if (!isSliding) return;
+
+        slideTimer += Time.fixedDeltaTime;
+        if (slideTimer >= _playerSO.SlideDuration)
+        {
+            EndSlide();
+        }
+    }
+
+    private void EndSlide()
+    {
+        isSliding = false;
+
+        // Reset collider
+        playerCollider.height = originalColliderHeight;
+        playerCollider.center = originalColliderCenter;
+    }
+    #endregion
 }
+
+
