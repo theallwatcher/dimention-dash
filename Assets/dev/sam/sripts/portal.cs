@@ -1,20 +1,28 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class portal : MonoBehaviour
 {
-
+    Rigidbody rb;
+    [SerializeField] float speed = -500;
     public int counter;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (counter == 2)
+    void Update(){
+
+        if (Keyboard.current.shiftKey.wasPressedThisFrame) {
+
+            rb.AddForce(new Vector3(0, 0, speed));
+        }
+
+        if (counter >= 4)
         {
 
             SceneManager.LoadScene("//next scene name");
@@ -25,6 +33,12 @@ public class portal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        counter++;
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("portal hit 1");
+            counter++;
+        }
     }
+
+    
 }
