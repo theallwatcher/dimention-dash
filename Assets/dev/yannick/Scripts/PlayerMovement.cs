@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
     //public InputSystem_Actions PlayerControls;
     private PlayerInput playerInput;
     [SerializeField] PlayerObject _playerSO;
-    [SerializeField] CharacterController _characterController;
     [SerializeField] Rigidbody rb;
     //movement
     private Vector2 moveDirection;

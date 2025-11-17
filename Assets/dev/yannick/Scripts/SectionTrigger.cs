@@ -1,14 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SectionTrigger : MonoBehaviour
 {
-    [SerializeField] GameObject sectionPrefab;
+    [SerializeField] private List<GameObject> _roadSectionList;
+
     [SerializeField] Transform spawnPoint;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("RoadSectionTrigger"))
         {
-            Instantiate(sectionPrefab, spawnPoint.position, Quaternion.identity);
+            Instantiate(_roadSectionList[Random.Range(0, _roadSectionList.Count)], spawnPoint.position, spawnPoint.rotation);
         }
     }
 }
