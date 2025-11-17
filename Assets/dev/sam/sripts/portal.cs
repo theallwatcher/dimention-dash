@@ -31,9 +31,10 @@ public class portal : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.tag == "player") {
+        if (collision.gameObject.tag == "player") {
+            Debug.Log("portal hit 1");
             counter++;
         }
     }

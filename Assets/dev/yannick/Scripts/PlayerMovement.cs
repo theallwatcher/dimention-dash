@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
                 targetPosX = new Vector3(rb.position.x + _playerSO.LaneOffset, rb.position.y, rb.position.z);
 
             //CLAMP X POSITION
-            targetPosX.x = Mathf.Clamp(targetPosX.x, -_playerSO.LaneOffset, _playerSO.LaneOffset);
+            targetPosX.x = Mathf.Clamp(targetPosX.x,startPos.x  -_playerSO.LaneOffset, startPos.x + _playerSO.LaneOffset);
 
             // start movement if new target detected
             if (moveDirection.x > 0.1f || moveDirection.x < -0.1f)
