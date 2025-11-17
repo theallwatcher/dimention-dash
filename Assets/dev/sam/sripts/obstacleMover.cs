@@ -15,10 +15,17 @@ public class obstacleMover : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (gameObject.transform.position.z < endPoint.position.z)
-        {
+    void Update(){
+
+        if (gameObject.transform.position.z < endPoint.position.z){
+
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other){
+
+        if (other.gameObject.tag == "Player") {
 
             Destroy(gameObject);
         }
