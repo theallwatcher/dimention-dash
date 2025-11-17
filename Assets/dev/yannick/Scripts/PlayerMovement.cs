@@ -1,21 +1,21 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public InputSystem_Actions PlayerControls;
+    //public InputSystem_Actions PlayerControls;
+    private PlayerInput playerInput;
     [SerializeField] PlayerObject _playerSO;
-
+    [SerializeField] CharacterController _characterController;
+    [SerializeField] Rigidbody rb;
     //movement
     private Vector2 moveDirection;
-    private InputAction jump;
-    private InputAction duck;
-    private InputAction move;
+    private InputAction jumpAction;
+    private InputAction duckAction;
+    private InputAction moveAction;
     private Vector3 startPos;
     //jump
     private bool isGrounded = true;
-    private Rigidbody rb;
 
 
     private bool isMovingX = false;
@@ -33,7 +33,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        PlayerControls = new InputSystem_Actions();
+        playerInput = GetComponent<PlayerInput>();
+        moveAction = playerInput.actions["Move"];
+        jumpAction = playerInput.actions["Jump"];
+        duckAction = playerInput.actions["Duck"];
     }
     private void Start()
     {
@@ -49,27 +52,33 @@ public class PlayerMovement : MonoBehaviour
     #region onEnableAndDisable
     private void OnEnable()
     {
-        //enable all movement buttons
-        move = PlayerControls.Player.Move;
-        move.Enable();
+        moveAction = playerInput.actions["Move"];
+        moveAction.performed += ctx => moveDirection = ctx.ReadValue<Vector2>();
+        moveAction.canceled += ctx => moveDirection = Vector2.zero;
 
-        jump = PlayerControls.Player.Jump;
-        jump.Enable();
-        jump.performed += Jump;
+        jumpAction = playerInput.actions["Jump"];
+        jumpAction.performed += OnJump;
 
-        duck = PlayerControls.Player.Duck;
-        duck.Enable();
-        duck.performed += Duck;
+        duckAction = playerInput.actions["Duck"];
+        duckAction.performed += OnDuck;
+        /*//enable all movement buttons
+        moveAction.Enable();
+
+        jumpAction.Enable();
+        jumpAction.performed += OnJump;
+
+       // duckAction.Enable();
+        duckAction.performed += OnDuck;*/
     }
     private void OnDisable()
     {
-        move.Disable();
-        jump.Disable();
-        duck.Disable();
+        moveAction.Disable();
+        jumpAction.Disable();
+        duckAction.Disable();
     }
     #endregion
     #region Input
-    private void Jump(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
         if (!isGrounded) return;
 
@@ -77,7 +86,15 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(Vector3.up * _playerSO.JumpForce, ForceMode.Impulse);
 
     }
-    private void Duck(InputAction.CallbackContext context)
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;  
+        }
+    }
+    public void OnDuck(InputAction.CallbackContext context)
     {
         StartSlide();
     }
@@ -85,30 +102,20 @@ public class PlayerMovement : MonoBehaviour
     #endregion
     private void FixedUpdate()
     {
-        Debug.Log(isSliding);
+        Debug.Log(isGrounded);
+
         Move();
         SwitchLane();
         if (isMovingZ) HandleForwardBackwardMovement();
         HandleSlide();
-
-        
-        
-    }
-    private void OnCollisionEnter(Collision other)
-    {
-        //GROUNDCHECK
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
     }
 
-    private void Move()
+    public void Move()
     {
         if (!isMovingX)
         {
             //read value from input system
-            moveDirection = PlayerControls.Player.Move.ReadValue<Vector2>();
+          //  moveDirection = .Player.Move.ReadValue<Vector2>();
 
 
             ///LEFT
