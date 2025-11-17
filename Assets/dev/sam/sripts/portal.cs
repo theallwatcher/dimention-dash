@@ -22,7 +22,7 @@ public class portal : MonoBehaviour
             rb.AddForce(new Vector3(0, 0, speed));
         }
 
-        if (counter == 2)
+        if (counter >= 4)
         {
 
             SceneManager.LoadScene("//next scene name");
@@ -31,11 +31,14 @@ public class portal : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "player") {
+        if (other.gameObject.tag == "Player")
+        {
             Debug.Log("portal hit 1");
             counter++;
         }
     }
+
+    
 }

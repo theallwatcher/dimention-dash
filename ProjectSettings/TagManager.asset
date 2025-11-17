@@ -8,6 +8,7 @@ TagManager:
   - RoadSectionTrigger
   - Destroy
   - Damage
+  - obstacle
   layers:
   - Default
   - TransparentFX

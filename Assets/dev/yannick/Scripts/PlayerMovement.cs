@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
     #endregion
     private void FixedUpdate()
     {
-        Debug.Log(isGrounded);
+       
 
         Move();
         SwitchLane();
@@ -174,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 newPos = new Vector3(
                 currentPos.x, currentPos.y, newZ);
 
-        targetPosZ.z = Mathf.Clamp(targetPosZ.z, startPos.z - 5, 50);
+        //targetPosZ.z = Mathf.Clamp(targetPosZ.z, startPos.z - 5, 50);
 
         rb.MovePosition(newPos);
 
@@ -185,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
             }
     }
 
-    public void DamagePlayer(float amount)
+    public void MovePlayerZ(float amount)
     {
         if (isMovingZ) return;
 
@@ -194,6 +194,14 @@ public class PlayerMovement : MonoBehaviour
             rb.position.y,
             rb.position.z - amount);
         isMovingZ = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "obstacle") 
+        {
+            MovePlayerZ(3);
+        }
     }
     #endregion
 
