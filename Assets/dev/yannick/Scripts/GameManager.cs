@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     private bool _playerTwoReady;
 
     [SerializeField] Transform _playerOnePos, _playerTwoPos;
+    [SerializeField] private PlayerInventory playerOneInventory;
+    [SerializeField] private PlayerInventory playerTwoInventory;
     public string leader = " ";
 
     public float roadSpeed = 2f;
@@ -34,16 +36,22 @@ public class GameManager : MonoBehaviour
             {
                 //player one is in front
                 leader = "Player 1";
+            playerOneInventory.IsLeader(true);
+            playerTwoInventory.IsLeader(false);
             }
             else if (_playerOnePos.position.z < _playerTwoPos.position.z)
             {
                 //player 2 is in front
                 leader = "Player 2";
-            }        
+                playerOneInventory.IsLeader(false);
+                playerTwoInventory.IsLeader(true);
+        }        
         else if(_playerOnePos.position.z == _playerTwoPos.position.z)
         {
             //tie
-            leader = "tie";
+            leader = "tie"; 
+            playerOneInventory.IsLeader(false);
+            playerTwoInventory.IsLeader(false);
         }
         Debug.Log(leader);
     }
