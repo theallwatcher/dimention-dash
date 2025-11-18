@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private List<ItemObject> itemObjects = new List<ItemObject>();
+
+    [Header("In scene references")]
     [SerializeField] private Image itemSlotImage = null;
+    [SerializeField] PlayerMovement otherPlayer;
 
     private GameObject currentPowerup = null;
     private Coroutine scrollRoutine = null;
@@ -44,7 +47,9 @@ public class PlayerInventory : MonoBehaviour
 
     public void UsePowerup()
     {
-        Instantiate(currentPowerup);
+        //set powerup spawnPoint 
+
+//        Instantiate(currentPowerup, spawnPos);
         itemSlotImage.sprite = null;
         currentPowerup = null;
     }
@@ -54,7 +59,7 @@ public class PlayerInventory : MonoBehaviour
         float interval = 0.01f;
 
         //start at a random entry in the array
-        int index = Random.Range(0, itemObjects.Count);
+        int index = Random.Range(0, itemObjects.Count-1);
 
         
         while (interval < 0.6f)
