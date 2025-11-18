@@ -1,5 +1,6 @@
 using UnityEngine;
-using UnityEngine.InputSystem; // Belangrijk: Gebruik de nieuwe Input System
+using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class InputController : MonoBehaviour
 {
@@ -7,102 +8,129 @@ public class InputController : MonoBehaviour
     public UI3DObjectManager displayManager;
 
     [Header("Input Action Assets")]
-    [Tooltip("Sleep hier de Input Action Asset naartoe die de WASD en Arrow toetsen bevat.")]
+    [Tooltip("Dit asset bevat de Player en Player1 maps.")]
     public InputActionAsset inputActions;
+    
+    // Deze acties blijven, maar we luisteren naar beide
+    private InputAction _playerMoveAction; 
+    private InputAction _arrowMoveAction; 
 
-    // Groepen van input actions (Action Maps)
-    private InputActionMap _playerControls;
-    private InputActionMap _arrowControls;
+    private const string MoveActionName = "Move";
+    
+    // ⭐ NIEUW: Opslag om bij te houden welk apparaat welke index al gespawnd heeft.
+    private readonly Dictionary<InputDevice, int> _deviceIndexMap = new Dictionary<InputDevice, int>();
+    
+    // De index die we willen spawnen voor de Player1 map (Index 1 i.p.v. 2)
+    private const int Player1Index = 1; 
+
 
     void Awake()
     {
-        if (inputActions == null)
+        if (inputActions == null || displayManager == null)
         {
-            Debug.LogError("Input Actions Asset is niet ingesteld! De input zal niet werken.");
+            if (inputActions == null) Debug.LogError("Input Actions Asset is niet ingesteld!");
+            if (displayManager == null) Debug.LogError("UI3DObjectManager is niet ingesteld!");
             enabled = false;
             return;
         }
 
-        // Zoek de Input Action Maps in het Asset
-        // Zorg ervoor dat de namen "Player" en "Player1" correct zijn in je Input Asset!
-        _playerControls = inputActions.FindActionMap("Player");
-        _arrowControls = inputActions.FindActionMap("Player1");
-
-        if (_playerControls == null || _arrowControls == null)
-        {
-            Debug.LogError("Input Action Maps (PlayerControls of ArrowControls) niet gevonden in het Asset! Controleer de namen.");
-            enabled = false;
-            return;
-        }
+        InputActionMap playerMap = inputActions.FindActionMap("Player");
+        InputActionMap player1Map = inputActions.FindActionMap("Player1"); // Naam is "Player1"
         
-        // Koppel de events (wat moet er gebeuren als de actie wordt geactiveerd?)
-        // We gebruiken += in plaats van .AddListener(), wat de standaard .NET manier is
-        _playerControls.actionTriggered += OnPlayerControlsActivated;
-        _arrowControls.actionTriggered += OnArrowControlsActivated;
+        if (playerMap == null || player1Map == null)
+        {
+            Debug.LogError("Input Action Maps (Player of Player1) niet gevonden! Controleer de namen.");
+            enabled = false;
+            return;
+        }
+
+        _playerMoveAction = playerMap.FindAction(MoveActionName);
+        _arrowMoveAction = player1Map.FindAction(MoveActionName); // Naam in script was _arrowMoveAction
+        
+        if (_playerMoveAction == null || _arrowMoveAction == null)
+        {
+            Debug.LogError($"De actie '{MoveActionName}' is niet gevonden in beide Maps!");
+            enabled = false;
+            return;
+        }
+
+        // ⭐ GEWIJZIGD: Beide acties roepen nu dezelfde Handler aan.
+        // De Handler bepaalt intern welke index gespawnd moet worden.
+        _playerMoveAction.performed += OnMoveActivated;
+        _arrowMoveAction.performed += OnMoveActivated;
     }
 
     private void OnEnable()
     {
-        // Activeer de Input Action Maps wanneer dit script actief wordt
-        _playerControls?.Enable();
-        _arrowControls?.Enable();
+        _playerMoveAction?.Enable();
+        _arrowMoveAction?.Enable();
     }
 
     private void OnDisable()
     {
-        // Deactiveer de Input Action Maps wanneer dit script inactief wordt
-        // Vergeet niet de events ook te ontkoppelen als je dit script op een GameObject hebt dat vaak wordt geactiveerd/gedeactiveerd
-        _playerControls?.Disable();
-        _arrowControls?.Disable();
+        _playerMoveAction?.Disable();
+        _arrowMoveAction?.Disable();
     }
     
-    // Optioneel, ontkoppel events bij destroy om geheugenlekken te voorkomen
     private void OnDestroy()
     {
-        if (_playerControls != null)
-        {
-            _playerControls.actionTriggered -= OnPlayerControlsActivated;
-        }
-        if (_arrowControls != null)
-        {
-            _arrowControls.actionTriggered -= OnArrowControlsActivated;
-        }
+        if (_playerMoveAction != null) _playerMoveAction.performed -= OnMoveActivated;
+        if (_arrowMoveAction != null) _arrowMoveAction.performed -= OnMoveActivated;
     }
 
-    private void OnPlayerControlsActivated(InputAction.CallbackContext context)
-    {
-        // Controleren of de actie net is ingedrukt (Performed) én of de displayManager aanwezig is
-        if (context.phase == InputActionPhase.Performed && displayManager != null)
-        {
-            // 1. Lees de Vector2 waarde van de input actie (moet ingesteld zijn als Vector2 in het Input Asset)
-            Vector2 movement = context.ReadValue<Vector2>();
 
-            // 2. Controleer of de bewegingswaarde NIET (0, 0) is. 
-            // Een waarde groter dan 0 betekent dat er een knop is ingedrukt.
-            // sqrMagnitude is efficiënter dan Magnitude.
-            if (movement.sqrMagnitude > 0.01f) // 0.01f is een kleine drempel
+    /// <summary>
+    /// Handler voor BEIDE Player Move Actions.
+    /// Deze functie bepaalt aan de hand van het triggering device welke index gespawnd moet worden.
+    /// </summary>
+    private void OnMoveActivated(InputAction.CallbackContext context)
+    {
+        Vector2 movement = context.ReadValue<Vector2>();
+
+        // We willen alleen een actie triggeren als er daadwerkelijke beweging is (dit filtert 0,0 input)
+        if (movement.sqrMagnitude < 0.01f)
+        {
+            return;
+        }
+
+        InputDevice triggeringDevice = context.control.device;
+
+        // 1. Controleer of dit apparaat al een index heeft gespawnd
+        if (_deviceIndexMap.ContainsKey(triggeringDevice))
+        {
+            // Apparaat heeft al gespawnd. Negeer deze aanroep.
+            // Dit zorgt ervoor dat een apparaat Index 0 niet twee keer kan spawnen.
+            return;
+        }
+
+        // 2. Bepaal de target index op basis van de Action Map die getriggerd is
+        int targetIndex = -1;
+        string mapName = context.action.actionMap.name;
+
+        if (mapName == "Player")
+        {
+            targetIndex = 0; // Player Map (WASD / Controller 1) -> Index 0
+        }
+        else if (mapName == "Player1")
+        {
+            targetIndex = Player1Index; // Player1 Map (Arrows / Controller 2) -> Index 1
+        }
+        
+        // 3. Spawnen en apparaat vastleggen
+        if (targetIndex != -1)
+        {
+            // Spawnen alleen als de Index geldig is en de displayManager bestaat.
+            if (targetIndex < displayManager.displayEntries.Length)
             {
-                // Object 1 (Index 0) wordt geactiveerd door WASD
-                Debug.Log("WASD/Player input gedetecteerd. Activeer object 0.");
-                displayManager.SetupDisplayByIndex(0);
+                Debug.Log($"Setup (Index {targetIndex}) geactiveerd door Map '{mapName}' en device '{triggeringDevice.name}'.");
+                displayManager.SetupDisplayByIndex(targetIndex);
+                
+                // ⭐ BELANGRIJK: Leg dit apparaat vast zodat het niet opnieuw kan triggeren
+                _deviceIndexMap.Add(triggeringDevice, targetIndex);
             }
-        }
-    }
-
-    private void OnArrowControlsActivated(InputAction.CallbackContext context)
-    {
-        // Controleren of de actie net is ingedrukt (Performed) én of de displayManager aanwezig is
-        if (context.phase == InputActionPhase.Performed && displayManager != null)
-        {
-            // 1. Lees de Vector2 waarde van de input actie
-            Vector2 movement = context.ReadValue<Vector2>();
-
-            // 2. Controleer of de bewegingswaarde NIET (0, 0) is.
-            if (movement.sqrMagnitude > 0.01f)
+            else
             {
-                // Object 2 (Index 1) wordt geactiveerd door de pijltoetsen
-                Debug.Log("Pijltoets input gedetecteerd. Activeer object 1.");
-                displayManager.SetupDisplayByIndex(1);
+                Debug.LogError($"Index {targetIndex} is groter dan de array grootte van UI3DObjectManager.");
             }
         }
     }

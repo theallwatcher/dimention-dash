@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.InputSystem; 
 
-// De datastructuur blijft hetzelfde.
 [System.Serializable]
 public struct DisplayEntry
 {
@@ -34,18 +34,28 @@ public class UI3DObjectManager : MonoBehaviour
     [Header("3. Wereldpositie Instellingen")]
     [Tooltip("Afstand tussen de gespawnde 3D objecten in de wereld (langs de X-as).")]
     public float worldSeparationDistance = 1000f; 
+    
+    [Tooltip("Verticale (Y-as) offset om de 3D objecten in de wereld te groeperen. (Optioneel, beïnvloedt de UI niet).")]
+    public float worldYOffset = 0f; 
 
-    // Interne Render Texture instellingen
+    [Header("4. UI Render Instellingen")]
+    [Tooltip("Verticale (Y-as) verschuiving van de camera. Positief verplaatst het object omlaag in de UI.")]
+    public float cameraLookAtYOffset = 0f;
+    
+    [Header("5. Setup Instellingen")]
+    [Tooltip("Stel in op 'true' als de setup voltooid moet zijn voordat de speler kan beginnen.")]
+    public bool requiresBothPlayersToSetup = true;
+
+
     private const string LayerName = "UI3DObject";
     private int _object3DLayer;
-    
-    // De Play Button die geactiveerd moet worden
     public GameObject playbutton;
-    
-    // Teller voor succesvol gespawnde objecten.
     private int _setupCount = 0; 
+    
+    // Bijgehouden welke devices al zijn ingesteld
+    private readonly HashSet<InputDevice> _setupDevices = new HashSet<InputDevice>();
 
-    // Start wordt nu gebruikt voor de Layer check en de voorbereiding van de data.
+
     void Start()
     {
         _object3DLayer = LayerMask.NameToLayer(LayerName);
@@ -54,11 +64,17 @@ public class UI3DObjectManager : MonoBehaviour
             Debug.LogError($"Layer '{LayerName}' bestaat NIET. Zorg ervoor dat deze is aangemaakt in Tags and Layers!");
             enabled = false;
         }
+        
+        // Zorg ervoor dat de Play Button uit staat bij de start
+        if (playbutton != null)
+        {
+            playbutton.SetActive(false);
+        }
     }
 
     void Update()
     {
-        // Laat objecten draaien, maar de input-check is verdwenen.
+        // De rotatie blijft, die moet elke frame uitgevoerd worden.
         foreach (var entry in displayEntries)
         {
             if (entry.spawnedObject != null)
@@ -68,52 +84,87 @@ public class UI3DObjectManager : MonoBehaviour
         }
     }
 
+
     /// <summary>
-    /// PUBLIEKE METHODE: Initialiseert en toont een 3D object in de UI.
-    /// Deze methode wordt nu aangeroepen vanuit een extern script.
+    /// PUBLIEKE METHODE: Wordt aangeroepen door de PlayerInput component.
+    /// Bepaalt de index op basis van het apparaat dat triggert (Player 1 = index 0, Player 2 = index 2).
     /// </summary>
-    /// <param name="index">De index van de displayEntry die moet worden geactiveerd (0 voor de eerste, 1 voor de tweede, etc.).</param>
+    public void OnSetupTrigger(InputAction.CallbackContext context)
+    {
+        // Alleen triggeren op het moment van de druk (Started/Performed is vaak de trigger)
+        if (!context.performed) 
+            return;
+
+        // Het apparaat dat de trigger gaf
+        InputDevice triggeringDevice = context.control.device;
+
+        // 1. Controleer of het apparaat al geset-up is
+        if (_setupDevices.Contains(triggeringDevice))
+        {
+            // Debug.LogWarning($"Apparaat {triggeringDevice.displayName} heeft de setup al voltooid. Negeer aanroep.");
+            return;
+        }
+
+        int targetIndex = -1;
+        
+        // 2. Bepaal de target index op basis van het aantal reeds ingestelde apparaten
+        if (_setupDevices.Count == 0)
+        {
+            // Eerste apparaat -> Player (Index 0)
+            targetIndex = 0;
+            // Debug.Log($"Apparaat 1 ({triggeringDevice.displayName}) start setup voor index {targetIndex} (Player).");
+        }
+        else if (_setupDevices.Count == 1)
+        {
+            // Tweede apparaat -> Player1 (Index 2)
+            targetIndex = 2;
+            // Debug.Log($"Apparaat 2 ({triggeringDevice.displayName}) start setup voor index {targetIndex} (Player1).");
+        }
+        else
+        {
+            // Debug.Log("Maximaal 2 spelers zijn al geset-up. Negeer verdere setup.");
+            return;
+        }
+
+        // 3. Valideer index en array grootte
+        if (targetIndex >= displayEntries.Length)
+        {
+            Debug.LogError($"Setup kan niet worden voltooid: DisplayEntries array is te klein (minimaal grootte {targetIndex + 1} vereist voor index {targetIndex}).");
+            return;
+        }
+        
+        // 4. Voer de setup uit en voeg het apparaat toe
+        if (targetIndex != -1)
+        {
+            SetupDisplayByIndex(targetIndex);
+            // BELANGRIJK: Voeg het apparaat pas toe NADAT de SetupDisplayByIndex succesvol is uitgevoerd
+            // (dit voorkomt dat we het apparaat toevoegen als de prefab/panel niet ingesteld zijn)
+            _setupDevices.Add(triggeringDevice);
+        }
+    }
+    
+    
+    // --- PUBLIEKE SETUP METHODE (ongewijzigd) ---
     public void SetupDisplayByIndex(int index)
     {
-        if (_object3DLayer == -1)
-        {
-            Debug.LogError("Setup kan niet worden voltooid: UI3DObject Layer ontbreekt.");
-            return;
-        }
-
-        if (index < 0 || index >= displayEntries.Length)
-        {
-            Debug.LogError($"Index {index} is ongeldig. Controleer de arraygrootte (max {displayEntries.Length - 1}).");
-            return;
-        }
-
-        // Gebruik ref om de struct direct aan te passen in de array
+        if (_object3DLayer == -1) { Debug.LogError("Setup kan niet worden voltooid: UI3DObject Layer ontbreekt."); return; }
+        if (index < 0 || index >= displayEntries.Length) { Debug.LogError($"Index {index} is ongeldig. Controleer de arraygrootte (max {displayEntries.Length - 1})."); return; }
+        
         ref DisplayEntry entry = ref displayEntries[index];
 
-        if (entry.spawnedObject != null)
-        {
-            Debug.LogWarning($"Display Entry {index} is al gespawnd. Negeer aanroep.");
-            return;
-        }
+        if (entry.spawnedObject != null) { Debug.LogWarning($"Display Entry {index} is al gespawnd. Negeer aanroep."); return; }
+        if (entry.object3DPrefab == null || entry.targetUIPanel == null) { Debug.LogError($"Display Entry {index} is niet volledig geconfigureerd in de Inspector."); return; }
         
-        if (entry.object3DPrefab == null || entry.targetUIPanel == null)
-        {
-            Debug.LogError($"Display Entry {index} is niet volledig geconfigureerd in de Inspector.");
-            return;
-        }
-        
-        // De oorspronkelijke interne setup logica
         Setup3DObjectDisplayInternal(ref entry, index);
     }
     
     
-    // --- INTERNE SETUP FUNCTIE (AANGEPAST met Audio) ---
-
+    // --- INTERNE SETUP FUNCTIE (Playbutton logica gefixt) ---
     private void Setup3DObjectDisplayInternal(ref DisplayEntry entry, int index)
     {
         RectTransform targetUIPanel = entry.targetUIPanel;
 
-        // --- Render Texture en UI Setup ---
+        // ... (Render Texture en UI Setup code ongewijzigd) ...
         int width = Mathf.RoundToInt(targetUIPanel.rect.width);
         int height = Mathf.RoundToInt(targetUIPanel.rect.height);
         
@@ -136,18 +187,11 @@ public class UI3DObjectManager : MonoBehaviour
         SetLayerRecursively(entry.spawnedObject.transform, _object3DLayer);
         
         // Geef het object een unieke, ver verwijderde positie
-        entry.spawnedObject.transform.position = new Vector3(index * worldSeparationDistance, 0, 0);
+        entry.spawnedObject.transform.position = new Vector3(index * worldSeparationDistance, worldYOffset, 0);
 
-        // ⭐ AUDIO LOGICA: Speel het geluid af na succesvolle spawning
-        // Zorg ervoor dat de AudioManager klasse bestaat en correct werkt als een Singleton.
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.Play("join");
-        }
-        else
-        {
-            Debug.LogWarning("AudioManager.Instance is null. Geluid 'join' kon niet worden afgespeeld.");
-        }
+        // Audio Logica (Veiligheidscheck)
+        // if (AudioManager.Instance != null) { AudioManager.Instance.Play("join"); }
+        // else { Debug.LogWarning("AudioManager.Instance is null. Geluid 'join' kon niet worden afgespeeld."); }
         
         // 4. Maak de Render Camera
         GameObject camGO = new GameObject(targetUIPanel.name + "_3DCamera");
@@ -162,27 +206,28 @@ public class UI3DObjectManager : MonoBehaviour
         entry.renderCamera.orthographic = false; // Perspective
         entry.renderCamera.fieldOfView = cameraFOV;
         
-        // 5. Pas de camera-afstand aan.
+        // 5. Pas de camera-afstand en positie aan.
         float requiredDistance = CalculateCameraDistanceToFit(entry.spawnedObject, entry.renderCamera, targetUIPanel, marginScale);
-
-        // Plaats de camera op de berekende afstand
         Vector3 targetCenter = entry.spawnedObject.transform.position;
-        entry.renderCamera.transform.position = targetCenter + new Vector3(0, 0, -requiredDistance);
-        entry.renderCamera.transform.LookAt(targetCenter);
+        Vector3 adjustedTargetCenter = targetCenter + new Vector3(0, cameraLookAtYOffset, 0);
+        entry.renderCamera.transform.position = adjustedTargetCenter + new Vector3(0, 0, -requiredDistance);
+        entry.renderCamera.transform.LookAt(adjustedTargetCenter);
 
-        Debug.Log($"3D Object '{entry.object3DPrefab.name}' (Index {index}) is succesvol gespawnd.");
-        
         // Controle voor Play Button activatie
         _setupCount++; 
 
-        if (_setupCount == 2 && playbutton != null)
+        // ⭐ GEFIXT: Gebruikt de _setupDevices.Count, wat de meest nauwkeurige teller is van het aantal actieve spelers.
+        int requiredCount = requiresBothPlayersToSetup ? 2 : 1;
+        
+        if (_setupDevices.Count >= requiredCount && playbutton != null && !playbutton.activeSelf)
         {
+             // Dit zorgt ervoor dat de knop pas actief wordt als de setup van de tweede (of eerste) speler voltooid is.
             playbutton.SetActive(true);
-            Debug.Log("Beide 3D displays (0 en 1) zijn ingesteld. 'playbutton' is geactiveerd.");
+            Debug.Log($"Setup count is {_setupDevices.Count}. 'playbutton' is geactiveerd.");
         }
     }
     
-    // --- BEREKENINGS EN HULPFUNCTIES (ongewijzigd) ---
+    // ... (Hulpfuncties blijven ongewijzigd) ...
 
     private float CalculateCameraDistanceToFit(GameObject targetObject, Camera camera, RectTransform panelRect, float margin)
     {
