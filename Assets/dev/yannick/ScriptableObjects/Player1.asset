@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerObject
   LaneOffset: 4
   MovementSpeed: 15
-  JumpForce: 7
+  JumpForce: 16
   SlideDuration: 1
   slideHeight: 0.5

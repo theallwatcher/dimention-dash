@@ -13,19 +13,33 @@ public class PlayerInventory : MonoBehaviour
     private Coroutine scrollRoutine = null;
 
     private bool _isLeader;
+    private bool _tie;
     public void IsLeader(bool isLeader)
     {
         _isLeader = isLeader;
     }
     public void PickupRandomItem()
     {
+        if (itemSlotImage != null && currentPowerup != null)
+        {
+            itemSlotImage.sprite = null;
+            currentPowerup = null;
+        }
+
         if (_isLeader)
         {
-            scrollRoutine = StartCoroutine(ScrollThroughItems(0));
+            //only spawn nurfed powerups   [index 0 to 2]
+            scrollRoutine = StartCoroutine(ScrollThroughItems(Random.Range(0, 2)));
         }
-        else
+        if(!_isLeader && !_tie)
         {
-            scrollRoutine = StartCoroutine(ScrollThroughItems(1));
+            //spawn helpfull powerups      [index 3, 4]
+            scrollRoutine = StartCoroutine(ScrollThroughItems(Random.Range(3, 4)));
+        }
+        else if (!_isLeader && _tie) 
+        {
+            //spawn any of the powerups
+            scrollRoutine = StartCoroutine(ScrollThroughItems(Random.Range(0, itemObjects.Count)));
         }
     }
 

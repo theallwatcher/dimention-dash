@@ -126,8 +126,6 @@ public class PlayerMovement : MonoBehaviour
         if (!isMovingX)
         {
             //read value from input system
-          //  moveDirection = .Player.Move.ReadValue<Vector2>();
-
 
             ///LEFT
             if (moveDirection.x < -.1f)

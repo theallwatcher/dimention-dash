@@ -263,6 +263,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3f346747-d42e-4a2b-a92c-b2b4aac0f206
+    m_ActionName: 'Player/PowerUps[/XInputControllerWindows/buttonNorth,/XInputControllerWindows1/buttonNorth,/Keyboard/e]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player1
@@ -291,7 +295,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59064923132740882}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 3
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -345,7 +349,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c299768ce857937449bf308f092888bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
-  itemImages:
-  - {fileID: 11400000, guid: 3e0ff154d6cb2ba419bde1ee97ad9638, type: 2}
-  - {fileID: 11400000, guid: a617279b8cc161347885f3e95b8a10fe, type: 2}
+  itemObjects: []
   itemSlotImage: {fileID: 0}
