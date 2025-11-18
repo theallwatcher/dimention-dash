@@ -746,6 +746,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6917229133876065695, guid: 64ddc78fbcb56e048bd822a0ed50414f, type: 3}
   m_PrefabInstance: {fileID: 737288964}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &297479400 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3497068044745610971, guid: 64ddc78fbcb56e048bd822a0ed50414f, type: 3}
+  m_PrefabInstance: {fileID: 737288964}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c299768ce857937449bf308f092888bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
 --- !u!1 &345752092
 GameObject:
   m_ObjectHideFlags: 0
@@ -2094,6 +2105,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6917229133876065695, guid: 64ddc78fbcb56e048bd822a0ed50414f, type: 3}
   m_PrefabInstance: {fileID: 693532643}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1176210219 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3497068044745610971, guid: 64ddc78fbcb56e048bd822a0ed50414f, type: 3}
+  m_PrefabInstance: {fileID: 693532643}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c299768ce857937449bf308f092888bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
 --- !u!1 &1244335835
 GameObject:
   m_ObjectHideFlags: 0
@@ -2552,6 +2574,7 @@ GameObject:
   - component: {fileID: 1787099994}
   - component: {fileID: 1787099993}
   - component: {fileID: 1787099992}
+  - component: {fileID: 1787099996}
   m_Layer: 0
   m_Name: PowerupBox
   m_TagString: Untagged
@@ -2574,7 +2597,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2605,7 +2628,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: c7d25d9c1496c0e4dadb3c0a38b21f33, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2645,12 +2668,24 @@ Transform:
   m_GameObject: {fileID: 1787099991}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.35458, y: -7.01, z: 14.87992}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 5.89, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1787099996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787099991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea54b31d949e7642ace3c44504ca604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupPowerupBox
 --- !u!1 &1834487988
 GameObject:
   m_ObjectHideFlags: 0
@@ -2682,6 +2717,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   _playerOnePos: {fileID: 297479399}
   _playerTwoPos: {fileID: 1176210218}
+  playerOneInventory: {fileID: 297479400}
+  playerTwoInventory: {fileID: 1176210219}
   leader: ' '
   roadSpeed: 5
 --- !u!4 &1834487990
