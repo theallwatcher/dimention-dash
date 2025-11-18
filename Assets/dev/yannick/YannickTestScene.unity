@@ -2066,8 +2066,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SectionTrigger
   _roadSectionList:
   - {fileID: 2537904020836020709, guid: 4ce245273593d294ab86982926b79323, type: 3}
-  - {fileID: 88291624406017800, guid: 4ea6f00a03c529f43a633b10abbf59ee, type: 3}
-  - {fileID: 6555451849423479089, guid: e3aa2a4085222874c9da66592a2a257e, type: 3}
   spawnPoint: {fileID: 1358823474}
 --- !u!65 &1244335837
 BoxCollider:
@@ -3226,6 +3224,10 @@ PrefabInstance:
     - target: {fileID: 7841180330508261637, guid: 167a721228eba594795cf7891569d567, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471753174023628966, guid: 167a721228eba594795cf7891569d567, type: 3}
+      propertyPath: _roadSectionList.Array.size
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
