@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::obstacleMover
   speed: -500
-  endPoint: {fileID: 9011374471934633605, guid: a2dcfcb7d54dd714a8f4c46b7ef6258d, type: 3}
+  endPoint: {fileID: 2603978606980266922, guid: 6ce0d2e7ea8465e41899c455296cddd1, type: 3}
 --- !u!1 &3666803956999166254
 GameObject:
   m_ObjectHideFlags: 0
