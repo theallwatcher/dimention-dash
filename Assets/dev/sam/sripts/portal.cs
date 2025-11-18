@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -7,10 +8,16 @@ public class portal : MonoBehaviour
     Rigidbody rb;
     [SerializeField] float speed = -500;
     public int counter;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    [SerializeField] List<GameObject> portals1 = new List<GameObject>();
+    [SerializeField] List<GameObject> portals2 = new List<GameObject>();
+    [SerializeField] GameObject corectIndicatorPrefab;
+    
     void Start()
     {
+        
         rb = GetComponent<Rigidbody>();
+        RandomizePortals();
         
     }
 
@@ -40,5 +47,21 @@ public class portal : MonoBehaviour
         }
     }
 
+    private void RandomizePortals() { 
+
+        int portal1Random = Random.Range(0, portals1.Count);
+        int portal2Random = Random.Range(0, portals2.Count);
+
+        portals1[portal1Random].tag = "Untagged";
+        portals2[portal2Random].tag = "Untagged";
+
+        Vector3 portalPosition1 = new Vector3(portals1[portal1Random].transform.position.x, portals1[portal1Random].transform.position.y + 5, portals1[portal1Random].transform.position.z);
+        Vector3 portalPosition2 = new Vector3(portals2[portal2Random].transform.position.x, portals2[portal2Random].transform.position.y + 5, portals2[portal2Random].transform.position.z);
+
+
+        GameObject indicator1 = Instantiate(corectIndicatorPrefab,portalPosition1, portals1[portal1Random].transform.rotation);
+        GameObject indicator2 = Instantiate(corectIndicatorPrefab, portalPosition2, portals2[portal2Random].transform.rotation);
+
+    }
     
 }
