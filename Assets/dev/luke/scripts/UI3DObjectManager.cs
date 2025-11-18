@@ -12,8 +12,6 @@ public struct DisplayEntry
     [Tooltip("Het Panel waarbinnen het object moet verschijnen.")]
     public RectTransform targetUIPanel;
 
-    // We verwijderen 'activationKeys' en 'isSetupAttempted' uit de struct.
-
     // Bijgehouden instanties
     [HideInInspector] public GameObject spawnedObject;
     [HideInInspector] public Camera renderCamera;
@@ -40,6 +38,12 @@ public class UI3DObjectManager : MonoBehaviour
     // Interne Render Texture instellingen
     private const string LayerName = "UI3DObject";
     private int _object3DLayer;
+    
+    // De Play Button die geactiveerd moet worden
+    public GameObject playbutton;
+    
+    // Teller voor succesvol gespawnde objecten.
+    private int _setupCount = 0; 
 
     // Start wordt nu gebruikt voor de Layer check en de voorbereiding van de data.
     void Start()
@@ -103,7 +107,7 @@ public class UI3DObjectManager : MonoBehaviour
     }
     
     
-    // --- INTERNE SETUP FUNCTIE (Verplaatst en hernoemd) ---
+    // --- INTERNE SETUP FUNCTIE (AANGEPAST met Audio) ---
 
     private void Setup3DObjectDisplayInternal(ref DisplayEntry entry, int index)
     {
@@ -134,6 +138,17 @@ public class UI3DObjectManager : MonoBehaviour
         // Geef het object een unieke, ver verwijderde positie
         entry.spawnedObject.transform.position = new Vector3(index * worldSeparationDistance, 0, 0);
 
+        // ⭐ AUDIO LOGICA: Speel het geluid af na succesvolle spawning
+        // Zorg ervoor dat de AudioManager klasse bestaat en correct werkt als een Singleton.
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.Play("join");
+        }
+        else
+        {
+            Debug.LogWarning("AudioManager.Instance is null. Geluid 'join' kon niet worden afgespeeld.");
+        }
+        
         // 4. Maak de Render Camera
         GameObject camGO = new GameObject(targetUIPanel.name + "_3DCamera");
         entry.renderCamera = camGO.AddComponent<Camera>();
@@ -156,6 +171,15 @@ public class UI3DObjectManager : MonoBehaviour
         entry.renderCamera.transform.LookAt(targetCenter);
 
         Debug.Log($"3D Object '{entry.object3DPrefab.name}' (Index {index}) is succesvol gespawnd.");
+        
+        // Controle voor Play Button activatie
+        _setupCount++; 
+
+        if (_setupCount == 2 && playbutton != null)
+        {
+            playbutton.SetActive(true);
+            Debug.Log("Beide 3D displays (0 en 1) zijn ingesteld. 'playbutton' is geactiveerd.");
+        }
     }
     
     // --- BEREKENINGS EN HULPFUNCTIES (ongewijzigd) ---
