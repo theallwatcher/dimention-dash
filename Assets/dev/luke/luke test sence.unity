@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inputmanager
   displayManager: {fileID: 1449242741}
-  inputActions: {fileID: -944628639613478452, guid: d6d13304786c9c3409ebd997884a0e18, type: 3}
+  inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!4 &27464861
 Transform:
   m_ObjectHideFlags: 0
@@ -3710,8 +3710,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c93ca2c12bcb934ca39a3f4a417d30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  musicSource: {fileID: 0}
-  sfxSource: {fileID: 0}
   sounds:
   - name: test
     type: 1

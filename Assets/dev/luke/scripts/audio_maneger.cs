@@ -15,9 +15,9 @@ public class AudioManager : MonoBehaviour
 
     [Header("Audio Instellingen")]
     // Eén AudioSource voor achtergrondmuziek.
-    public AudioSource musicSource;
+    private AudioSource musicSource;
     // Eén AudioSource voor geluidseffecten.
-    public AudioSource sfxSource;
+    private AudioSource sfxSource;
     
     [Space(10)]
     [Header("Geluidslijst")]

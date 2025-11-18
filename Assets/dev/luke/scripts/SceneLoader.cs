@@ -49,6 +49,11 @@ public class SceneLoader : MonoBehaviour
         backbutton.SetActive(true);
         closmenu.SetActive(false);
     }
+    public void quitgame()
+    {
+        Application.Quit();
+        Debug.Log("Game is closed");
+    }
 
     /// <summary>
     /// Coroutine om de scene te laden na een korte vertraging.
