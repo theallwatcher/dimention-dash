@@ -141,7 +141,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""f1ba0d36-48eb-4cd5-b651-1c94a6531f70"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -150,6 +150,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""Duck"",
                     ""type"": ""Button"",
                     ""id"": ""7d4cbdc6-c698-4b16-9f90-bed107239813"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PowerUps"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f346747-d42e-4a2b-a92c-b2b4aac0f206"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -168,7 +177,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""Next"",
                     ""type"": ""Button"",
                     ""id"": ""b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -588,6 +597,28 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Duck"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8070b660-b59a-4a1f-a7fe-ea2582688e9e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerUps"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""119be918-8c60-48eb-a7a9-724afa4ac8fc"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerUps"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1632,6 +1663,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Duck = m_Player.FindAction("Duck", throwIfNotFound: true);
+        m_Player_PowerUps = m_Player.FindAction("PowerUps", throwIfNotFound: true);
         m_Player_Previous = m_Player.FindAction("Previous", throwIfNotFound: true);
         m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
@@ -1748,6 +1780,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Duck;
+    private readonly InputAction m_Player_PowerUps;
     private readonly InputAction m_Player_Previous;
     private readonly InputAction m_Player_Next;
     private readonly InputAction m_Player_Sprint;
@@ -1790,6 +1823,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Duck".
         /// </summary>
         public InputAction @Duck => m_Wrapper.m_Player_Duck;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/PowerUps".
+        /// </summary>
+        public InputAction @PowerUps => m_Wrapper.m_Player_PowerUps;
         /// <summary>
         /// Provides access to the underlying input action "Player/Previous".
         /// </summary>
@@ -1849,6 +1886,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Duck.started += instance.OnDuck;
             @Duck.performed += instance.OnDuck;
             @Duck.canceled += instance.OnDuck;
+            @PowerUps.started += instance.OnPowerUps;
+            @PowerUps.performed += instance.OnPowerUps;
+            @PowerUps.canceled += instance.OnPowerUps;
             @Previous.started += instance.OnPrevious;
             @Previous.performed += instance.OnPrevious;
             @Previous.canceled += instance.OnPrevious;
@@ -1890,6 +1930,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Duck.started -= instance.OnDuck;
             @Duck.performed -= instance.OnDuck;
             @Duck.canceled -= instance.OnDuck;
+            @PowerUps.started -= instance.OnPowerUps;
+            @PowerUps.performed -= instance.OnPowerUps;
+            @PowerUps.canceled -= instance.OnPowerUps;
             @Previous.started -= instance.OnPrevious;
             @Previous.performed -= instance.OnPrevious;
             @Previous.canceled -= instance.OnPrevious;
@@ -2456,6 +2499,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDuck(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PowerUps" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPowerUps(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Previous" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

@@ -55,7 +55,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -64,6 +64,15 @@
                     "name": "Duck",
                     "type": "Button",
                     "id": "7d4cbdc6-c698-4b16-9f90-bed107239813",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PowerUps",
+                    "type": "Button",
+                    "id": "3f346747-d42e-4a2b-a92c-b2b4aac0f206",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -82,7 +91,7 @@
                     "name": "Next",
                     "type": "Button",
                     "id": "b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -502,6 +511,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Duck",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8070b660-b59a-4a1f-a7fe-ea2582688e9e",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PowerUps",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "119be918-8c60-48eb-a7a9-724afa4ac8fc",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PowerUps",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
