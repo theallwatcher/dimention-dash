@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
             playerOneInventory.IsLeader(false);
             playerTwoInventory.IsLeader(false);
         }
-        Debug.Log(leader);
     }
 
     public void StartGame()

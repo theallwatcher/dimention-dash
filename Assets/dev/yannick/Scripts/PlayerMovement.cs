@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     //public InputSystem_Actions PlayerControls;
     private PlayerInput playerInput;
+    private PlayerInventory inventory;
     [SerializeField] PlayerObject _playerSO;
     [SerializeField] Rigidbody rb;
     //movement
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private InputAction jumpAction;
     private InputAction duckAction;
     private InputAction moveAction;
+    private InputAction powerupAction;
     private Vector3 startPos;
     //jump
     private bool isGrounded = true;
@@ -36,11 +38,13 @@ public class PlayerMovement : MonoBehaviour
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
         duckAction = playerInput.actions["Duck"];
+        powerupAction = playerInput.actions["PowerUps"];
     }
     private void Start()
     {
         startPos = transform.position;
         rb = GetComponent<Rigidbody>();
+        inventory = GetComponent<PlayerInventory>();
 
         if (playerCollider != null)
         {
@@ -60,6 +64,9 @@ public class PlayerMovement : MonoBehaviour
 
         duckAction = playerInput.actions["Duck"];
         duckAction.performed += OnDuck;
+
+        powerupAction.performed += OnPowerupUse;
+
         /*//enable all movement buttons
         moveAction.Enable();
 
@@ -96,6 +103,11 @@ public class PlayerMovement : MonoBehaviour
     public void OnDuck(InputAction.CallbackContext context)
     {
         StartSlide();
+    }
+
+    public void OnPowerupUse(InputAction.CallbackContext context)
+    {
+        inventory.UsePowerup();
     }
 
     #endregion
