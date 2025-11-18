@@ -8,6 +8,7 @@ public class portal : MonoBehaviour
     Rigidbody rb;
     [SerializeField] float speed = -500;
     public int counter;
+    public int hitCount = 2;
 
     [SerializeField] List<GameObject> portals1 = new List<GameObject>();
     [SerializeField] List<GameObject> portals2 = new List<GameObject>();
@@ -29,7 +30,7 @@ public class portal : MonoBehaviour
             rb.AddForce(new Vector3(0, 0, speed));
         }
 
-        if (counter >= 4)
+        if (counter >= hitCount)
         {
 
             SceneManager.LoadScene("//next scene name");

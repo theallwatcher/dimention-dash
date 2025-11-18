@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 62985433}
   m_Layer: 0
   m_Name: ff (3)
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -491,9 +491,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::portal
   speed: -500
   counter: 0
-  portals1: []
-  portals2: []
-  corectIndicatorPrefab: {fileID: 0}
+  portals1:
+  - {fileID: 1293482266}
+  - {fileID: 1616288019}
+  - {fileID: 1803991997}
+  portals2:
+  - {fileID: 62985428}
+  - {fileID: 1444904860}
+  - {fileID: 2055087274}
+  corectIndicatorPrefab: {fileID: 7216533550209648503, guid: 1f908ee9d5d308c49aed60bc81381a68, type: 3}
 --- !u!1 &282342280
 GameObject:
   m_ObjectHideFlags: 0
@@ -2279,7 +2285,7 @@ GameObject:
   - component: {fileID: 1293482271}
   m_Layer: 0
   m_Name: ff
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2657,7 +2663,7 @@ GameObject:
   - component: {fileID: 1444904865}
   m_Layer: 0
   m_Name: ff (4)
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3083,7 +3089,7 @@ GameObject:
   - component: {fileID: 1616288024}
   m_Layer: 0
   m_Name: ff (1)
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3194,7 +3200,7 @@ GameObject:
   - component: {fileID: 1803992002}
   m_Layer: 0
   m_Name: ff (2)
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3305,7 +3311,7 @@ GameObject:
   - component: {fileID: 2055087279}
   m_Layer: 0
   m_Name: ff (5)
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
