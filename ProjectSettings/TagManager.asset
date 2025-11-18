@@ -13,10 +13,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - UI3DObject
   - Water
   - UI
-  - 
+  - MovingGround
   - 
   - 
   - 

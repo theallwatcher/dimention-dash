@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5485085535865139395}
   - component: {fileID: 1172980602668462730}
   - component: {fileID: 999398168082199494}
-  - component: {fileID: 7160680894492008010}
+  - component: {fileID: 3497068044745610971}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -281,7 +281,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   _playerSO: {fileID: 11400000, guid: b32636b5dd63df843be610bbbb572ca0, type: 2}
-  _characterController: {fileID: 7160680894492008010}
   rb: {fileID: 1172980602668462730}
   playerCollider: {fileID: 999398168082199494}
 --- !u!54 &1172980602668462730
@@ -334,28 +333,17 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!143 &7160680894492008010
-CharacterController:
+--- !u!114 &3497068044745610971
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59064923132740882}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c299768ce857937449bf308f092888bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+  itemImages: []
+  itemSlotImage: {fileID: 0}

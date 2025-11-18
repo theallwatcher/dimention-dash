@@ -29,8 +29,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
 
-        if (_playerOnePos.position.z - _playerTwoPos.position.z > 0.1f)
-        {
+
             if (_playerOnePos.position.z > _playerTwoPos.position.z)
             {
                 //player one is in front
@@ -40,9 +39,7 @@ public class GameManager : MonoBehaviour
             {
                 //player 2 is in front
                 leader = "Player 2";
-            }
-        }
-        
+            }        
         else if(_playerOnePos.position.z == _playerTwoPos.position.z)
         {
             //tie
