@@ -11,14 +11,21 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private Image itemSlotImage = null;
     [SerializeField] PlayerMovement otherPlayer;
 
-    private GameObject currentPowerup = null;
+    private ItemObject currentPowerup = null;
     private Coroutine scrollRoutine = null;
 
-    private bool _isLeader;
-    private bool _tie;
-    public void IsLeader(bool isLeader)
+    public enum PlayerPosition 
     {
-        _isLeader = isLeader;
+        FirstPlace,
+        Tie,
+        LastPlace
+    }
+
+    public PlayerPosition currentPosition;
+    
+    public void SetPosition(PlayerPosition position)
+    {
+        currentPosition = position;
     }
     public void PickupRandomItem()
     {
@@ -28,17 +35,17 @@ public class PlayerInventory : MonoBehaviour
             currentPowerup = null;
         }
 
-        if (_isLeader)
+        if (currentPosition == PlayerPosition.FirstPlace)
         {
             //only spawn nurfed powerups   [index 0 to 2]
             scrollRoutine = StartCoroutine(ScrollThroughItems(Random.Range(0, 2)));
         }
-        if(!_isLeader && !_tie)
+        if(currentPosition == PlayerPosition.LastPlace)
         {
             //spawn helpfull powerups      [index 3, 4]
             scrollRoutine = StartCoroutine(ScrollThroughItems(Random.Range(3, 4)));
         }
-        else if (!_isLeader && _tie) 
+        else if (currentPosition == PlayerPosition.Tie) 
         {
             //spawn any of the powerups
             scrollRoutine = StartCoroutine(ScrollThroughItems(Random.Range(0, itemObjects.Count)));
@@ -49,9 +56,18 @@ public class PlayerInventory : MonoBehaviour
     {
         //set powerup spawnPoint 
 
-//        Instantiate(currentPowerup, spawnPos);
+        SpawnPowerup(currentPowerup.Type);
         itemSlotImage.sprite = null;
         currentPowerup = null;
+    }
+
+    private void SpawnPowerup(ItemObject.ItemType type)
+    {
+        if(currentPowerup.Type == ItemObject.ItemType.Bomb)
+        {
+            Instantiate(currentPowerup.Prefab);
+
+        }
     }
 
     private IEnumerator ScrollThroughItems(int finalIndex)
