@@ -13,7 +13,9 @@ public class ItemObject : ScriptableObject
          Spikes,
          Boost,
          LaneSwitch,
-         InvertControls
+         InvertControls,
+         Shield,
+         PositionSwitch
     }
 
     public ItemType Type;

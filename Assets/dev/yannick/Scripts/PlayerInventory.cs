@@ -10,7 +10,7 @@ public class PlayerInventory : MonoBehaviour
     [Header("In scene references")]
     [SerializeField] private Image itemSlotImage = null;
     [SerializeField] PlayerMovement otherPlayer;
-
+    [SerializeField] PlayerMovement thisMovement;
     private ItemObject currentPowerup = null;
     private Coroutine scrollRoutine = null;
 
@@ -22,7 +22,12 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public PlayerPosition currentPosition;
-    
+
+    private void Start()
+    {
+        thisMovement = GetComponent<PlayerMovement>();
+    }
+
     public void SetPosition(PlayerPosition position)
     {
         currentPosition = position;
@@ -63,10 +68,59 @@ public class PlayerInventory : MonoBehaviour
 
     private void SpawnPowerup(ItemObject.ItemType type)
     {
-        if(currentPowerup.Type == ItemObject.ItemType.Bomb)
-        {
-            Instantiate(currentPowerup.Prefab);
+        GameObject spawnedObject = null;
 
+        switch (type)
+        {
+            case ItemObject.ItemType.Boost:
+                
+                
+
+                break;
+
+            case ItemObject.ItemType.Bomb:
+
+                spawnedObject = Instantiate(spawnedObject);
+                break;
+
+
+
+
+            case ItemObject.ItemType.Spikes:
+
+                spawnedObject = Instantiate(spawnedObject);
+                break;
+
+
+
+
+            case ItemObject.ItemType.LaneSwitch:
+
+                spawnedObject = Instantiate(spawnedObject);
+                break;
+
+
+
+
+            case ItemObject.ItemType.InvertControls:
+
+                spawnedObject = Instantiate(spawnedObject);
+                break;
+
+
+
+            case ItemObject.ItemType.Shield:
+
+                spawnedObject = Instantiate(spawnedObject);
+                break;
+
+
+
+
+            case ItemObject.ItemType.PositionSwitch:
+
+                spawnedObject = Instantiate(spawnedObject);
+                break;
         }
     }
 
@@ -93,6 +147,6 @@ public class PlayerInventory : MonoBehaviour
 
         //when scroll is over pass in the final items
         itemSlotImage.sprite = itemObjects[finalIndex].UI_sprite ;
-        currentPowerup = itemObjects[finalIndex].Prefab;
+        currentPowerup = itemObjects[finalIndex];
     }
 }

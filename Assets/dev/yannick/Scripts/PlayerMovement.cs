@@ -15,6 +15,17 @@ public class PlayerMovement : MonoBehaviour
     private InputAction moveAction;
     private InputAction powerupAction;
     private Vector3 startPos;
+
+    public enum PlayerLane
+    {
+        Left,
+        Middle,
+        Right,
+    }
+
+    public PlayerLane CurrentLane;
+    
+
     //jump
     private bool isGrounded = true;
 
@@ -46,6 +57,9 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         inventory = GetComponent<PlayerInventory>();
 
+        //players start in middle lane
+        CurrentLane = PlayerLane.Middle;
+
         if (playerCollider != null)
         {
             originalColliderHeight = playerCollider.height;
@@ -66,15 +80,6 @@ public class PlayerMovement : MonoBehaviour
         duckAction.performed += OnDuck;
 
         powerupAction.performed += OnPowerupUse;
-
-        /*//enable all movement buttons
-        moveAction.Enable();
-
-        jumpAction.Enable();
-        jumpAction.performed += OnJump;
-
-       // duckAction.Enable();
-        duckAction.performed += OnDuck;*/
     }
     private void OnDisable()
     {
@@ -129,11 +134,47 @@ public class PlayerMovement : MonoBehaviour
 
             ///LEFT
             if (moveDirection.x < -.1f)
+            {
                 targetPosX = new Vector3(rb.position.x - _playerSO.LaneOffset, rb.position.y, rb.position.z);
+
+                //when player is right move to middle pos
+                if(CurrentLane == PlayerLane.Right)
+                {
+                    CurrentLane = PlayerLane.Middle;
+                }
+                //when player is right move to middle pos
+                else if (CurrentLane == PlayerLane.Middle)
+                {
+                    CurrentLane = PlayerLane.Left;
+                }
+                //when is player is left dont change
+                else if(CurrentLane == PlayerLane.Left)
+                {
+                    CurrentLane = PlayerLane.Left;
+                }
+            }
 
             //RIGHT
             else if (moveDirection.x > .1f)
+            {
                 targetPosX = new Vector3(rb.position.x + _playerSO.LaneOffset, rb.position.y, rb.position.z);
+
+                //when player is left move to middle pos
+                if (CurrentLane == PlayerLane.Left)
+                {
+                    CurrentLane = PlayerLane.Middle;
+                }
+                //when player is middle move to right pos
+                else if (CurrentLane == PlayerLane.Middle)
+                {
+                    CurrentLane = PlayerLane.Right;
+                }
+                //when is player is right dont change
+                else if (CurrentLane == PlayerLane.Right)
+                {
+                    CurrentLane = PlayerLane.Right;
+                }
+            }
 
             //CLAMP X POSITION
             targetPosX.x = Mathf.Clamp(targetPosX.x,startPos.x  -_playerSO.LaneOffset, startPos.x + _playerSO.LaneOffset);
