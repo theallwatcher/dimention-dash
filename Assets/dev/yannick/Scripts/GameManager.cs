@@ -36,22 +36,22 @@ public class GameManager : MonoBehaviour
             {
                 //player one is in front
                 leader = "Player 1";
-            playerOneInventory.IsLeader(true);
-            playerTwoInventory.IsLeader(false);
+            playerOneInventory.SetPosition(PlayerInventory.PlayerPosition.FirstPlace);
+            playerTwoInventory.SetPosition(PlayerInventory.PlayerPosition.LastPlace);
             }
             else if (_playerOnePos.position.z < _playerTwoPos.position.z)
             {
                 //player 2 is in front
                 leader = "Player 2";
-                playerOneInventory.IsLeader(false);
-                playerTwoInventory.IsLeader(true);
+            playerOneInventory.SetPosition(PlayerInventory.PlayerPosition.LastPlace);
+            playerTwoInventory.SetPosition(PlayerInventory.PlayerPosition.FirstPlace);
         }        
         else if(_playerOnePos.position.z == _playerTwoPos.position.z)
         {
             //tie
-            leader = "tie"; 
-            playerOneInventory.IsLeader(false);
-            playerTwoInventory.IsLeader(false);
+            leader = "tie";
+            playerOneInventory.SetPosition(PlayerInventory.PlayerPosition.Tie);
+            playerTwoInventory.SetPosition(PlayerInventory.PlayerPosition.Tie);
         }
     }
 
