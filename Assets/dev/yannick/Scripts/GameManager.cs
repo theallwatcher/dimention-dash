@@ -8,9 +8,8 @@ public class GameManager : MonoBehaviour
     private bool _playerOneReady;
     private bool _playerTwoReady;
 
-    [SerializeField] Transform _playerOnePos, _playerTwoPos;
-    [SerializeField] private PlayerInventory playerOneInventory;
-    [SerializeField] private PlayerInventory playerTwoInventory;
+    Transform _playerOnePos, _playerTwoPos;
+    private PlayerInventory playerOneInventory, playerTwoInventory;
     public string leader = " ";
 
     public float roadSpeed = 2f;
@@ -60,14 +59,16 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void PlayerOneReady()
+    public void SetupPlayersPositions(Transform pos1, Transform pos2)
     {
-        _playerOneReady = true; 
+        _playerOnePos = pos1;
+        _playerTwoPos = pos2;
     }
 
-    public void PlayerTwoReady()
+    public void SetPlayersInventory(PlayerInventory inv1, PlayerInventory inv2)
     {
-        _playerTwoReady = true;
+        playerOneInventory = inv1;
+        playerTwoInventory = inv2;
     }
 
 }

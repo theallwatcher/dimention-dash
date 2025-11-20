@@ -19,6 +19,8 @@ public class InputManager : MonoBehaviour
 
     private PlayerInventory playerOneInventory;
     private PlayerInventory playerTwoInventory;
+
+    GameManager gameManager;
     private void Start()
     {
         if (Keyboard.current == null) return;
@@ -96,11 +98,22 @@ public class InputManager : MonoBehaviour
             player2.transform.position = spawnPoints[1].position;
         }
 
+        //set links to each player script
         playerOneInventory.SetOtherMoveScript(playerTwoMovement);
         playerTwoInventory.SetOtherMoveScript(playerOneMovement);
 
+        gameManager = GameManager.Instance;
+        gameManager.SetPlayersInventory(playerOneInventory, playerTwoInventory);
     }
 
+    private void Update()
+    {
+
+        Transform pos1 = playerOneInventory.transform;
+        Transform pos2 = playerTwoInventory.transform;
+
+        gameManager.SetupPlayersPositions(pos1, pos2);
+    }
 
     //private void Update()
     //{

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,9 +17,11 @@ public class PlayerMovement : MonoBehaviour
     private InputAction powerupAction;
     private Vector3 startPos;
 
-
+    //powerup variables
     private bool switchLanePowerup = false;
 
+    private bool invertControlsActive = false;
+    private Coroutine invertControlsCoroutine = null;
     public enum PlayerLane
     {
         Left,
@@ -297,6 +300,7 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
 
+    #region powerups
     public void ActivateSwitchLanePowerup() //is activated by other players powerup
     {
         switchLanePowerup = true;
@@ -331,6 +335,25 @@ public class PlayerMovement : MonoBehaviour
             targetPosX = new Vector3(rb.position.x - _playerSO.LaneOffset, rb.position.y, rb.position.z);
         }
     }
+
+    public void ActivateInvertControls(float t)
+    {
+        if(invertControlsCoroutine != null)
+        {
+            StopCoroutine(invertControlsCoroutine);
+        }
+        invertControlsCoroutine = StartCoroutine(SwitchControls(t));
+    }
+
+    private IEnumerator SwitchControls(float t)
+    {
+        invertControlsActive = true;
+        yield return new WaitForSeconds(t);
+        invertControlsActive = false;
+    }
+
+
+    #endregion
 }
 
 

@@ -16,6 +16,9 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField] private Transform feetPosition;
     [SerializeField] private Transform powerupSpawnPoint;
+
+    [SerializeField] private GameObject shieldObject;
+    private Coroutine shieldRoutine;
     private ItemObject currentPowerup = null;
     private Coroutine scrollRoutine = null;
     
@@ -104,7 +107,8 @@ public class PlayerInventory : MonoBehaviour
 
             case ItemObject.ItemType.Spikes:
 
-                //spawnedObject = Instantiate(spawnedObject);
+                powerupSpawnPoint.position = apponentMovementScript.transform.position + new Vector3(0, 0, 5); 
+                spawnedObject = Instantiate(spawnedObject, powerupSpawnPoint);
                 break;
 
 
@@ -120,13 +124,19 @@ public class PlayerInventory : MonoBehaviour
 
             case ItemObject.ItemType.InvertControls:
 
+                apponentMovementScript.ActivateInvertControls(5);
                 break;
 
 
 
             case ItemObject.ItemType.Shield:
 
-               // spawnedObject = Instantiate(spawnedObject);
+                if(shieldRoutine != null)
+                {
+                    StopCoroutine(shieldRoutine);
+                }
+
+                StartCoroutine(EnableShield(5));
                 break;
 
 
@@ -168,5 +178,13 @@ public class PlayerInventory : MonoBehaviour
     public void SetOtherMoveScript(PlayerMovement movement)
     {
         apponentMovementScript = movement;
+    }
+
+    IEnumerator EnableShield(float t)
+    {
+        shieldObject.SetActive(true);
+        yield return new WaitForSeconds(t);
+
+        shieldObject.SetActive(false);
     }
 }
