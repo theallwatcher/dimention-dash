@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class coinCounter : MonoBehaviour
 {
-    int coins;
+    public int coins;
 
     private void OnTriggerEnter(Collider other){
 

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 999398168082199494}
   - component: {fileID: 3497068044745610971}
   - component: {fileID: 7187450909309393282}
+  - component: {fileID: 1900752886253732383}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -225,8 +226,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d0073b6f364891f4c9f09619a64f85ee, type: 2}
   - {fileID: 11400000, guid: a617279b8cc161347885f3e95b8a10fe, type: 2}
   itemSlotImage: {fileID: 0}
-  otherPlayer: {fileID: 0}
-  thisMovement: {fileID: 5485085535865139395}
   feetPosition: {fileID: 6645852770755914562}
   powerupSpawnPoint: {fileID: 3842588472712676352}
   currentPosition: 0
@@ -243,6 +242,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerKiller
   playerInputObj: {fileID: 1794937278688757854}
+--- !u!114 &1900752886253732383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59064923132740882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c430aabe000fdf245b7ceac67c33b30a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::coinCounter
 --- !u!1 &2191989373227212952
 GameObject:
   m_ObjectHideFlags: 0
