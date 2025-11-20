@@ -6,14 +6,14 @@ public class buttons : MonoBehaviour
     public void startLevel(){
 
         //Laad het huidige level in met de SceneManager.
-        SceneManager.LoadScene("sam Test");
+        SceneManager.LoadScene("Main");
         Time.timeScale = 1;
     }
 
     public void menu(){
 
         //Laad het huidige level in met de SceneManager.
-        SceneManager.LoadScene("start Scene");
+        SceneManager.LoadScene("start");
         Time.timeScale = 1;
     }
 
