@@ -8,14 +8,14 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private List<ItemObject> itemObjects = new List<ItemObject>();
 
     [Header("In scene references")]
-    [SerializeField] private Image itemSlotImage = null;
+    public Image itemSlotImage = null;
 
     [Header("Script links")]
     [SerializeField] PlayerMovement otherPlayer;
     [SerializeField] PlayerMovement thisMovement;
 
     [SerializeField] private Transform feetPosition;
-
+    [SerializeField] private Transform powerupSpawnPoint;
     private ItemObject currentPowerup = null;
     private Coroutine scrollRoutine = null;
     
@@ -45,7 +45,13 @@ public class PlayerInventory : MonoBehaviour
             currentPowerup = null;
         }
 
-        if (currentPosition == PlayerPosition.FirstPlace)
+        //stop routine if already running
+        if(scrollRoutine != null)
+        {
+            StopCoroutine(scrollRoutine);
+        }
+
+        /*if (currentPosition == PlayerPosition.FirstPlace)
         {
             //only spawn nurfed powerups   [index 0 to 2]
             scrollRoutine = StartCoroutine(ScrollThroughItems(Random.Range(0, 2)));
@@ -59,12 +65,14 @@ public class PlayerInventory : MonoBehaviour
         {
             //spawn any of the powerups
             scrollRoutine = StartCoroutine(ScrollThroughItems(Random.Range(0, itemObjects.Count)));
-        }
+        }*/
+        scrollRoutine = StartCoroutine(ScrollThroughItems(1));
     }
 
     public void UsePowerup()
     {
         //set powerup spawnPoint 
+        if (currentPowerup == null) return;
 
         SpawnPowerup(currentPowerup.Type);
         itemSlotImage.sprite = null;
@@ -74,14 +82,13 @@ public class PlayerInventory : MonoBehaviour
     private void SpawnPowerup(ItemObject.ItemType type)
     {
         GameObject spawnedObject = null;
-        Transform spawnPoint = null;
 
         switch (type)
         {
             case ItemObject.ItemType.Boost:
 
-                spawnPoint.position = feetPosition.position;
-               // spawnedObject = Instantiate(spawnedObject);
+                powerupSpawnPoint.position = feetPosition.position + new Vector3(0, 0, 5);
+                spawnedObject = Instantiate(currentPowerup.Prefab, powerupSpawnPoint.position, Quaternion.identity);
 
                 break;
 

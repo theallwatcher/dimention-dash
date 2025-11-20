@@ -46,6 +46,9 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        inventory = GetComponent<PlayerInventory>();
+        rb = GetComponent<Rigidbody>();
+
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
         duckAction = playerInput.actions["Duck"];
@@ -54,8 +57,6 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         startPos = transform.position;
-        rb = GetComponent<Rigidbody>();
-        inventory = GetComponent<PlayerInventory>();
 
         //players start in middle lane
         CurrentLane = PlayerLane.Middle;
@@ -79,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
         duckAction = playerInput.actions["Duck"];
         duckAction.performed += OnDuck;
 
+        powerupAction = playerInput.actions["PowerUps"];
         powerupAction.performed += OnPowerupUse;
     }
     private void OnDisable()
@@ -86,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
         moveAction.Disable();
         jumpAction.Disable();
         duckAction.Disable();
+        powerupAction.Disable();
     }
     #endregion
     #region Input
