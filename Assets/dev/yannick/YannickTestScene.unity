@@ -1652,6 +1652,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1176210214}
     - target: {fileID: 3497068044745610971, guid: 64ddc78fbcb56e048bd822a0ed50414f, type: 3}
+      propertyPath: thisMovement
+      value: 
+      objectReference: {fileID: 297479395}
+    - target: {fileID: 3497068044745610971, guid: 64ddc78fbcb56e048bd822a0ed50414f, type: 3}
       propertyPath: itemSlotImage
       value: 
       objectReference: {fileID: 232323688}

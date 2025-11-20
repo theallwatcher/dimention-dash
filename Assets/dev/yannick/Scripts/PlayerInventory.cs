@@ -9,11 +9,16 @@ public class PlayerInventory : MonoBehaviour
 
     [Header("In scene references")]
     [SerializeField] private Image itemSlotImage = null;
+
+    [Header("Script links")]
     [SerializeField] PlayerMovement otherPlayer;
     [SerializeField] PlayerMovement thisMovement;
+
+    [SerializeField] private Transform feetPosition;
+
     private ItemObject currentPowerup = null;
     private Coroutine scrollRoutine = null;
-
+    
     public enum PlayerPosition 
     {
         FirstPlace,
@@ -69,18 +74,20 @@ public class PlayerInventory : MonoBehaviour
     private void SpawnPowerup(ItemObject.ItemType type)
     {
         GameObject spawnedObject = null;
+        Transform spawnPoint = null;
 
         switch (type)
         {
             case ItemObject.ItemType.Boost:
-                
-                
+
+                spawnPoint.position = feetPosition.position;
+               // spawnedObject = Instantiate(spawnedObject);
 
                 break;
 
             case ItemObject.ItemType.Bomb:
 
-                spawnedObject = Instantiate(spawnedObject);
+                //spawnedObject = Instantiate(spawnedObject);
                 break;
 
 
@@ -88,7 +95,7 @@ public class PlayerInventory : MonoBehaviour
 
             case ItemObject.ItemType.Spikes:
 
-                spawnedObject = Instantiate(spawnedObject);
+                //spawnedObject = Instantiate(spawnedObject);
                 break;
 
 
@@ -96,7 +103,7 @@ public class PlayerInventory : MonoBehaviour
 
             case ItemObject.ItemType.LaneSwitch:
 
-                spawnedObject = Instantiate(spawnedObject);
+               // spawnedObject = Instantiate(spawnedObject);
                 break;
 
 
@@ -104,14 +111,14 @@ public class PlayerInventory : MonoBehaviour
 
             case ItemObject.ItemType.InvertControls:
 
-                spawnedObject = Instantiate(spawnedObject);
+               // spawnedObject = Instantiate(spawnedObject);
                 break;
 
 
 
             case ItemObject.ItemType.Shield:
 
-                spawnedObject = Instantiate(spawnedObject);
+               // spawnedObject = Instantiate(spawnedObject);
                 break;
 
 
@@ -119,14 +126,14 @@ public class PlayerInventory : MonoBehaviour
 
             case ItemObject.ItemType.PositionSwitch:
 
-                spawnedObject = Instantiate(spawnedObject);
+               // spawnedObject = Instantiate(spawnedObject);
                 break;
         }
     }
 
     private IEnumerator ScrollThroughItems(int finalIndex)
     {
-        float interval = 0.01f;
+        float interval = 0.001f;
 
         //start at a random entry in the array
         int index = Random.Range(0, itemObjects.Count-1);
