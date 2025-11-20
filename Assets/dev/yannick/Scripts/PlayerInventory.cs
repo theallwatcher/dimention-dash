@@ -19,6 +19,8 @@ public class PlayerInventory : MonoBehaviour
     private ItemObject currentPowerup = null;
     private Coroutine scrollRoutine = null;
     
+
+
     public enum PlayerPosition 
     {
         FirstPlace,
@@ -88,6 +90,7 @@ public class PlayerInventory : MonoBehaviour
             case ItemObject.ItemType.Boost:
 
                 powerupSpawnPoint.position = feetPosition.position + new Vector3(0, 0, 5);
+                Debug.Log(powerupSpawnPoint.position);
                 spawnedObject = Instantiate(currentPowerup.Prefab, powerupSpawnPoint.position, Quaternion.identity);
 
                 break;
