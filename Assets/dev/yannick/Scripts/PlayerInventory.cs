@@ -71,7 +71,7 @@ public class PlayerInventory : MonoBehaviour
             //spawn any of the powerups
             scrollRoutine = StartCoroutine(ScrollThroughItems(Random.Range(0, itemObjects.Count)));
         }*/
-        scrollRoutine = StartCoroutine(ScrollThroughItems(3));
+        scrollRoutine = StartCoroutine(ScrollThroughItems(6));
     }
 
     public void UsePowerup()
@@ -106,9 +106,12 @@ public class PlayerInventory : MonoBehaviour
 
 
             case ItemObject.ItemType.Spikes:
+                //make a new transform to spawn the spike prefab
+                GameObject spawn = new GameObject("Spike SpawnPoint");
 
-                powerupSpawnPoint.position = apponentMovementScript.transform.position + new Vector3(0, 0, 5); 
-                spawnedObject = Instantiate(spawnedObject, powerupSpawnPoint);
+                //move position to other player and move forwards
+                spawn.transform.position = apponentMovementScript.transform.position + new Vector3(0, 0, 10); 
+                spawnedObject = Instantiate(currentPowerup.Prefab, spawn.transform.position, Quaternion.identity);
                 break;
 
 
