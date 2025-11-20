@@ -6,5 +6,6 @@ public class Boost : BasePowerup
     protected override void Activate(PlayerMovement player)
     {
         player.MovePlayerZ(-boostAmount);
+        Destroy(gameObject.transform.parent.gameObject);
     }
 }

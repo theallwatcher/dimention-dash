@@ -11,8 +11,8 @@ public class PlayerInventory : MonoBehaviour
     public Image itemSlotImage = null;
 
     [Header("Script links")]
-    [SerializeField] PlayerMovement otherPlayer;
-    [SerializeField] PlayerMovement thisMovement;
+    private PlayerMovement movementScript;
+    private PlayerMovement apponentMovementScript;
 
     [SerializeField] private Transform feetPosition;
     [SerializeField] private Transform powerupSpawnPoint;
@@ -32,7 +32,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void Start()
     {
-        thisMovement = GetComponent<PlayerMovement>();
+        movementScript = GetComponent<PlayerMovement>();
     }
 
     public void SetPosition(PlayerPosition position)
@@ -68,7 +68,7 @@ public class PlayerInventory : MonoBehaviour
             //spawn any of the powerups
             scrollRoutine = StartCoroutine(ScrollThroughItems(Random.Range(0, itemObjects.Count)));
         }*/
-        scrollRoutine = StartCoroutine(ScrollThroughItems(1));
+        scrollRoutine = StartCoroutine(ScrollThroughItems(3));
     }
 
     public void UsePowerup()
@@ -81,7 +81,7 @@ public class PlayerInventory : MonoBehaviour
         currentPowerup = null;
     }
 
-    private void SpawnPowerup(ItemObject.ItemType type)
+    private void SpawnPowerup(ItemObject.ItemType type) //every powerup type spawns in a different way
     {
         GameObject spawnedObject = null;
 
@@ -89,8 +89,7 @@ public class PlayerInventory : MonoBehaviour
         {
             case ItemObject.ItemType.Boost:
 
-                powerupSpawnPoint.position = feetPosition.position + new Vector3(0, 0, 5);
-                Debug.Log(powerupSpawnPoint.position);
+                powerupSpawnPoint.position = feetPosition.position + new Vector3(0, 0, 10);
                 spawnedObject = Instantiate(currentPowerup.Prefab, powerupSpawnPoint.position, Quaternion.identity);
 
                 break;
@@ -113,7 +112,7 @@ public class PlayerInventory : MonoBehaviour
 
             case ItemObject.ItemType.LaneSwitch:
 
-               // spawnedObject = Instantiate(spawnedObject);
+                apponentMovementScript.ActivateSwitchLanePowerup();
                 break;
 
 
@@ -121,7 +120,6 @@ public class PlayerInventory : MonoBehaviour
 
             case ItemObject.ItemType.InvertControls:
 
-               // spawnedObject = Instantiate(spawnedObject);
                 break;
 
 
@@ -165,5 +163,10 @@ public class PlayerInventory : MonoBehaviour
         //when scroll is over pass in the final items
         itemSlotImage.sprite = itemObjects[finalIndex].UI_sprite ;
         currentPowerup = itemObjects[finalIndex];
+    }
+
+    public void SetOtherMoveScript(PlayerMovement movement)
+    {
+        apponentMovementScript = movement;
     }
 }

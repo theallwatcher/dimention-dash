@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     private InputAction powerupAction;
     private Vector3 startPos;
 
+
+    private bool switchLanePowerup = false;
+
     public enum PlayerLane
     {
         Left,
@@ -131,8 +134,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
-        if (!isMovingX)
-        {
+        if (isMovingX || switchLanePowerup) return;
+                
             //read value from input system
 
             ///LEFT
@@ -185,7 +188,6 @@ public class PlayerMovement : MonoBehaviour
             // start movement if new target detected
             if (moveDirection.x > 0.1f || moveDirection.x < -0.1f)
                 isMovingX = true;
-        }
     }
     private void SwitchLane()
     {
@@ -195,6 +197,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 currentPos = rb.position;
 
+        //Lerp current position to new target position 
         float newX = Mathf.Lerp(
             currentPos.x,
             targetPosX.x,
@@ -293,6 +296,41 @@ public class PlayerMovement : MonoBehaviour
         playerCollider.center = originalColliderCenter;
     }
     #endregion
+
+    public void ActivateSwitchLanePowerup() //is activated by other players powerup
+    {
+        switchLanePowerup = true;
+
+        if (CurrentLane == PlayerLane.Left)
+        {
+            //always move right when left
+            CurrentLane = PlayerLane.Middle;
+            targetPosX = new Vector3(rb.position.x + _playerSO.LaneOffset, rb.position.y, rb.position.z);
+
+        }
+        else if (CurrentLane == PlayerLane.Middle)
+        {
+            //move left or right when in middle
+            int randomDir = Random.Range(0, 1);
+            
+            if(randomDir == 0)
+            {
+                targetPosX = new Vector3(rb.position.x - _playerSO.LaneOffset, rb.position.y, rb.position.z);
+                CurrentLane = PlayerLane.Left;
+            }
+            else
+            {
+                targetPosX = new Vector3(rb.position.x + _playerSO.LaneOffset, rb.position.y, rb.position.z);
+                CurrentLane = PlayerLane.Right;
+            }
+        }
+        else if (CurrentLane == PlayerLane.Right)
+        {
+            //when player is right move to middle pos
+            CurrentLane = PlayerLane.Middle;
+            targetPosX = new Vector3(rb.position.x - _playerSO.LaneOffset, rb.position.y, rb.position.z);
+        }
+    }
 }
 
 

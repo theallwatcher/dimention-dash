@@ -14,6 +14,11 @@ public class InputManager : MonoBehaviour
     bool arrowsJoined = false;
     bool gamepadJoined = false;
 
+    private PlayerMovement playerOneMovement;
+    private PlayerMovement playerTwoMovement;
+
+    private PlayerInventory playerOneInventory;
+    private PlayerInventory playerTwoInventory;
     private void Start()
     {
         if (Keyboard.current == null) return;
@@ -26,10 +31,12 @@ public class InputManager : MonoBehaviour
             pairWithDevice: Gamepad.all[0]);
 
             //link ui image
-            PlayerInventory inventory = player.GetComponent<PlayerInventory>();
-            if (inventory != null)
+            playerOneInventory = player.GetComponent<PlayerInventory>();
+            playerOneMovement = player.GetComponent<PlayerMovement>();
+
+            if (playerOneInventory != null)
             {
-                inventory.itemSlotImage = itemSlot1;
+                playerOneInventory.itemSlotImage = itemSlot1;
             }
 
             player.transform.position = spawnPoints[0].position;
@@ -41,10 +48,12 @@ public class InputManager : MonoBehaviour
                 pairWithDevice: Keyboard.current);
 
             //link ui image
-            PlayerInventory inventory = player.GetComponent<PlayerInventory>();
-            if (inventory != null)
+            playerOneInventory = player.GetComponent<PlayerInventory>();
+            playerOneMovement = player.GetComponent<PlayerMovement>();
+
+            if (playerOneInventory != null)
             {
-                inventory.itemSlotImage = itemSlot1;
+                playerOneInventory.itemSlotImage = itemSlot1;
             }
 
             player.transform.position = spawnPoints[0].position;
@@ -59,10 +68,12 @@ public class InputManager : MonoBehaviour
             pairWithDevice: Gamepad.all[1]);
 
             //link ui image
-            PlayerInventory inventory = player2.GetComponent<PlayerInventory>();
-            if (inventory != null)
+            playerTwoInventory = player2.GetComponent<PlayerInventory>();
+            playerTwoMovement = player2.GetComponent<PlayerMovement>();
+
+            if (playerTwoInventory != null)
             {
-                inventory.itemSlotImage = itemSlot2;
+                playerTwoInventory.itemSlotImage = itemSlot2;
             }
 
             player2.transform.position = spawnPoints[1].position;
@@ -74,15 +85,19 @@ public class InputManager : MonoBehaviour
                 pairWithDevice: Keyboard.current);
 
             //link ui image
-            PlayerInventory inventory = player2.GetComponent<PlayerInventory>();
-            if (inventory != null)
+            playerTwoInventory = player2.GetComponent<PlayerInventory>();
+            playerTwoMovement = player2.GetComponent<PlayerMovement>();
+
+            if (playerTwoInventory != null)
             {
-                inventory.itemSlotImage = itemSlot2;
+                playerTwoInventory.itemSlotImage = itemSlot2;
             }
 
             player2.transform.position = spawnPoints[1].position;
-
         }
+
+        playerOneInventory.SetOtherMoveScript(playerTwoMovement);
+        playerTwoInventory.SetOtherMoveScript(playerOneMovement);
 
     }
 
