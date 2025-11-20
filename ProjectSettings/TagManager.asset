@@ -9,6 +9,7 @@ TagManager:
   - Destroy
   - Damage
   - obstacle
+  - Killer
   layers:
   - Default
   - TransparentFX
