@@ -1684,6 +1684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::spawnManager
   obstacles:
+  - {fileID: 1280408372001429099, guid: 85383b701a7c8d445809a0e9ce7af7b4, type: 3}
   - {fileID: 1280408372001429099, guid: d87274dfd3bac8b46869157655ad076d, type: 3}
   spawnPoints:
   - {fileID: 1659853989}
@@ -3240,6 +3241,7 @@ Transform:
   - {fileID: 402671646}
   - {fileID: 1774879298}
   - {fileID: 332057368}
+  - {fileID: 1367138854}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &801759245
@@ -5064,6 +5066,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6917229133876065695, guid: 64ddc78fbcb56e048bd822a0ed50414f, type: 3}
   m_PrefabInstance: {fileID: 1358919053}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1367138853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1367138854}
+  - component: {fileID: 1367138855}
+  m_Layer: 0
+  m_Name: spawn manager (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1367138854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367138853}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -9.05425, y: 7.01, z: -396.9691}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 784707890}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1367138855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367138853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb4027b7a7fdacb4aa497635f2614308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::spawnManager
+  obstacles:
+  - {fileID: 8128825658735750631, guid: 87a81c0f89a49664dad90e729bf109bf, type: 3}
+  - {fileID: 8128825658735750631, guid: 87a81c0f89a49664dad90e729bf109bf, type: 3}
+  spawnPoints:
+  - {fileID: 1659853989}
+  - {fileID: 295673164}
+  - {fileID: 203400330}
+  - {fileID: 1229479109}
+  - {fileID: 1241985165}
+  - {fileID: 758515045}
+  spawnDelay: 5
 --- !u!1 &1402440151
 GameObject:
   m_ObjectHideFlags: 0
