@@ -8,7 +8,7 @@ public class spawnManager : MonoBehaviour
 
     [SerializeField] List<GameObject> obstacles = new List<GameObject>();
     [SerializeField] List<Transform> spawnPoints = new List<Transform>();
-    [SerializeField] int spawnDelay;
+    [SerializeField] float spawnDelay;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
@@ -35,7 +35,7 @@ public class spawnManager : MonoBehaviour
         GameObject obstacle = Instantiate(obstacles[randomObstacle], spawnPoints[randomSpawn].position, spawnPoints[randomSpawn].rotation);
     }
 
-    IEnumerator spawnTimer(int seconds) { 
+    IEnumerator spawnTimer(float seconds) { 
 
 
         yield return new WaitForSeconds(seconds);

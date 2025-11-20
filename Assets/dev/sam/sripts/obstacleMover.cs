@@ -25,7 +25,7 @@ public class obstacleMover : MonoBehaviour
 
     private void OnTriggerEnter(Collider other){
 
-        if (other.gameObject.tag == "Player") {
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "obstacle") {
             Debug.Log("hit player");
             Destroy(gameObject);
         }
