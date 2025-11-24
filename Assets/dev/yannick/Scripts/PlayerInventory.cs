@@ -57,21 +57,10 @@ public class PlayerInventory : MonoBehaviour
             StopCoroutine(scrollRoutine);
         }
 
-        /*if (currentPosition == PlayerPosition.FirstPlace)
-        {
-            //only spawn nurfed powerups   [index 0 to 2]
-            scrollRoutine = StartCoroutine(ScrollThroughItems(Random.Range(0, 2)));
-        }
-        if(currentPosition == PlayerPosition.LastPlace)
-        {
-            //spawn helpfull powerups      [index 3, 4]
-            scrollRoutine = StartCoroutine(ScrollThroughItems(Random.Range(3, 4)));
-        }
-        else if (currentPosition == PlayerPosition.Tie) 
-        {
-            //spawn any of the powerups
-            scrollRoutine = StartCoroutine(ScrollThroughItems(Random.Range(0, itemObjects.Count)));
-        }*/
+        //spawn powerups based on the position of player
+        //[leader gets less chance of good powerup]
+
+
         scrollRoutine = StartCoroutine(ScrollThroughItems(0));
     }
 
