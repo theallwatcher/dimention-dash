@@ -15,7 +15,8 @@ public class ItemObject : ScriptableObject
          LaneSwitch,
          InvertControls,
          Shield,
-         PositionSwitch
+         PositionSwitch,
+         Coins
     }
 
     public ItemType Type;

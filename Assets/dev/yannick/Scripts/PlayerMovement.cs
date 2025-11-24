@@ -17,11 +17,6 @@ public class PlayerMovement : MonoBehaviour
     private InputAction powerupAction;
     private Vector3 startPos;
 
-    //powerup variables
-    private bool switchLanePowerup = false;
-
-    private bool invertControlsActive = false;
-    private Coroutine invertControlsCoroutine = null;
     public enum PlayerLane
     {
         Left,
@@ -49,6 +44,10 @@ public class PlayerMovement : MonoBehaviour
     private float originalColliderHeight;
     private Vector3 originalColliderCenter;
 
+
+    //powerups
+    float controlDirection = 1f;
+    bool forceLaneSwitch = false;
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -129,20 +128,21 @@ public class PlayerMovement : MonoBehaviour
     {
        
 
-        Move();
+        MoveLeftRight();
         SwitchLane();
         if (isMovingZ) HandleForwardBackwardMovement();
         HandleSlide();
     }
 
-    public void Move()
+    public void MoveLeftRight()
     {
-        if (isMovingX || switchLanePowerup) return;
-                
-            //read value from input system
+        if (isMovingX || forceLaneSwitch) return;
+
+        //when reverse input powerup is active
+        float horizontal = moveDirection.x * controlDirection;
 
             ///LEFT
-            if (moveDirection.x < -.1f)
+            if (horizontal < -.1f)
             {
                 targetPosX = new Vector3(rb.position.x - _playerSO.LaneOffset, rb.position.y, rb.position.z);
 
@@ -164,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //RIGHT
-            else if (moveDirection.x > .1f)
+            else if (horizontal > .1f)
             {
                 targetPosX = new Vector3(rb.position.x + _playerSO.LaneOffset, rb.position.y, rb.position.z);
 
@@ -189,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
             targetPosX.x = Mathf.Clamp(targetPosX.x,startPos.x  -_playerSO.LaneOffset, startPos.x + _playerSO.LaneOffset);
 
             // start movement if new target detected
-            if (moveDirection.x > 0.1f || moveDirection.x < -0.1f)
+            if (horizontal > 0.1f || horizontal < -0.1f)
                 isMovingX = true;
     }
     private void SwitchLane()
@@ -223,6 +223,7 @@ public class PlayerMovement : MonoBehaviour
     #region Z movement
     private void HandleForwardBackwardMovement()
     {
+
             Vector3 currentPos = rb.position;
 
             float newZ = Mathf.Lerp(
@@ -233,7 +234,6 @@ public class PlayerMovement : MonoBehaviour
             Vector3 newPos = new Vector3(
                 currentPos.x, currentPos.y, newZ);
 
-        //targetPosZ.z = Mathf.Clamp(targetPosZ.z, startPos.z - 5, 50);
 
         rb.MovePosition(newPos);
 
@@ -301,7 +301,7 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region powerups
-    public void ActivateSwitchLanePowerup() //is activated by other players powerup
+/*    public void ActivateSwitchLanePowerup() //is activated by other players powerup
     {
         switchLanePowerup = true;
 
@@ -351,7 +351,48 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(t);
         invertControlsActive = false;
     }
+*/
 
+    public IEnumerator SwitchControls()
+    {
+        controlDirection = -1f;
+
+        yield return new WaitForSeconds(5);
+        controlDirection = 1f;
+    }
+
+    public void ForceSwitchLane()
+    {
+        if (isMovingX) return;
+        forceLaneSwitch = true;
+        // Move RIGHT if possible
+        if (CurrentLane == PlayerLane.Left)
+        {
+            CurrentLane = PlayerLane.Middle;
+            targetPosX = new Vector3(rb.position.x + _playerSO.LaneOffset, rb.position.y, rb.position.z);
+        }
+        else if (CurrentLane == PlayerLane.Middle)
+        {
+            // Random: left or right
+            if (Random.value > 0.5f)
+            {
+                CurrentLane = PlayerLane.Left;
+                targetPosX = new Vector3(rb.position.x - _playerSO.LaneOffset, rb.position.y, rb.position.z);
+            }
+            else
+            {
+                CurrentLane = PlayerLane.Right;
+                targetPosX = new Vector3(rb.position.x + _playerSO.LaneOffset, rb.position.y, rb.position.z);
+            }
+        }
+        else if (CurrentLane == PlayerLane.Right)
+        {
+            CurrentLane = PlayerLane.Middle;
+            targetPosX = new Vector3(rb.position.x - _playerSO.LaneOffset, rb.position.y, rb.position.z);
+        }
+
+        isMovingX = true; // start movement next FixedUpdate
+    }
 
     #endregion
 }

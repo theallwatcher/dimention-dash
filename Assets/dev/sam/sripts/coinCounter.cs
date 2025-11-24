@@ -11,4 +11,9 @@ public class coinCounter : MonoBehaviour
             coins++;
         }
     }
+
+    public void AddCoins()
+    {
+        coins += Random.Range(2, 5);
+    }
 }

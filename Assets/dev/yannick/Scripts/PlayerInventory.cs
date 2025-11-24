@@ -12,7 +12,7 @@ public class PlayerInventory : MonoBehaviour
 
     [Header("Script links")]
     private PlayerMovement movementScript;
-    private PlayerMovement apponentMovementScript;
+    private PlayerMovement opponentMovementScript;
 
     [SerializeField] private Transform feetPosition;
     [SerializeField] private Transform powerupSpawnPoint;
@@ -36,7 +36,6 @@ public class PlayerInventory : MonoBehaviour
     private void Start()
     {
         movementScript = GetComponent<PlayerMovement>();
-        //currentPowerup = itemObjects[0];
     }
 
     public void SetPosition(PlayerPosition position)
@@ -45,6 +44,7 @@ public class PlayerInventory : MonoBehaviour
     }
     public void PickupRandomItem()
     {
+        //empty current item in slot
         if (itemSlotImage != null && currentPowerup != null)
         {
             itemSlotImage.sprite = null;
@@ -57,11 +57,10 @@ public class PlayerInventory : MonoBehaviour
             StopCoroutine(scrollRoutine);
         }
 
-        //spawn powerups based on the position of player
-        //[leader gets less chance of good powerup]
+        //RandomizeItems();
 
-
-        scrollRoutine = StartCoroutine(ScrollThroughItems(0));
+        //debug function
+        scrollRoutine = StartCoroutine(ScrollThroughItems(3));
     }
 
     public void UsePowerup()
@@ -94,7 +93,7 @@ public class PlayerInventory : MonoBehaviour
 
                 if(bombScript != null)
                 {
-                    bombScript.Constructor(powerupSpawnPoint, apponentMovementScript.transform, apponentMovementScript.transform.gameObject);
+                    bombScript.Constructor(powerupSpawnPoint, opponentMovementScript.transform, opponentMovementScript.transform.gameObject);
                 }
 
                 break;
@@ -107,7 +106,7 @@ public class PlayerInventory : MonoBehaviour
                 GameObject spawn = new GameObject("Spike SpawnPoint");
 
                 //move position to other player and move forwards
-                spawn.transform.position = apponentMovementScript.transform.position + new Vector3(0, 0, 10); 
+                spawn.transform.position = opponentMovementScript.transform.position + new Vector3(0, 0, 10); 
                 spawnedObject = Instantiate(currentPowerup.Prefab, spawn.transform.position, Quaternion.identity);
                 break;
 
@@ -116,7 +115,7 @@ public class PlayerInventory : MonoBehaviour
 
             case ItemObject.ItemType.LaneSwitch:
 
-                apponentMovementScript.ActivateSwitchLanePowerup();
+                opponentMovementScript.ForceSwitchLane();
                 break;
 
 
@@ -124,7 +123,8 @@ public class PlayerInventory : MonoBehaviour
 
             case ItemObject.ItemType.InvertControls:
 
-                apponentMovementScript.ActivateInvertControls(5);
+                PowerupManager opponentPowerupManager = opponentMovementScript.GetComponent<PowerupManager>();
+                opponentPowerupManager.ActivateInvertControls();
                 break;
 
 
@@ -145,6 +145,12 @@ public class PlayerInventory : MonoBehaviour
             case ItemObject.ItemType.PositionSwitch:
 
                // spawnedObject = Instantiate();
+                break;
+
+            case ItemObject.ItemType.Coins:
+
+                coinCounter coinScript = GetComponent<coinCounter>();
+                coinScript.AddCoins();
                 break;
         }
     }
@@ -179,7 +185,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void SetOtherMoveScript(PlayerMovement movement)
     {
-        apponentMovementScript = movement;
+        opponentMovementScript = movement;
     }
 
     IEnumerator EnableShield(float t)
@@ -188,5 +194,122 @@ public class PlayerInventory : MonoBehaviour
         yield return new WaitForSeconds(t);
 
         shieldObject.SetActive(false);
+    }
+
+    private void RandomizeItems()
+    {
+        float roll = Random.Range(0, 100);
+
+         #region FirstPlace
+        if (currentPosition == PlayerPosition.FirstPlace)
+        {
+            if (roll < 12f)     //Bomb [12%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(0)); 
+            }
+            else if (roll < 0)  //Boost [0%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(1)); 
+            }
+            else if (roll >= 12f && roll < 19f) //Invert controls [7%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(2)); 
+            }
+            else if (roll >= 19f && roll < 31.5)//Lane switch [12.5%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(3)); 
+            }
+            else if (roll >= 31.5f && roll < 51.5f)//Pos switch [20%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(4)); 
+            }
+            else if (roll >= 51.5f && roll < 57.5f) //Shield [6%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(5)); 
+            }
+            else if (roll >= 57.5f && roll < 70) //Spikes [12.5%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(6)); 
+            }
+            else if (roll >= 70f && roll <= 100) //Coins [30%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(7)); 
+            }
+        }
+        #endregion
+        #region Tie
+        if (currentPosition == PlayerPosition.Tie) //when player is tied with opponent all spawn chances are equal
+        {
+            if (roll < 12f)     //Bomb [12%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(0));
+            }
+            else if (roll < 0)  //Boost [0%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(1));
+            }
+            else if (roll >= 12f && roll < 19f) //Invert controls [7%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(2));
+            }
+            else if (roll >= 19f && roll < 31.5)//Lane switch [12.5%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(3));
+            }
+            else if (roll >= 31.5f && roll < 51.5f)//Pos switch [20%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(4));
+            }
+            else if (roll >= 51.5f && roll < 57.5f) //Shield [6%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(5));
+            }
+            else if (roll >= 57.5f && roll < 70) //Spikes [12.5%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(6));
+            }
+            else if (roll >= 70f && roll <= 100) //Coins [30%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(7));
+            }
+        }
+        #endregion
+         #region Last
+        if (currentPosition == PlayerPosition.LastPlace)
+        {
+            if (roll < 12f)     //Bomb [12%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(0));
+            }
+            else if (roll < 0)  //Boost [0%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(1));
+            }
+            else if (roll >= 12f && roll < 19f) //Invert controls [7%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(2));
+            }
+            else if (roll >= 19f && roll < 31.5)//Lane switch [12.5%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(3));
+            }
+            else if (roll >= 31.5f && roll < 51.5f)//Pos switch [20%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(4));
+            }
+            else if (roll >= 51.5f && roll < 57.5f) //Shield [6%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(5));
+            }
+            else if (roll >= 57.5f && roll < 70) //Spikes [12.5%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(6));
+            }
+            else if (roll >= 70f && roll <= 100) //Coins [30%]
+            {
+                scrollRoutine = StartCoroutine(ScrollThroughItems(7));
+            }
+        }
+        #endregion
     }
 }
