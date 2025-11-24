@@ -18,35 +18,40 @@ public class portal : MonoBehaviour
         
         rb = GetComponent<Rigidbody>();
         RandomizePortals();
-        
+        rb.AddForce(new Vector3(0, 0, speed));
     }
 
     // Update is called once per frame
     void Update(){
 
-        if (Keyboard.current.shiftKey.wasPressedThisFrame) {
+        /*if (Keyboard.current.shiftKey.wasPressedThisFrame)
+        {
 
             rb.AddForce(new Vector3(0, 0, speed));
-        }
+        }*/
 
-        if (counter >= hitCount){
+        if (counter >= hitCount)
+        {
 
             SceneManager.LoadScene("//next scene name");
-                
+
         }
     }
 
 
-    private void OnTriggerEnter(Collider other){
+    private void OnTriggerEnter(Collider other)
+    {
 
-        if (other.gameObject.tag == "Player"){
+        if (other.gameObject.tag == "Player")
+        {
 
             Debug.Log("portal hit 1");
             counter++;
         }
     }
 
-    private void RandomizePortals() { 
+    private void RandomizePortals()
+    {
 
         int portal1Random = Random.Range(0, portals1.Count);
         int portal2Random = Random.Range(0, portals2.Count);
@@ -58,9 +63,9 @@ public class portal : MonoBehaviour
         Vector3 portalPosition2 = new Vector3(portals2[portal2Random].transform.position.x, portals2[portal2Random].transform.position.y + 5, portals2[portal2Random].transform.position.z);
 
 
-        GameObject indicator1 = Instantiate(corectIndicatorPrefab,portalPosition1, portals1[portal1Random].transform.rotation, portals1[portal1Random].transform);
+        GameObject indicator1 = Instantiate(corectIndicatorPrefab, portalPosition1, portals1[portal1Random].transform.rotation, portals1[portal1Random].transform);
         GameObject indicator2 = Instantiate(corectIndicatorPrefab, portalPosition2, portals2[portal2Random].transform.rotation, portals2[portal2Random].transform);
 
     }
-    
+
 }

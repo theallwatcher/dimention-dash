@@ -3100,6 +3100,7 @@ Transform:
   - {fileID: 402671646}
   - {fileID: 332057368}
   - {fileID: 1367138854}
+  - {fileID: 2126760881}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &801759245
@@ -7111,6 +7112,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: portals
       objectReference: {fileID: 0}
+    - target: {fileID: 7809425060482921794, guid: 40c0a50dae7190641b33196b6646837c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7918270582063671667, guid: 40c0a50dae7190641b33196b6646837c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7156,6 +7161,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40c0a50dae7190641b33196b6646837c, type: 3}
+--- !u!1 &1868876069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7809425060482921794, guid: 40c0a50dae7190641b33196b6646837c, type: 3}
+  m_PrefabInstance: {fileID: 1868876068}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1945597037
 GameObject:
   m_ObjectHideFlags: 0
@@ -8074,6 +8084,55 @@ PrefabInstance:
       addedObject: {fileID: 1311694667}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d44fef3fd959fd4aa38e2ab2649753c, type: 3}
+--- !u!1 &2126760880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2126760881}
+  - component: {fileID: 2126760882}
+  m_Layer: 0
+  m_Name: round ender Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2126760881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126760880}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.56499, y: 7.01, z: -399.47647}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 784707890}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2126760882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126760880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0c0a39738fe6d64ebfdc396daffe8b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::roundEnderManager
+  portals: {fileID: 1868876069}
+  spawners:
+  - {fileID: 332057367}
+  - {fileID: 1367138853}
+  roundDuration: 60
 --- !u!1 &2134443088
 GameObject:
   m_ObjectHideFlags: 0
