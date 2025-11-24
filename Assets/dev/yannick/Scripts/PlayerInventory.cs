@@ -36,6 +36,7 @@ public class PlayerInventory : MonoBehaviour
     private void Start()
     {
         movementScript = GetComponent<PlayerMovement>();
+        //currentPowerup = itemObjects[0];
     }
 
     public void SetPosition(PlayerPosition position)
@@ -71,7 +72,7 @@ public class PlayerInventory : MonoBehaviour
             //spawn any of the powerups
             scrollRoutine = StartCoroutine(ScrollThroughItems(Random.Range(0, itemObjects.Count)));
         }*/
-        scrollRoutine = StartCoroutine(ScrollThroughItems(6));
+        scrollRoutine = StartCoroutine(ScrollThroughItems(0));
     }
 
     public void UsePowerup()
@@ -99,7 +100,14 @@ public class PlayerInventory : MonoBehaviour
 
             case ItemObject.ItemType.Bomb:
 
-                //spawnedObject = Instantiate(spawnedObject);
+                spawnedObject = Instantiate(currentPowerup.Prefab);
+                BombPowerup bombScript = spawnedObject.GetComponentInChildren<BombPowerup>();
+
+                if(bombScript != null)
+                {
+                    bombScript.Constructor(powerupSpawnPoint, apponentMovementScript.transform, apponentMovementScript.transform.gameObject);
+                }
+
                 break;
 
 
@@ -147,22 +155,22 @@ public class PlayerInventory : MonoBehaviour
 
             case ItemObject.ItemType.PositionSwitch:
 
-               // spawnedObject = Instantiate(spawnedObject);
+               // spawnedObject = Instantiate();
                 break;
         }
     }
 
     private IEnumerator ScrollThroughItems(int finalIndex)
     {
-        float interval = 0.001f;
-
+        float interval = 0.03f;
+        float maxInterval = 0.5f;
+        float acceleration = 1.12f;
         //start at a random entry in the array
         int index = Random.Range(0, itemObjects.Count-1);
 
         
-        while (interval < 0.6f)
+        while (interval < maxInterval)
         {
-            interval += 0.05f;
             index++;
             //reset when overflowing
             if (index > itemObjects.Count -1)
@@ -171,12 +179,14 @@ public class PlayerInventory : MonoBehaviour
             //switch item sprite
             itemSlotImage.sprite = itemObjects[index].UI_sprite;
             yield return new WaitForSeconds(interval);
+
+            interval *= acceleration;
         }
 
         //when scroll is over pass in the final items
         itemSlotImage.sprite = itemObjects[finalIndex].UI_sprite ;
         currentPowerup = itemObjects[finalIndex];
-    }
+    } 
 
     public void SetOtherMoveScript(PlayerMovement movement)
     {
