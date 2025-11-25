@@ -1106,7 +1106,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7643484335149035672, guid: 2d44fef3fd959fd4aa38e2ab2649753c, type: 3}
   m_PrefabInstance: {fileID: 1465903549}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &294165676
+--- !u!114 &294165678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1117,16 +1117,15 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 706afb7ff35feef4e87586f983b6970a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Input_Manager
+  m_EditorClassIdentifier: Assembly-CSharp::Input_manager
   playerPrefab: {fileID: 59064923132740882, guid: 64ddc78fbcb56e048bd822a0ed50414f, type: 3}
   spawnPoints:
   - {fileID: 1760658889}
   - {fileID: 1001198467}
   itemSlot1: {fileID: 717977674}
   itemSlot2: {fileID: 943075504}
-  playerMaterials:
-  - {fileID: 2100000, guid: cc8bd4abdb2b54247aad5cb1d38f2b65, type: 2}
-  - {fileID: 2100000, guid: f69c5beaa77a39444a9d9a9678a7644b, type: 2}
+  player1Material: {fileID: 2100000, guid: cc8bd4abdb2b54247aad5cb1d38f2b65, type: 2}
+  player2Material: {fileID: 2100000, guid: f69c5beaa77a39444a9d9a9678a7644b, type: 2}
   ui3DManager: {fileID: 1340452310}
 --- !u!1 &298380967
 GameObject:
@@ -5026,7 +5025,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7486864791549186214, guid: 2d44fef3fd959fd4aa38e2ab2649753c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 294165676}
+      addedObject: {fileID: 294165678}
   m_SourcePrefab: {fileID: 100100000, guid: 2d44fef3fd959fd4aa38e2ab2649753c, type: 3}
 --- !u!1 &1517718889
 GameObject:
