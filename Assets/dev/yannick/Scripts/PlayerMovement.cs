@@ -393,6 +393,51 @@ public class PlayerMovement : MonoBehaviour
 
         isMovingX = true; // start movement next FixedUpdate
     }
+    public void SmoothSwapZ(PlayerMovement otherPlayer)
+    {
+        if (otherPlayer == null) return;
+
+        StartCoroutine(SmoothSwapCoroutine(otherPlayer));
+    }
+
+    private IEnumerator SmoothSwapCoroutine(PlayerMovement otherPlayer)
+    {
+        // stop current movement
+        isMovingZ = false;
+        otherPlayer.isMovingZ = false;
+
+        rb.linearVelocity = Vector3.zero;
+        otherPlayer.rb.linearVelocity = Vector3.zero;
+
+        rb.isKinematic = true;
+        otherPlayer.rb.isKinematic = true;
+
+        float duration = 0.4f;     // how long the swap lasts
+        float t = 0f;
+
+        Vector3 myStart = transform.position;
+        Vector3 otherStart = otherPlayer.transform.position;
+
+        Vector3 myTarget = new Vector3(myStart.x, myStart.y, otherStart.z);
+        Vector3 otherTarget = new Vector3(otherStart.x, otherStart.y, myStart.z);
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / duration;
+
+            transform.position = Vector3.Lerp(myStart, myTarget, t);
+            otherPlayer.transform.position = Vector3.Lerp(otherStart, otherTarget, t);
+
+            yield return null;
+        }
+
+        // finalize snap to exact spot
+        transform.position = myTarget;
+        otherPlayer.transform.position = otherTarget;
+
+        rb.isKinematic = false;
+        otherPlayer.rb.isKinematic = false;
+    }
 
     #endregion
 }

@@ -232,6 +232,7 @@ MonoBehaviour:
   feetPosition: {fileID: 6645852770755914562}
   powerupSpawnPoint: {fileID: 3842588472712676352}
   shieldObject: {fileID: 4474901002285799781}
+  currentPowerupName: 
   currentPosition: 0
 --- !u!114 &7187450909309393282
 MonoBehaviour:

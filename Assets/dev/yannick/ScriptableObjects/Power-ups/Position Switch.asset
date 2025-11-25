@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fe031162d3cb04d85b9546a3777ba4, type: 3}
   m_Name: Position Switch
   m_EditorClassIdentifier: Assembly-CSharp::ItemObject
-  UI_sprite: {fileID: 21300000, guid: ca5872be3799066449177d27976f7a98, type: 3}
-  Prefab: {fileID: 5500243749058550579, guid: 938f6ab0b7193cf4f807b4af3fd8a6f6, type: 3}
-  Type: 1
+  UI_sprite: {fileID: 21300000, guid: b260daa11b43c77419eca830419d8cc6, type: 3}
+  Prefab: {fileID: 0}
+  Type: 6
