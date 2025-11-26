@@ -6,7 +6,7 @@ public class PlayerObject : ScriptableObject
     public float LaneOffset;
 
     public float MovementSpeed;
-    public float JumpForce;
+    public float JumpHeight;
 
     public float SlideDuration;
     public float slideHeight;

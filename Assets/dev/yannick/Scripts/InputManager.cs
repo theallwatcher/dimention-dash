@@ -77,8 +77,8 @@ public class InputManager : MonoBehaviour
         }
 
         //set links to each player script
-       // playerOneInventory.SetOtherMoveScript(playerTwoMovement);
-        //playerTwoInventory.SetOtherMoveScript(playerOneMovement);
+        playerOneInventory.SetOtherMoveScript(playerTwoMovement);
+        playerTwoInventory.SetOtherMoveScript(playerOneMovement);
 
         gameManager = GameManager.Instance;
         gameManager.SetPlayersInventory(playerOneInventory, playerTwoInventory);

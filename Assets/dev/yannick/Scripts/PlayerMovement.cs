@@ -108,7 +108,15 @@ public class PlayerMovement : MonoBehaviour
         if (!isGrounded) return;
 
         isGrounded = false;
-        rb.AddForce(Vector3.up * _playerSO.JumpForce, ForceMode.Impulse);
+
+       /* float g = Mathf.Abs(Physics.gravity.y);
+        float mass = rb.mass;
+
+        float jumpVelocity = Mathf.Sqrt(2f * g * _playerSO.JumpHeight);
+        float jumpImpulse = mass * jumpVelocity;
+*/
+        rb.AddForce(Vector3.up * _playerSO.JumpHeight, ForceMode.Force);
+        
         Debug.Log("jump");
     }
 
@@ -372,7 +380,7 @@ public class PlayerMovement : MonoBehaviour
         rb.isKinematic = true;
         otherPlayer.rb.isKinematic = true;
 
-        float duration = 0.4f;     // how long the swap lasts
+        float duration = 0.4f;    
         float t = 0f;
 
         Vector3 myStart = transform.position;

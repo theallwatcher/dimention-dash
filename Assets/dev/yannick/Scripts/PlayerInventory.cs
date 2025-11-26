@@ -62,7 +62,6 @@ public class PlayerInventory : MonoBehaviour
         {
             StopCoroutine(scrollRoutine);
         }
-
         RandomizeItems();
     }
 
@@ -248,23 +247,23 @@ public class PlayerInventory : MonoBehaviour
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(0));
             }
-            else if (roll < 0)  //Boost [0%]
+            else if (roll >= 12 && roll < 22.5f)  //Boost [10.5%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(1));
             }
-            else if (roll >= 12f && roll < 19f) //Invert controls [7%]
+            else if (roll >= 22.5f && roll < 29.5f) //Invert controls [7%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(2));
             }
-            else if (roll >= 19f && roll < 31.5)//Lane switch [12.5%]
+            else if (roll >= 29.5f && roll < 42.5)//Lane switch [13%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(3));
             }
-            else if (roll >= 31.5f && roll < 51.5f)//Pos switch [20%]
+            else if (roll < 0f)//Pos switch [0%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(4));
             }
-            else if (roll >= 51.5f && roll < 57.5f) //Shield [6%]
+            else if (roll >= 42.5f && roll < 57.5f) //Shield [15%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(5));
             }

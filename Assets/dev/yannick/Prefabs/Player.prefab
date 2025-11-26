@@ -136,6 +136,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3f346747-d42e-4a2b-a92c-b2b4aac0f206
     m_ActionName: 'Player/PowerUps[/XInputControllerWindows/buttonNorth,/XInputControllerWindows1/buttonNorth,/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 52fd3cc7-b045-4f69-9675-23f0b9389012
+    m_ActionName: 'Gameplay/Pause[/Keyboard/escape,/Keyboard/enter]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Gameplay
@@ -165,7 +169,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59064923132740882}
   serializedVersion: 5
-  m_Mass: 3
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -260,6 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::coinCounter
   coins: 0
+  counter: {fileID: 0}
 --- !u!114 &6362148874665387606
 MonoBehaviour:
   m_ObjectHideFlags: 0
