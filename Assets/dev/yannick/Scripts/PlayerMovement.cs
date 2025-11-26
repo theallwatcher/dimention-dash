@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private InputAction duckAction;
     private InputAction moveAction;
     private InputAction powerupAction;
+    private InputAction pauseAction;
     private Vector3 startPos;
 
     public enum PlayerLane
@@ -58,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
         jumpAction = playerInput.actions["Jump"];
         duckAction = playerInput.actions["Duck"];
         powerupAction = playerInput.actions["PowerUps"];
+
+        pauseAction = playerInput.actions["Pause"];
     }
     private void Start()
     {
@@ -87,6 +90,9 @@ public class PlayerMovement : MonoBehaviour
 
         powerupAction = playerInput.actions["PowerUps"];
         powerupAction.performed += OnPowerupUse;
+
+        pauseAction = playerInput.actions["Pause"];
+        pauseAction.performed += OnPause;
     }
     private void OnDisable()
     {
@@ -103,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
 
         isGrounded = false;
         rb.AddForce(Vector3.up * _playerSO.JumpForce, ForceMode.Impulse);
-
+        Debug.Log("jump");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -121,6 +127,11 @@ public class PlayerMovement : MonoBehaviour
     public void OnPowerupUse(InputAction.CallbackContext context)
     {
         inventory.UsePowerup();
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        GameManager.Instance.Pause();
     }
 
     #endregion
@@ -301,57 +312,6 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region powerups
-/*    public void ActivateSwitchLanePowerup() //is activated by other players powerup
-    {
-        switchLanePowerup = true;
-
-        if (CurrentLane == PlayerLane.Left)
-        {
-            //always move right when left
-            CurrentLane = PlayerLane.Middle;
-            targetPosX = new Vector3(rb.position.x + _playerSO.LaneOffset, rb.position.y, rb.position.z);
-
-        }
-        else if (CurrentLane == PlayerLane.Middle)
-        {
-            //move left or right when in middle
-            int randomDir = Random.Range(0, 1);
-            
-            if(randomDir == 0)
-            {
-                targetPosX = new Vector3(rb.position.x - _playerSO.LaneOffset, rb.position.y, rb.position.z);
-                CurrentLane = PlayerLane.Left;
-            }
-            else
-            {
-                targetPosX = new Vector3(rb.position.x + _playerSO.LaneOffset, rb.position.y, rb.position.z);
-                CurrentLane = PlayerLane.Right;
-            }
-        }
-        else if (CurrentLane == PlayerLane.Right)
-        {
-            //when player is right move to middle pos
-            CurrentLane = PlayerLane.Middle;
-            targetPosX = new Vector3(rb.position.x - _playerSO.LaneOffset, rb.position.y, rb.position.z);
-        }
-    }
-
-    public void ActivateInvertControls(float t)
-    {
-        if(invertControlsCoroutine != null)
-        {
-            StopCoroutine(invertControlsCoroutine);
-        }
-        invertControlsCoroutine = StartCoroutine(SwitchControls(t));
-    }
-
-    private IEnumerator SwitchControls(float t)
-    {
-        invertControlsActive = true;
-        yield return new WaitForSeconds(t);
-        invertControlsActive = false;
-    }
-*/
 
     public IEnumerator SwitchControls()
     {

@@ -2,14 +2,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-
+using TMPro;
 public class InputManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private Transform[] spawnPoints;
 
     [SerializeField] private Image itemSlot1, itemSlot2;
-
+    [SerializeField] private TextMeshProUGUI coinCounter1, coinCounter2;
     bool wasdJoined = false;
     bool arrowsJoined = false;
     bool gamepadJoined = false;
@@ -19,6 +19,9 @@ public class InputManager : MonoBehaviour
 
     private PlayerInventory playerOneInventory;
     private PlayerInventory playerTwoInventory;
+
+    private coinCounter playerOneCoinCounter;
+    private coinCounter playerTwoCoinCounter;
 
     GameManager gameManager;
     private void Start()
@@ -32,14 +35,7 @@ public class InputManager : MonoBehaviour
             controlScheme: "Gamepad",
             pairWithDevice: Gamepad.all[0]);
 
-            //link ui image
-            playerOneInventory = player.GetComponent<PlayerInventory>();
-            playerOneMovement = player.GetComponent<PlayerMovement>();
-
-            if (playerOneInventory != null)
-            {
-                playerOneInventory.itemSlotImage = itemSlot1;
-            }
+            SetupUIElements(player, true);
 
             player.transform.position = spawnPoints[0].position;
         }
@@ -49,14 +45,8 @@ public class InputManager : MonoBehaviour
                 controlScheme: "WASD",
                 pairWithDevice: Keyboard.current);
 
-            //link ui image
-            playerOneInventory = player.GetComponent<PlayerInventory>();
-            playerOneMovement = player.GetComponent<PlayerMovement>();
+            SetupUIElements(player, true);
 
-            if (playerOneInventory != null)
-            {
-                playerOneInventory.itemSlotImage = itemSlot1;
-            }
 
             player.transform.position = spawnPoints[0].position;
 
@@ -69,14 +59,8 @@ public class InputManager : MonoBehaviour
             controlScheme: "Gamepad",
             pairWithDevice: Gamepad.all[1]);
 
-            //link ui image
-            playerTwoInventory = player2.GetComponent<PlayerInventory>();
-            playerTwoMovement = player2.GetComponent<PlayerMovement>();
+            SetupUIElements(player2, false);
 
-            if (playerTwoInventory != null)
-            {
-                playerTwoInventory.itemSlotImage = itemSlot2;
-            }
 
             player2.transform.position = spawnPoints[1].position;
         }
@@ -86,21 +70,15 @@ public class InputManager : MonoBehaviour
                 controlScheme: "Arrows",
                 pairWithDevice: Keyboard.current);
 
-            //link ui image
-            playerTwoInventory = player2.GetComponent<PlayerInventory>();
-            playerTwoMovement = player2.GetComponent<PlayerMovement>();
+            SetupUIElements(player2, false);
 
-            if (playerTwoInventory != null)
-            {
-                playerTwoInventory.itemSlotImage = itemSlot2;
-            }
 
             player2.transform.position = spawnPoints[1].position;
         }
 
         //set links to each player script
-        playerOneInventory.SetOtherMoveScript(playerTwoMovement);
-        playerTwoInventory.SetOtherMoveScript(playerOneMovement);
+       // playerOneInventory.SetOtherMoveScript(playerTwoMovement);
+        //playerTwoInventory.SetOtherMoveScript(playerOneMovement);
 
         gameManager = GameManager.Instance;
         gameManager.SetPlayersInventory(playerOneInventory, playerTwoInventory);
@@ -115,50 +93,29 @@ public class InputManager : MonoBehaviour
         gameManager.SetupPlayersPositions(pos1, pos2);
     }
 
-    //private void Update()
-    //{
-    //    if (Keyboard.current == null) return;
+    private void SetupUIElements(PlayerInput player, bool isPlayerOne)
+    {
+        var inventory = player.GetComponent<PlayerInventory>();
+        var movement = player.GetComponent<PlayerMovement>();
+        var counter = player.GetComponent<coinCounter>();
 
-    //    if(!wasdJoined && Keyboard.current.spaceKey.wasPressedThisFrame)
-    //    {
-    //        var player = PlayerInput.Instantiate(playerPrefab,
-    //            controlScheme: "WASD",
-    //            pairWithDevice: Keyboard.current );
+        if (isPlayerOne)
+        {
+            playerOneInventory = inventory;
+            playerOneMovement = movement;
+            playerOneCoinCounter = counter;
 
-    //        if(spawnPoints.Length > 0)
-    //        {
-    //            player.transform.position = spawnPoints[0].position;
-    //        }
-    //        wasdJoined = true;
-    //    }
+            inventory.itemSlotImage = itemSlot1;
+            counter.counter = coinCounter1;
+        }
+        else
+        {
+            playerTwoInventory = inventory;
+            playerTwoMovement = movement;
+            playerTwoCoinCounter = counter;
 
-
-    //    if (!arrowsJoined && Keyboard.current.rightShiftKey.wasPressedThisFrame)
-    //    {
-    //        var player = PlayerInput.Instantiate(playerPrefab,
-    //            controlScheme: "Arrows",
-    //            pairWithDevice: Keyboard.current);
-
-    //        if (spawnPoints.Length > 0)
-    //        {
-    //            player.transform.position = spawnPoints[1].position;
-    //        }
-    //        arrowsJoined = true;
-    //    }
-
-    //    foreach(var gamepad in Gamepad.all)
-    //    {
-    //        if (gamepad.buttonSouth.wasPressedThisFrame)
-    //        {
-    //            PlayerInput.Instantiate(playerPrefab,
-    //            controlScheme: "Gamepad",
-    //            pairWithDevice: gamepad);
-    //            gamepadJoined = true;
-
-    //        }
-    //    }
-
-
-    //}
-
+            inventory.itemSlotImage = itemSlot2;
+            counter.counter = coinCounter2;
+        }
+    }
 }

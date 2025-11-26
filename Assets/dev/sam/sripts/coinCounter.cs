@@ -1,8 +1,14 @@
 using UnityEngine;
-
+using TMPro;
 public class coinCounter : MonoBehaviour
 {
     public int coins;
+    public TextMeshProUGUI counter;
+
+    private void Update()
+    {
+        counter.text = "Coins: " + coins;
+    }
 
     private void OnTriggerEnter(Collider other){
 
