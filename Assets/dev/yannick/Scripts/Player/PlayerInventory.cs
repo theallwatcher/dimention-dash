@@ -35,8 +35,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void Start()
     {
-        movementScript = GetComponent<PlayerMovement>();
-        currentPowerup = itemObjects[4];
+        movementScript = GetComponent<PlayerMovement>();        
     }
 
     public void SetPosition(PlayerPosition position)

@@ -321,7 +321,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ForceSwitchLane()
     {
-        if (isMovingX) return;
+       // if (isMovingX) return;
         forceLaneSwitch = true;
         // Move RIGHT if possible
         if (CurrentLane == PlayerLane.Left)
@@ -348,8 +348,8 @@ public class PlayerMovement : MonoBehaviour
             CurrentLane = PlayerLane.Middle;
             targetPosX = new Vector3(rb.position.x - _playerSO.LaneOffset, rb.position.y, rb.position.z);
         }
-
-        isMovingX = true; // start movement next FixedUpdate
+        forceLaneSwitch = false;
+        isMovingX = true;
     }
     public void SmoothSwapZ(PlayerMovement otherPlayer)
     {
