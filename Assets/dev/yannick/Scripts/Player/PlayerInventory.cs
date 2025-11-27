@@ -57,10 +57,7 @@ public class PlayerInventory : MonoBehaviour
             StopCoroutine(scrollRoutine);
         }
 
-       // RandomizeItems();
-
-        //debug function
-        scrollRoutine = StartCoroutine(ScrollThroughItems(2));
+        RandomizeItems();
     }
 
     public void UsePowerup()
