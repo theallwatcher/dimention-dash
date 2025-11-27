@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     //slide
     private bool isSliding = false;
     private float slideTimer = 0f;
-    
+    [SerializeField] private CapsuleCollider standingCollider, slidingCollider;
 
 
     //powerups
@@ -300,6 +300,10 @@ public class PlayerMovement : MonoBehaviour
 
         isSliding = true;
         animator.SetIsSliding(true);
+
+        standingCollider.enabled = false;
+        slidingCollider.enabled = true;
+
         slideTimer = 0f;
 
     }
@@ -320,7 +324,8 @@ public class PlayerMovement : MonoBehaviour
     {
         isSliding = false;
 
-        
+        standingCollider.enabled = true;
+        slidingCollider.enabled = false;
 
         animator.SetIsSliding(false);
     }
