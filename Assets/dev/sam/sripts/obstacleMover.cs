@@ -11,11 +11,12 @@ public class obstacleMover : MonoBehaviour
     void Start(){
 
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(new Vector3(0, 0, speed));
+       // rb.AddForce(new Vector3(0, 0, speed));
     }
 
     // Update is called once per frame
     void Update(){
+        transform.position -= new Vector3(0, 0, GameManager.Instance.roadSpeed) * Time.deltaTime;
 
         if (gameObject.transform.position.z < endPoint.position.z){
 
