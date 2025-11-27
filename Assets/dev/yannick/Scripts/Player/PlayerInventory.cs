@@ -19,7 +19,7 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField] private GameObject shieldObject;
     private Coroutine shieldRoutine;
-    private ItemObject currentPowerup = null;
+    private ItemObject currentPowerup;
     private Coroutine scrollRoutine = null;
     
 
@@ -36,6 +36,7 @@ public class PlayerInventory : MonoBehaviour
     private void Start()
     {
         movementScript = GetComponent<PlayerMovement>();
+        currentPowerup = itemObjects[4];
     }
 
     public void SetPosition(PlayerPosition position)
@@ -57,10 +58,10 @@ public class PlayerInventory : MonoBehaviour
             StopCoroutine(scrollRoutine);
         }
 
-        //RandomizeItems();
+        RandomizeItems();
 
         //debug function
-        scrollRoutine = StartCoroutine(ScrollThroughItems(2));
+       // scrollRoutine = StartCoroutine(ScrollThroughItems(4));
     }
 
     public void UsePowerup()
