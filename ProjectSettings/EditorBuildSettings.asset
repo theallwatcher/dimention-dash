@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: 58f93391ae0795b498e753d849a58901
   - enabled: 1
+    path: Assets/Scenes/Main 2.unity
+    guid: 7168b82d059b5fd41bae8ec54173904f
+  - enabled: 1
     path: Assets/Scenes/loser0.unity
     guid: 87d978186344ed74c83fccd53fce0578
   - enabled: 1

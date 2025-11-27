@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class buildingmover : MonoBehaviour
 {
-    Rigidbody rb;
-    [SerializeField] float speed = 1;
+    //Rigidbody rb;
+    //[SerializeField] float speed = 1;
     [SerializeField] Transform startPoint;
     [SerializeField] Transform endPoint;
 
     void Start(){
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
        // rb.AddForce (new Vector3 (0, 0, speed));
     }
 
