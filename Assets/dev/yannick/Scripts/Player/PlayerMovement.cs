@@ -100,6 +100,18 @@ public class PlayerMovement : MonoBehaviour
     #region Input
     public void OnJump(InputAction.CallbackContext context)
     {
+        if(controlDirection > 0)
+        {
+            Jump();
+        }
+        else
+        {
+            StartSlide();
+        }
+    }
+
+    private void Jump()
+    {
         if (!isGrounded) return;
 
         isGrounded = false;
@@ -107,8 +119,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetIsGrounded(false);
 
         rb.AddForce(Vector3.up * _playerSO.JumpHeight, ForceMode.Force);
-        
-        Debug.Log("jump");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -121,7 +131,14 @@ public class PlayerMovement : MonoBehaviour
     }
     public void OnDuck(InputAction.CallbackContext context)
     {
-        StartSlide();
+        if(controlDirection > 0)
+        {
+            StartSlide();
+        }
+        else
+        {
+            Jump();
+        }
     }
 
     public void OnPowerupUse(InputAction.CallbackContext context)
