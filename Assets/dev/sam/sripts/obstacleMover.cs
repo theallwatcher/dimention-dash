@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class obstacleMover : MonoBehaviour
 {
-    Rigidbody rb;
-    [SerializeField] float speed = -500;
+    //Rigidbody rb;
+    //[SerializeField] float speed = -500;
     [SerializeField] Transform endPoint;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
 
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
        // rb.AddForce(new Vector3(0, 0, speed));
     }
 

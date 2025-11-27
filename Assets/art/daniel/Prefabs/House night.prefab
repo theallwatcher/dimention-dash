@@ -62,6 +62,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad3aa140708b1674289ee706ff721169, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 583502877990294471}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad3aa140708b1674289ee706ff721169, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 104060843446367522}
   m_SourcePrefab: {fileID: 100100000, guid: ad3aa140708b1674289ee706ff721169, type: 3}
 --- !u!1 &7299711803010774539 stripped
@@ -69,6 +72,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ad3aa140708b1674289ee706ff721169, type: 3}
   m_PrefabInstance: {fileID: 7605630773733083994}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &583502877990294471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299711803010774539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e72d3a9db4657741befd32bbf50ea2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::buildingmover
+  speed: -500
+  startPoint: {fileID: 0}
+  endPoint: {fileID: 6431830537345292096, guid: 5747767b69114a84ebdcac8957a0606b, type: 3}
 --- !u!54 &104060843446367522
 Rigidbody:
   m_ObjectHideFlags: 0

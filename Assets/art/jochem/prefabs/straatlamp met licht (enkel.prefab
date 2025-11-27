@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2539680461806409749}
+  - component: {fileID: 7846479797049030643}
   m_Layer: 0
   m_Name: straatlamp met licht (enkel
   m_TagString: Untagged
@@ -33,6 +34,21 @@ Transform:
   - {fileID: 5224631058162448103}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7846479797049030643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6294673085591512920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e72d3a9db4657741befd32bbf50ea2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::buildingmover
+  speed: -500
+  startPoint: {fileID: 0}
+  endPoint: {fileID: 6431830537345292096, guid: 5747767b69114a84ebdcac8957a0606b, type: 3}
 --- !u!1 &7607074854884976315
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +76,7 @@ Transform:
   m_GameObject: {fileID: 7607074854884976315}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 16.529999, y: -0.15999985, z: -0.9200001}
+  m_LocalPosition: {x: -2, y: 10.010001, z: -0.9200001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -170,15 +186,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 14858157155169b439da343ffdfc0f7c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14858157155169b439da343ffdfc0f7c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.090002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14858157155169b439da343ffdfc0f7c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.8900013
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14858157155169b439da343ffdfc0f7c, type: 3}
       propertyPath: m_LocalRotation.w

@@ -13,6 +13,7 @@ public class portal : MonoBehaviour
     [SerializeField] List<GameObject> portals1 = new List<GameObject>();
     [SerializeField] List<GameObject> portals2 = new List<GameObject>();
     [SerializeField] GameObject corectIndicatorPrefab;
+    [SerializeField] string nextSceneName;
     
     void Start(){
         
@@ -33,7 +34,7 @@ public class portal : MonoBehaviour
         if (counter >= hitCount)
         {
 
-            SceneManager.LoadScene("//next scene name");
+            SceneManager.LoadScene(nextSceneName);
 
         }
     }

@@ -4,9 +4,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //public InputSystem_Actions PlayerControls;
     private PlayerInput playerInput;
     private PlayerInventory inventory;
+    private PlayerAnimator animator;
+
     [SerializeField] PlayerObject _playerSO;
     [SerializeField] Rigidbody rb;
     //movement
@@ -41,9 +42,7 @@ public class PlayerMovement : MonoBehaviour
     //slide
     private bool isSliding = false;
     private float slideTimer = 0f;
-    [SerializeField] private CapsuleCollider playerCollider;
-    private float originalColliderHeight;
-    private Vector3 originalColliderCenter;
+    
 
 
     //powerups
@@ -54,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         inventory = GetComponent<PlayerInventory>();
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<PlayerAnimator>();
+
 
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
@@ -68,12 +69,6 @@ public class PlayerMovement : MonoBehaviour
 
         //players start in middle lane
         CurrentLane = PlayerLane.Middle;
-
-        if (playerCollider != null)
-        {
-            originalColliderHeight = playerCollider.height;
-            originalColliderCenter = playerCollider.center;
-        }
     }
     #region onEnableAndDisable
     private void OnEnable()
@@ -109,12 +104,8 @@ public class PlayerMovement : MonoBehaviour
 
         isGrounded = false;
 
-       /* float g = Mathf.Abs(Physics.gravity.y);
-        float mass = rb.mass;
+        animator.SetIsGrounded(false);
 
-        float jumpVelocity = Mathf.Sqrt(2f * g * _playerSO.JumpHeight);
-        float jumpImpulse = mass * jumpVelocity;
-*/
         rb.AddForce(Vector3.up * _playerSO.JumpHeight, ForceMode.Force);
         
         Debug.Log("jump");
@@ -124,7 +115,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = true;  
+            isGrounded = true; 
+            animator.SetIsGrounded(true);
         }
     }
     public void OnDuck(InputAction.CallbackContext context)
@@ -287,14 +279,12 @@ public class PlayerMovement : MonoBehaviour
     #region slide movement
     private void StartSlide()
     {
-        if (isSliding || playerCollider == null) return;
+        if (!isGrounded || isSliding) return;
 
         isSliding = true;
+        animator.SetIsSliding(true);
         slideTimer = 0f;
 
-        // Lower collider
-        playerCollider.height = originalColliderHeight * _playerSO.slideHeight;
-        playerCollider.center = originalColliderCenter - new Vector3(0, originalColliderHeight * (1 - _playerSO.slideHeight) / 2f, 0);
     }
 
 
@@ -313,9 +303,9 @@ public class PlayerMovement : MonoBehaviour
     {
         isSliding = false;
 
-        // Reset collider
-        playerCollider.height = originalColliderHeight;
-        playerCollider.center = originalColliderCenter;
+        
+
+        animator.SetIsSliding(false);
     }
     #endregion
 
