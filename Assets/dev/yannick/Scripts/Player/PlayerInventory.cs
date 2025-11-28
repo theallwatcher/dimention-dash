@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class PlayerInventory : MonoBehaviour
 
     [Header("In scene references")]
     public Image itemSlotImage = null;
+    private TextMeshProUGUI itemName;
 
     [Header("Script links")]
     private PlayerMovement movementScript;
@@ -35,7 +37,11 @@ public class PlayerInventory : MonoBehaviour
 
     private void Start()
     {
-        movementScript = GetComponent<PlayerMovement>();        
+        movementScript = GetComponent<PlayerMovement>();     
+        
+        itemName = itemSlotImage.gameObject.GetComponentInChildren<TextMeshProUGUI>();
+        if(itemName  != null)
+        itemName.text = " ";
     }
 
     public void SetPosition(PlayerPosition position)
@@ -49,6 +55,7 @@ public class PlayerInventory : MonoBehaviour
         {
             itemSlotImage.sprite = null;
             currentPowerup = null;
+            itemName.text = " ";
         }
 
         //stop routine if already running
@@ -56,8 +63,8 @@ public class PlayerInventory : MonoBehaviour
         {
             StopCoroutine(scrollRoutine);
         }
-
-        RandomizeItems();
+        StartCoroutine(ScrollThroughItems(5));
+        //RandomizeItems();
     }
 
     public void UsePowerup()
@@ -178,6 +185,7 @@ public class PlayerInventory : MonoBehaviour
         //when scroll is over pass in the final items
         itemSlotImage.sprite = itemObjects[finalIndex].UI_sprite ;
         currentPowerup = itemObjects[finalIndex];
+        itemName.text = itemObjects[finalIndex].Type.ToString();
     } 
 
     public void SetOtherMoveScript(PlayerMovement movement)
