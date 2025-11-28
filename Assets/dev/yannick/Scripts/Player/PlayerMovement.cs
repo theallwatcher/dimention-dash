@@ -42,9 +42,10 @@ public class PlayerMovement : MonoBehaviour
     //slide
     private bool isSliding = false;
     private float slideTimer = 0f;
-    
-
-
+    [SerializeField] private CapsuleCollider standingCollider, slidingCollider;
+    [SerializeField] private Transform slidePosition;
+    private float slideStartY;
+    private float slideTargetY;
     //powerups
     float controlDirection = 1f;
     bool forceLaneSwitch = false;
@@ -66,6 +67,10 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         startPos = transform.position;
+
+        //setup slide Y offsets
+        slideStartY = slidePosition.position.y;
+        slideTargetY = slidePosition.position.y - 1;
 
         //players start in middle lane
         CurrentLane = PlayerLane.Middle;
@@ -117,6 +122,10 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = false;
 
         animator.SetIsGrounded(false);
+        animator.SetIsSliding(false);
+
+        slidePosition.position = new Vector3(slidePosition.position.x, slideStartY, slidePosition.position.z);
+        if (isSliding) EndSlide();
 
         rb.AddForce(Vector3.up * _playerSO.JumpHeight, ForceMode.Force);
     }
@@ -154,8 +163,6 @@ public class PlayerMovement : MonoBehaviour
     #endregion
     private void FixedUpdate()
     {
-       
-
         MoveLeftRight();
         SwitchLane();
         if (isMovingZ) HandleForwardBackwardMovement();
@@ -300,29 +307,66 @@ public class PlayerMovement : MonoBehaviour
 
         isSliding = true;
         animator.SetIsSliding(true);
+
+        standingCollider.enabled = false;
+        slidingCollider.enabled = true;
+
         slideTimer = 0f;
 
     }
 
 
-    private void HandleSlide()
-    {
-        if (!isSliding) return;
-
-        slideTimer += Time.fixedDeltaTime;
-        if (slideTimer >= _playerSO.SlideDuration)
+        private void HandleSlide()
         {
-            EndSlide();
+            if (!isSliding) return;
+
+            slideTimer += Time.fixedDeltaTime;
+
+            //keep x and y positions 
+            Vector3 standY = new Vector3(slidePosition.position.x, slideStartY, slidePosition.position.z);
+            Vector3 slideY = new Vector3(slidePosition.position.x, slideTargetY, slidePosition.position.z);
+
+            //check the progression of the slide
+            float twoThirds = (_playerSO.SlideDuration / 3) * 2;
+            float t;
+            float newY;
+
+            if (slideTimer < twoThirds) //move model slightly down 
+            {
+                t = slideTimer / twoThirds;
+
+                newY = Mathf.Lerp(slideStartY, slideTargetY, t);
+            }
+            else//move model up when slide is halfway
+            {
+               t = (slideTimer - twoThirds) / twoThirds;
+
+               newY = Mathf.Lerp(slideTargetY, slideStartY, t);
+            }
+
+            //update final y position
+            slidePosition.position = new Vector3(slidePosition.position.x, newY, slidePosition.position.z);
+
+            //end sliding
+            if (slideTimer >= _playerSO.SlideDuration)
+            {
+                 EndSlide();
+            }
         }
-    }
 
-    private void EndSlide()
-    {
-        isSliding = false;
+        private void EndSlide()
+        {
+            isSliding = false;
 
-        
+            //update colliders
+            standingCollider.enabled = true;
+            slidingCollider.enabled = false;
 
-        animator.SetIsSliding(false);
+            //reset y position
+            slidePosition.position = new Vector3(slidePosition.position.x, slideStartY, slidePosition.position.z);
+
+            //change animation
+            animator.SetIsSliding(false);
     }
     #endregion
 
