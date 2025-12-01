@@ -72,7 +72,7 @@ public class BombPowerup : BasePowerup
             }
     }
 
-    private void OnTriggerEnter(Collider other)
+     protected override void OnTriggerEnter(Collider other)
     {
         //if opponent runs into bomb it explodes
         if (other.gameObject.CompareTag("Player"))

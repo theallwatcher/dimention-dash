@@ -9,25 +9,21 @@ public class CountDown : MonoBehaviour
 
     [SerializeField] ShowControls showControlsScript;
 
+    [SerializeField] GameObject spawners;
+
     bool counterDisabled = false;
     private void Start()
     {
         StartCoroutine(CountDownTimer());
+        spawners.SetActive(false);
     }
 
     private void Update()
     {
         if(timer == 0) //when timer == 0 stop timer
         {
-            if (!counterDisabled)
-            {
-                timerText.text = " ";
-
-                showControlsScript.DisableAll();
-                
-                GameManager.Instance.StartGame();
-                counterDisabled = true;
-            }
+            if(!counterDisabled)
+            StartCoroutine(DisableText());
         }
         else      //update timer 
         {
@@ -41,5 +37,19 @@ public class CountDown : MonoBehaviour
             yield return new WaitForSeconds(1);
             timer--;
         }
+    }
+
+    private IEnumerator DisableText()
+    {
+        timerText.text = "GO!";
+
+        showControlsScript.DisableAll();
+
+        GameManager.Instance.StartGame();
+        spawners.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+        timerText.text = " ";
+        counterDisabled = true;
     }
 }
