@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d4f0d8f010f7a64f86dc43a33640a81, type: 3}
   m_Name: Player1
   m_EditorClassIdentifier: Assembly-CSharp::PlayerObject
-  LaneOffset: 5
+  LaneOffset: 5.61
   MovementSpeed: 15
-  JumpHeight: 5000
+  JumpHeight: 1000
   SlideDuration: 1
   slideHeight: 0.5

@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour
     public string PlayerOneZPos = "";
     public string PlayerTwoZPos = "";
 
-    public float roadSpeed = 2f;
-    private bool isPaused = false;
+    public float roadSpeed = 4f;
+/*    public float startSpeed;
+    private float speedTimer = 0f;
+    private float speedUpInterval = 2;*/
 
     //singleton class
     private void Awake()
@@ -46,6 +48,13 @@ public class GameManager : MonoBehaviour
             PlayerOneZPos = "Player 1 not found";
             PlayerTwoZPos = "Player 2 not found";
         }
+
+        /*speedTimer += Time.deltaTime;
+        if(speedTimer > speedUpInterval)
+        {
+            IncreaseSpeed();
+            speedTimer = 0f;
+        }*/
     }
 
     private void UpdateLeader()
@@ -105,5 +114,10 @@ public class GameManager : MonoBehaviour
 
         movementPlayer1.gameStarted = true;
         movementPlayer2.gameStarted = true;
+    }
+
+    public void IncreaseSpeed()
+    {
+        roadSpeed += roadSpeed / 10;
     }
 }

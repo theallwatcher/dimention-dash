@@ -142,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
         slidePosition.position = new Vector3(slidePosition.position.x, slideStartY, slidePosition.position.z);
         if (isSliding) EndSlide();
 
-        rb.AddForce(Vector3.up * _playerSO.JumpHeight, ForceMode.Force);
+        rb.AddForce(Vector3.up * _playerSO.JumpHeight, ForceMode.Impulse);
     }
 
     private void OnCollisionEnter(Collision collision)
