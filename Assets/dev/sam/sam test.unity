@@ -3247,6 +3247,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3541177545054321289, guid: 949765d6b1599644da777977518a0c76, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3624495530759835055, guid: 949765d6b1599644da777977518a0c76, type: 3}
       propertyPath: m_Name
       value: big boom
