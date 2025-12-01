@@ -184,5 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfc1ad5b5a06a54d9032c99546de6d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::obstacleMover
-  speed: -500
   endPoint: {fileID: 6431830537345292096, guid: 5747767b69114a84ebdcac8957a0606b, type: 3}
+  particalPrefab: {fileID: 0}
+  isCoin: 1

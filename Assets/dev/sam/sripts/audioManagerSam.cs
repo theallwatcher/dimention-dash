@@ -7,7 +7,7 @@ public class audioManagerSam : MonoBehaviour
     public enum SoundType{
 
         Jump,
-        Powerup,
+        Break,
         buton
     }
 
