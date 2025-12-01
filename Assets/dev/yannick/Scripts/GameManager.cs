@@ -4,10 +4,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    //settings scriptable object
     [SerializeField] private SettingsObject settings;
 
-    Transform _playerOnePos, _playerTwoPos;
-
+    //players data
+    private Transform _playerOnePos, _playerTwoPos;
     private PlayerInventory playerOneInventory, playerTwoInventory;
 
     public string leader = " ";
@@ -95,5 +96,14 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1;
         }
+    }
+
+    public void StartGame()
+    {
+        PlayerMovement movementPlayer1 = playerOneInventory.GetComponent<PlayerMovement>();
+        PlayerMovement movementPlayer2 = playerTwoInventory.GetComponent<PlayerMovement>();
+
+        movementPlayer1.gameStarted = true;
+        movementPlayer2.gameStarted = true;
     }
 }

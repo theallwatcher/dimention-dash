@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private InputAction pauseAction;
     private Vector3 startPos;
 
+    public bool gameStarted = false;
     public enum PlayerLane
     {
         Left,
@@ -117,6 +118,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        if (!gameStarted) return;
+
         if (!isGrounded) return;
 
         isGrounded = false;
@@ -140,7 +143,9 @@ public class PlayerMovement : MonoBehaviour
     }
     public void OnDuck(InputAction.CallbackContext context)
     {
-        if(controlDirection > 0)
+        if (!gameStarted) return;
+
+        if (controlDirection > 0)
         {
             StartSlide();
         }
@@ -163,6 +168,7 @@ public class PlayerMovement : MonoBehaviour
     #endregion
     private void FixedUpdate()
     {
+        if (!gameStarted) return;
         MoveLeftRight();
         SwitchLane();
         if (isMovingZ) HandleForwardBackwardMovement();
