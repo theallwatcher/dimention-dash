@@ -57,15 +57,16 @@ public class portal : MonoBehaviour
         int portal1Random = Random.Range(0, portals1.Count);
         int portal2Random = Random.Range(0, portals2.Count);
 
-        portals1[portal1Random].tag = "Untagged";
-        portals2[portal2Random].tag = "Untagged";
+        //portals1[portal1Random].tag = "Untagged";
+        //portals2[portal2Random].tag = "Untagged";
 
-        Vector3 portalPosition1 = new Vector3(portals1[portal1Random].transform.position.x, portals1[portal1Random].transform.position.y + 5, portals1[portal1Random].transform.position.z);
-        Vector3 portalPosition2 = new Vector3(portals2[portal2Random].transform.position.x, portals2[portal2Random].transform.position.y + 5, portals2[portal2Random].transform.position.z);
+       
 
 
-        GameObject indicator1 = Instantiate(corectIndicatorPrefab, portalPosition1, portals1[portal1Random].transform.rotation, portals1[portal1Random].transform);
-        GameObject indicator2 = Instantiate(corectIndicatorPrefab, portalPosition2, portals2[portal2Random].transform.rotation, portals2[portal2Random].transform);
+        GameObject indicator1 = Instantiate(corectIndicatorPrefab, portals1[portal1Random].transform.position, portals1[portal1Random].transform.rotation,this.transform);
+        GameObject indicator2 = Instantiate(corectIndicatorPrefab, portals2[portal2Random].transform.position, portals2[portal2Random].transform.rotation,this.transform);
+        Destroy(portals1[portal1Random]);
+        Destroy(portals2[portal2Random]);
 
     }
 

@@ -162,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   _playerSO: {fileID: 11400000, guid: b32636b5dd63df843be610bbbb572ca0, type: 2}
   rb: {fileID: 1172980602668462730}
+  gameStarted: 0
   CurrentLane: 0
   standingCollider: {fileID: 7291571893629020903}
   slidingCollider: {fileID: 2453306081375054277}
@@ -304,7 +305,7 @@ GameObject:
   - component: {fileID: 2453306081375054277}
   m_Layer: 0
   m_Name: SlideCollider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -359,7 +360,7 @@ GameObject:
   - component: {fileID: 7291571893629020903}
   m_Layer: 0
   m_Name: StandingCollider
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
