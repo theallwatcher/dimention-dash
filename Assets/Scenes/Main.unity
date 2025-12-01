@@ -1480,7 +1480,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1925389649}
+  m_Father: {fileID: 784707890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &332057369
 MonoBehaviour:
@@ -2629,7 +2629,8 @@ Transform:
   - {fileID: 1355202572}
   - {fileID: 2126760881}
   - {fileID: 988942095}
-  - {fileID: 1925389649}
+  - {fileID: 332057368}
+  - {fileID: 1367138854}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &802870780
@@ -4491,7 +4492,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1925389649}
+  m_Father: {fileID: 784707890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1367138855
 MonoBehaviour:
@@ -5923,39 +5924,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7809425060482921794, guid: 40c0a50dae7190641b33196b6646837c, type: 3}
   m_PrefabInstance: {fileID: 1868876068}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1925389648
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1925389649}
-  m_Layer: 0
-  m_Name: spawner managers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1925389649
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925389648}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 332057368}
-  - {fileID: 1367138854}
-  m_Father: {fileID: 784707890}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1932046364
 GameObject:
   m_ObjectHideFlags: 0
@@ -6717,6 +6685,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1184443849}
     - target: {fileID: 2825475396541331561, guid: 2d44fef3fd959fd4aa38e2ab2649753c, type: 3}
+      propertyPath: playerPrefab1
+      value: 
+      objectReference: {fileID: 7010112727408364013, guid: 11fe2b239d13e2a409ec99dd116846ff, type: 3}
+    - target: {fileID: 2825475396541331561, guid: 2d44fef3fd959fd4aa38e2ab2649753c, type: 3}
+      propertyPath: playerPrefab2
+      value: 
+      objectReference: {fileID: 8009576789673484179, guid: 7de7aeb4fca083f4da97886e2eab0925, type: 3}
+    - target: {fileID: 2825475396541331561, guid: 2d44fef3fd959fd4aa38e2ab2649753c, type: 3}
       propertyPath: 'spawnPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 403675095}
@@ -7059,7 +7035,7 @@ PrefabInstance:
     - target: {fileID: 4210775632545127861, guid: 947402271a0237b4f8320d0281cf650a, type: 3}
       propertyPath: spawners
       value: 
-      objectReference: {fileID: 1925389648}
+      objectReference: {fileID: 0}
     - target: {fileID: 5750295683752125975, guid: 947402271a0237b4f8320d0281cf650a, type: 3}
       propertyPath: m_Name
       value: CountDown

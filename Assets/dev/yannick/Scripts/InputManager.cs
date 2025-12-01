@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject playerPrefab1, playerPrefab2;
     [SerializeField] private Transform[] spawnPoints;
 
     [SerializeField] private Image itemSlot1, itemSlot2;
@@ -43,7 +43,7 @@ public class InputManager : MonoBehaviour
         //if theres a controller connected 
         if (Gamepad.all.Count > 0)
         {
-            var player = PlayerInput.Instantiate(playerPrefab,
+            var player = PlayerInput.Instantiate(playerPrefab1,
             controlScheme: "Gamepad",
             pairWithDevice: Gamepad.all[0]);
 
@@ -54,7 +54,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            var player = PlayerInput.Instantiate(playerPrefab,
+            var player = PlayerInput.Instantiate(playerPrefab1,
                 controlScheme: "WASD",
                 pairWithDevice: Keyboard.current);
 
@@ -68,7 +68,7 @@ public class InputManager : MonoBehaviour
 
         if (Gamepad.all.Count > 1)
         {
-            var player2 = PlayerInput.Instantiate(playerPrefab,
+            var player2 = PlayerInput.Instantiate(playerPrefab2,
             controlScheme: "Gamepad",
             pairWithDevice: Gamepad.all[1]);
 
@@ -80,7 +80,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            var player2 = PlayerInput.Instantiate(playerPrefab,
+            var player2 = PlayerInput.Instantiate(playerPrefab2,
                 controlScheme: "Arrows",
                 pairWithDevice: Keyboard.current);
 

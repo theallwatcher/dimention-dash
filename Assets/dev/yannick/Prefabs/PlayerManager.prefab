@@ -89,9 +89,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03b751871d6d35478c1beb2fc9f72cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
-  playerPrefab: {fileID: 59064923132740882, guid: 64ddc78fbcb56e048bd822a0ed50414f, type: 3}
+  playerPrefab1: {fileID: 7010112727408364013, guid: 11fe2b239d13e2a409ec99dd116846ff, type: 3}
+  playerPrefab2: {fileID: 8009576789673484179, guid: 7de7aeb4fca083f4da97886e2eab0925, type: 3}
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}
   itemSlot1: {fileID: 0}
   itemSlot2: {fileID: 0}
+  coinCounter1: {fileID: 0}
+  coinCounter2: {fileID: 0}
+  countDownUI: {fileID: 0}

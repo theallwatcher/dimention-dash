@@ -2295,7 +2295,7 @@ Transform:
   m_GameObject: {fileID: 403675094}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12, y: 1.5, z: 0}
+  m_LocalPosition: {x: -12, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4562,7 +4562,7 @@ Transform:
   m_GameObject: {fileID: 1311694666}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: 1.5, z: 0}
+  m_LocalPosition: {x: 12, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7339,6 +7339,14 @@ PrefabInstance:
       propertyPath: coinCounter2
       value: 
       objectReference: {fileID: 1184443849}
+    - target: {fileID: 2825475396541331561, guid: 2d44fef3fd959fd4aa38e2ab2649753c, type: 3}
+      propertyPath: playerPrefab1
+      value: 
+      objectReference: {fileID: 7010112727408364013, guid: 11fe2b239d13e2a409ec99dd116846ff, type: 3}
+    - target: {fileID: 2825475396541331561, guid: 2d44fef3fd959fd4aa38e2ab2649753c, type: 3}
+      propertyPath: playerPrefab2
+      value: 
+      objectReference: {fileID: 8009576789673484179, guid: 7de7aeb4fca083f4da97886e2eab0925, type: 3}
     - target: {fileID: 2825475396541331561, guid: 2d44fef3fd959fd4aa38e2ab2649753c, type: 3}
       propertyPath: 'spawnPoints.Array.data[0]'
       value: 
