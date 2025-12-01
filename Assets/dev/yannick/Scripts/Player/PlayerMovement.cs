@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -64,6 +65,17 @@ public class PlayerMovement : MonoBehaviour
         powerupAction = playerInput.actions["PowerUps"];
 
         pauseAction = playerInput.actions["Pause"];
+
+        //only in the first level the players need to wait
+        Scene currentScene = SceneManager.GetActiveScene();
+        if(currentScene.name == "Main")
+        {
+            gameStarted = false;
+        }
+        else
+        {
+            gameStarted = true;
+        }
     }
     private void Start()
     {

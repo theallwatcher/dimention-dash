@@ -21,6 +21,7 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField] private GameObject shieldObject;
     private Coroutine shieldRoutine;
+    public bool hasShield = false;
     private ItemObject currentPowerup;
     private Coroutine scrollRoutine = null;
     
@@ -44,6 +45,18 @@ public class PlayerInventory : MonoBehaviour
         itemName.text = " ";
     }
 
+    private void Update()
+    {
+        if (shieldObject.gameObject.activeInHierarchy)
+        {
+            hasShield = true;
+        }
+        else
+        {
+            hasShield = false;  
+        }
+    }
+
     public void SetPosition(PlayerPosition position)
     {
         currentPosition = position;
@@ -63,8 +76,7 @@ public class PlayerInventory : MonoBehaviour
         {
             StopCoroutine(scrollRoutine);
         }
-        StartCoroutine(ScrollThroughItems(5));
-        //RandomizeItems();
+        RandomizeItems();
     }
 
     public void UsePowerup()
@@ -135,7 +147,7 @@ public class PlayerInventory : MonoBehaviour
 
             case ItemObject.ItemType.Shield:
 
-                if(shieldRoutine != null)
+                if(shieldRoutine != null && !hasShield)
                 {
                     StopCoroutine(shieldRoutine);
                 }
@@ -196,9 +208,16 @@ public class PlayerInventory : MonoBehaviour
     IEnumerator EnableShield(float t)
     {
         shieldObject.SetActive(true);
+        hasShield = true;
         yield return new WaitForSeconds(t);
-
+        hasShield = false;
         shieldObject.SetActive(false);
+    }
+
+    public void DestroyShield()
+    {
+        shieldObject.SetActive(false);
+        hasShield = false;
     }
 
     private void RandomizeItems()

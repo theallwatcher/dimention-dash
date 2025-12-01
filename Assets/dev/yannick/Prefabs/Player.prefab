@@ -40,10 +40,10 @@ Transform:
   m_Children:
   - {fileID: 6645852770755914562}
   - {fileID: 3842588472712676352}
-  - {fileID: 4761558954347643980}
   - {fileID: 4861867989970150790}
   - {fileID: 2426670760532151911}
   - {fileID: 5719914384364829418}
+  - {fileID: 4761558954347643980}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1794937278688757854
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   _playerSO: {fileID: 11400000, guid: b32636b5dd63df843be610bbbb572ca0, type: 2}
   rb: {fileID: 1172980602668462730}
+  gameStarted: 0
   CurrentLane: 0
   standingCollider: {fileID: 7291571893629020903}
   slidingCollider: {fileID: 2453306081375054277}
@@ -218,6 +219,7 @@ MonoBehaviour:
   feetPosition: {fileID: 6645852770755914562}
   powerupSpawnPoint: {fileID: 3842588472712676352}
   shieldObject: {fileID: 4474901002285799781}
+  hasShield: 0
   currentPosition: 0
 --- !u!114 &7187450909309393282
 MonoBehaviour:
@@ -341,7 +343,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 1.23
   m_Height: 6.003718
@@ -444,7 +446,7 @@ GameObject:
   - component: {fileID: 4761558954347643980}
   m_Layer: 0
   m_Name: Shield
-  m_TagString: Untagged
+  m_TagString: Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -458,7 +460,7 @@ Transform:
   m_GameObject: {fileID: 4474901002285799781}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.6800001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -696,6 +698,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: energy shield
       objectReference: {fileID: 0}
+    - target: {fileID: 7817511920305011709, guid: def96e28bf3ff2f4495d214f2016ebef, type: 3}
+      propertyPath: m_TagString
+      value: Shield
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -706,6 +712,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7817511920305011709, guid: def96e28bf3ff2f4495d214f2016ebef, type: 3}
       insertIndex: -1
       addedObject: {fileID: 396393665320292425}
+    - targetCorrespondingSourceObject: {fileID: 7817511920305011709, guid: def96e28bf3ff2f4495d214f2016ebef, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4108189809575630945}
   m_SourcePrefab: {fileID: 100100000, guid: def96e28bf3ff2f4495d214f2016ebef, type: 3}
 --- !u!1 &1680979894138770 stripped
 GameObject:
@@ -745,6 +754,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778bce8f557ad6d4aaa5d3bf82708720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shield
+--- !u!54 &4108189809575630945
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680979894138770}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!4 &814633092349603112 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7437326451287335239, guid: def96e28bf3ff2f4495d214f2016ebef, type: 3}

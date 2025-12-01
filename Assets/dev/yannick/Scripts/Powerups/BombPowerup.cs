@@ -90,9 +90,14 @@ public class BombPowerup : BasePowerup
         if(distance < explosionRange)
         {
             PlayerMovement moveScript = opponent.GetComponent<PlayerMovement>();
+            PlayerInventory inventory = opponent.GetComponent<PlayerInventory>();
+
             if (moveScript != null)
             {
-                moveScript.MovePlayerZ(explosionForce);
+                if (inventory.hasShield)
+                {
+                    moveScript.MovePlayerZ(explosionForce);
+                }
                 Destroy(gameObject.transform.parent.gameObject);
             }
         }

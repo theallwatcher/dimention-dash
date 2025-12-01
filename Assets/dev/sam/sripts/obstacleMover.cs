@@ -36,5 +36,11 @@ public class obstacleMover : MonoBehaviour
             }
             Destroy(gameObject);
         }
+        if (other.gameObject.CompareTag("Shield") && !isCoin)
+        {
+            PlayerInventory inv = other.gameObject.GetComponentInParent<PlayerInventory>();
+            inv.DestroyShield();
+            Destroy(gameObject);
+        }
     }
 }
