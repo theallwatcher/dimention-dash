@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     //jump
     private bool isGrounded = true;
-
+    private bool isJumping = false;
 
     private bool isMovingX = false;
     private Vector3 targetPosX;
@@ -134,20 +134,26 @@ public class PlayerMovement : MonoBehaviour
 
         if (!isGrounded) return;
 
+        isJumping = true;
         isGrounded = false;
-
         animator.SetIsGrounded(false);
-        animator.SetIsSliding(false);
+        if (isSliding)
+        {
+            /* animator.SetIsSliding(false);
+             standingCollider.enabled = true;
+             slidingCollider.enabled = false;
+             //change position
+             slidePosition.position = new Vector3(slidePosition.position.x, slideStartY, slidePosition.position.z);*/
+            EndSlide();
+        }
 
-        slidePosition.position = new Vector3(slidePosition.position.x, slideStartY, slidePosition.position.z);
-        if (isSliding) EndSlide();
 
         rb.AddForce(Vector3.up * _playerSO.JumpHeight, ForceMode.Impulse);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") )
         {
             isGrounded = true; 
             animator.SetIsGrounded(true);
@@ -374,17 +380,17 @@ public class PlayerMovement : MonoBehaviour
 
         private void EndSlide()
         {
-            isSliding = false;
+            //reset y position
+            slidePosition.position = new Vector3(slidePosition.position.x, slideStartY, slidePosition.position.z);
 
             //update colliders
             standingCollider.enabled = true;
             slidingCollider.enabled = false;
 
-            //reset y position
-            slidePosition.position = new Vector3(slidePosition.position.x, slideStartY, slidePosition.position.z);
-
+            
             //change animation
             animator.SetIsSliding(false);
+            isSliding = false;
     }
     #endregion
 

@@ -7,7 +7,7 @@ public class PickupPowerupBox : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            PlayerInventory inventory = other.gameObject.GetComponent<PlayerInventory>();
+            PlayerInventory inventory = other.gameObject.GetComponentInParent<PlayerInventory>();
 
            // if(inventory != null) 
             inventory.PickupRandomItem();

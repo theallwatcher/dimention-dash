@@ -6,6 +6,7 @@ public class BombPowerup : BasePowerup
 {
     Vector3 startPoint;
     Vector3 endPoint;
+
     [SerializeField] GameObject explosionPrefab;
 
     [Header("Curve config")]
@@ -18,7 +19,7 @@ public class BombPowerup : BasePowerup
     [SerializeField] GameObject opponent;
     [SerializeField] float explosionForce = 5;
     bool targetReached = false;
-    float explosionTime = 3f;
+    float explosionTime = 1f;
 
     [Header("Scale config")]
     [SerializeField] float endScale = 3f;
@@ -29,7 +30,8 @@ public class BombPowerup : BasePowerup
         Vector3 start = new Vector3(startPos.position.x, startPos.position.y , startPos.position.z);
         startPoint = start;
 
-        Vector3 end = new Vector3(endPos.position.x, endPos.position.y, endPos.position.z + 5);
+        float offSet = Random.Range(3, 8);
+        Vector3 end = new Vector3(endPos.position.x, endPos.position.y + 1, endPos.position.z + offSet);
         endPoint = end;
 
         //save exact enemy position for distance calculations
@@ -54,10 +56,6 @@ public class BombPowerup : BasePowerup
 
             transform.localScale = Vector3.Lerp(startScale, targetScale, t);
         }
-
-
-
-
 
         if (!targetReached) return;
 

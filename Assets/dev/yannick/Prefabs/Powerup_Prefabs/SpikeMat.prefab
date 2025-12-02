@@ -115,7 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a5f3fce5461364e84348af77c42f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spikes
-  damageAmount: 5
+  damageAmount: 4
+  damageEffect: {fileID: 8913907077832263896, guid: 4b4f4cd4e59641a4c87e51ad5a5d7037, type: 3}
 --- !u!1 &5500243749058550579
 GameObject:
   m_ObjectHideFlags: 0
