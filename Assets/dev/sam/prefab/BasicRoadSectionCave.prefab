@@ -330,6 +330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rainbow crystal (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6119692461300210634, guid: 26550a967f815ea4bac45b98cd94447b, type: 3}
+      propertyPath: m_Intensity
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6548992726902562261, guid: 26550a967f815ea4bac45b98cd94447b, type: 3}
       propertyPath: m_LocalScale.x
       value: 339.53
@@ -477,6 +481,10 @@ PrefabInstance:
     - target: {fileID: 5884342704947890031, guid: 26550a967f815ea4bac45b98cd94447b, type: 3}
       propertyPath: m_Name
       value: Rainbow crystal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119692461300210634, guid: 26550a967f815ea4bac45b98cd94447b, type: 3}
+      propertyPath: m_Intensity
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6548992726902562261, guid: 26550a967f815ea4bac45b98cd94447b, type: 3}
       propertyPath: m_LocalScale.x
@@ -678,6 +686,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -282.858
       objectReference: {fileID: 0}
+    - target: {fileID: 3934498624878892915, guid: 5680dc8627c79d24dbc201010846c785, type: 3}
+      propertyPath: m_Intensity
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -696,6 +708,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1500342450093937687}
     m_Modifications:
+    - target: {fileID: 89540957956752504, guid: 887f254ed109967489db0daf2d8c87ff, type: 3}
+      propertyPath: m_Intensity
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1172275569261372920, guid: 887f254ed109967489db0daf2d8c87ff, type: 3}
       propertyPath: m_LocalScale.x
       value: 193.68997
@@ -992,6 +1008,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1500342450093937687}
     m_Modifications:
+    - target: {fileID: 1846635691956494187, guid: f7dca7b033735b94faa607041a72cca0, type: 3}
+      propertyPath: m_Intensity
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6998870490484689422, guid: f7dca7b033735b94faa607041a72cca0, type: 3}
       propertyPath: m_LocalScale.x
       value: 446.47998
@@ -1436,6 +1456,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1500342450093937687}
     m_Modifications:
+    - target: {fileID: 4375942144715094303, guid: e5aaaafa9ebe9024095a09b3c8a03df5, type: 3}
+      propertyPath: m_Intensity
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5150704348325972281, guid: e5aaaafa9ebe9024095a09b3c8a03df5, type: 3}
       propertyPath: m_Name
       value: Yellow crystal
@@ -1658,6 +1682,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1500342450093937687}
     m_Modifications:
+    - target: {fileID: 4026954424634601206, guid: 5f8107194fc810f4dbe8de02b8898e94, type: 3}
+      propertyPath: m_Intensity
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4999018576422107252, guid: 5f8107194fc810f4dbe8de02b8898e94, type: 3}
       propertyPath: m_Name
       value: Blue crystal
@@ -1954,6 +1982,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1500342450093937687}
     m_Modifications:
+    - target: {fileID: 2727090223597544769, guid: 186f403dd68df45478c9fdb1df637aaa, type: 3}
+      propertyPath: m_Intensity
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5014133419617566398, guid: 186f403dd68df45478c9fdb1df637aaa, type: 3}
       propertyPath: m_LocalScale.x
       value: 328.93002
@@ -2028,6 +2060,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1500342450093937687}
     m_Modifications:
+    - target: {fileID: 89540957956752504, guid: 887f254ed109967489db0daf2d8c87ff, type: 3}
+      propertyPath: m_Intensity
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1172275569261372920, guid: 887f254ed109967489db0daf2d8c87ff, type: 3}
       propertyPath: m_LocalScale.x
       value: 123.49872
