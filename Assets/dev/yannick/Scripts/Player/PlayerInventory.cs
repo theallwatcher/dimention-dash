@@ -229,31 +229,31 @@ public class PlayerInventory : MonoBehaviour
          #region FirstPlace
         if (currentPosition == PlayerPosition.FirstPlace)
         {
-            if (roll < 12f)     //Bomb [12%]
+            if (roll < 10f)     //Bomb [10%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(0)); 
             }
-            else if (roll < 0)  //Boost [0%]
+            else if (roll >= 10 && roll < 15)  //Boost [5%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(1)); 
             }
-            else if (roll >= 12f && roll < 19f) //Invert controls [7%]
+            else if (roll >= 15f && roll < 20f) //Invert controls [5%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(2)); 
             }
-            else if (roll >= 19f && roll < 31.5)//Lane switch [12.5%]
+            else if (roll >= 20f && roll < 35)//Lane switch [15%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(3)); 
             }
-            else if (roll >= 31.5f && roll < 51.5f)//Pos switch [20%]
+            else if (roll >= 35f && roll < 45f)//Pos switch [10%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(4)); 
             }
-            else if (roll >= 51.5f && roll < 57.5f) //Shield [6%]
+            else if (roll >= 45f && roll < 65f) //Shield [20%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(5)); 
             }
-            else if (roll >= 57.5f && roll < 70) //Spikes [12.5%]
+            else if (roll >= 65f && roll < 70) //Spikes [5%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(6)); 
             }
@@ -266,35 +266,35 @@ public class PlayerInventory : MonoBehaviour
         #region Tie
         if (currentPosition == PlayerPosition.Tie) //when player is tied with opponent all spawn chances are equal
         {
-            if (roll < 12f)     //Bomb [12%]
+            if (roll < 20f)     //Bomb [20%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(0));
             }
-            else if (roll >= 12 && roll < 22)  //Boost [10%]
+            else if (roll >= 20 && roll < 35)  //Boost [15%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(1));
             }
-            else if (roll >= 22f && roll < 29f) //Invert controls [7%]
+            else if (roll >= 35f && roll < 55f) //Invert controls [20%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(2));
             }
-            else if (roll >= 29f && roll < 29)//Lane switch [0%]
+            else if (roll >= 55f && roll < 75)//Lane switch [10%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(3));
             }
-            else if (roll >= 29f && roll < 49f)//Pos switch [20%]
+            else if (roll < 0)//Pos switch [0%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(4));
             }
-            else if (roll >= 55f && roll < 61f) //Shield [6%]
+            else if (roll >= 75f && roll < 90f) //Shield [15%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(5));
             }
-            else if (roll >= 63.5f && roll < 86) //Spikes [12.5%]
+            else if (roll >= 90f && roll < 100) //Spikes [10%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(6));
             }
-            else if (roll >= 86f && roll <= 100) //Coins [30%]
+            else if (roll < 0) //Coins [30%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(7));
             }
@@ -303,35 +303,35 @@ public class PlayerInventory : MonoBehaviour
          #region Last
         if (currentPosition == PlayerPosition.LastPlace)
         {
-            if (roll < 12f)     //Bomb [12%]
+            if (roll < 10f)     //Bomb [10%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(0));
             }
-            else if (roll < 0)  //Boost [0%]
+            else if (roll >= 10 && roll < 30f)  //Boost [20%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(1));
             }
-            else if (roll >= 12f && roll < 19f) //Invert controls [7%]
+            else if (roll >= 30f && roll < 55f) //Invert controls [25%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(2));
             }
-            else if (roll >= 19f && roll < 31.5)//Lane switch [12.5%]
+            else if (roll >= 55f && roll < 60)//Lane switch [5%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(3));
             }
-            else if (roll >= 31.5f && roll < 51.5f)//Pos switch [20%]
+            else if (roll >= 60f && roll < 80f)//Pos switch [20%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(4));
             }
-            else if (roll >= 51.5f && roll < 57.5f) //Shield [6%]
+            else if (roll >= 80f && roll < 85f) //Shield [5%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(5));
             }
-            else if (roll >= 57.5f && roll < 70) //Spikes [12.5%]
+            else if (roll >= 85f && roll < 100) //Spikes [15%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(6));
             }
-            else if (roll >= 70f && roll <= 100) //Coins [30%]
+            else if (roll < 0) //Coins [0%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(7));
             }
