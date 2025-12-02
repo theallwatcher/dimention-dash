@@ -823,7 +823,7 @@ GameObject:
   - component: {fileID: 169452774}
   - component: {fileID: 169452773}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: sidewalk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -914,12 +914,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 169452772}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -22.5, y: 0, z: 37.8466}
   m_LocalScale: {x: 5.0198, y: 1, z: 113.412254}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2138181670}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &173656787
 PrefabInstance:
@@ -3399,7 +3399,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 25fb475d231dae14990d3d1f1838aa1c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3439,8 +3439,8 @@ Transform:
   m_GameObject: {fileID: 802870780}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.75, z: -26}
-  m_LocalScale: {x: 41.03718, y: 1, z: 24.592026}
+  m_LocalPosition: {x: 28.9446, y: -3, z: 54.6279}
+  m_LocalScale: {x: 358.8246, y: 1, z: 164.4394}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3572,7 +3572,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855276889}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3584,7 +3584,7 @@ Transform:
   - {fileID: 22247199}
   - {fileID: 1431076293}
   - {fileID: 1174233269}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2138181670}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &859309518
 PrefabInstance:
@@ -3749,6 +3749,8 @@ Transform:
   m_Children:
   - {fileID: 480950369}
   - {fileID: 114939616}
+  - {fileID: 1585686753}
+  - {fileID: 1614604855}
   m_Father: {fileID: 1244997171}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &956647930
@@ -5790,7 +5792,7 @@ GameObject:
   - component: {fileID: 1585686751}
   - component: {fileID: 1585686750}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: sidewalk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5881,12 +5883,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1585686749}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.5, y: 0, z: 37.8466}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: -22.5, y: 0, z: 34.553402}
   m_LocalScale: {x: 5.0198, y: 1, z: 113.412254}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 895234256}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1606243999
 PrefabInstance:
@@ -5978,8 +5980,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614604854}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 72.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5990,7 +5992,7 @@ Transform:
   - {fileID: 1909933999}
   - {fileID: 384343269}
   - {fileID: 1848714309}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 895234256}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1616690727
 GameObject:
@@ -6800,6 +6802,10 @@ PrefabInstance:
     - target: {fileID: 4759188813514840695, guid: 40c0a50dae7190641b33196b6646837c, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6226478482403851930, guid: 40c0a50dae7190641b33196b6646837c, type: 3}
+      propertyPath: nextSceneName
+      value: Main 3
       objectReference: {fileID: 0}
     - target: {fileID: 6623445219352322952, guid: 40c0a50dae7190641b33196b6646837c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7763,6 +7769,8 @@ Transform:
   m_Children:
   - {fileID: 1436321641}
   - {fileID: 1234115903}
+  - {fileID: 169452776}
+  - {fileID: 855276890}
   m_Father: {fileID: 1244997171}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &94585895228690194
@@ -7939,7 +7947,3 @@ SceneRoots:
   - {fileID: 995906534}
   - {fileID: 802870784}
   - {fileID: 1121721411}
-  - {fileID: 169452776}
-  - {fileID: 1585686753}
-  - {fileID: 1614604855}
-  - {fileID: 855276890}
