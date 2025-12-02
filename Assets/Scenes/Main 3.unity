@@ -1754,6 +1754,7 @@ MonoBehaviour:
   PlayerOneZPos: 
   PlayerTwoZPos: 
   roadSpeed: 10
+  startSpeed: 0
 --- !u!1 &403675094
 GameObject:
   m_ObjectHideFlags: 0
