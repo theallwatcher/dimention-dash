@@ -1363,7 +1363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &312358254
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1497,6 +1497,7 @@ MonoBehaviour:
   obstacles:
   - {fileID: 1280408372001429099, guid: 85383b701a7c8d445809a0e9ce7af7b4, type: 3}
   - {fileID: 1280408372001429099, guid: d87274dfd3bac8b46869157655ad076d, type: 3}
+  - {fileID: 3226474889198316784, guid: 0ea2df30f35e655468d68653cca15bbf, type: 3}
   spawnPoints:
   - {fileID: 1659853989}
   - {fileID: 295673164}
@@ -5726,7 +5727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2330844194569208682, guid: 40c0a50dae7190641b33196b6646837c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4257893
+      value: 0.043967005
       objectReference: {fileID: 0}
     - target: {fileID: 2330844194569208682, guid: 40c0a50dae7190641b33196b6646837c, type: 3}
       propertyPath: m_LocalScale.z
