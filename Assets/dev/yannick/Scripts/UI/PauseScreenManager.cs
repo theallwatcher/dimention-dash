@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public class PauseScreenManager : MonoBehaviour
 {
     [SerializeField] private SettingsObject settings;
@@ -18,5 +19,10 @@ public class PauseScreenManager : MonoBehaviour
     public void DisableAndEnablePause()
     {
         GameManager.Instance.Pause();
+    }
+
+    public void ReturnToStart()
+    {
+        SceneManager.LoadScene("start");
     }
 }
