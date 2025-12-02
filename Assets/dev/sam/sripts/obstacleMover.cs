@@ -32,7 +32,7 @@ public class obstacleMover : MonoBehaviour
             Debug.Log("hit player");
             if (isCoin == false){
                 GameObject particals = Instantiate(particalPrefab, transform.position, Quaternion.Euler(new Vector3(180, 0, 0)));
-                audioManagerSam.Instance.Play(audioManagerSam.SoundType.Break);
+               // audioManagerSam.Instance.Play(audioManagerSam.SoundType.Break);
             }
             Destroy(gameObject);
         }

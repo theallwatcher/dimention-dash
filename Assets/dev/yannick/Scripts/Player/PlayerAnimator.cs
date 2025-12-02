@@ -10,13 +10,12 @@ public class PlayerAnimator : MonoBehaviour
     {
         GameManager manager = GameManager.Instance;
 
-        /*if(manager.roadSpeed > manager.startSpeed)
+        if(manager.roadSpeed > lastKnownSpeed)
         {
             lastKnownSpeed = manager.roadSpeed;
             runSpeed += 0.1f;
-            manager.startSpeed = manager.roadSpeed;
             animator.SetFloat("RunSpeed", runSpeed);
-        }*/
+        }
     }
 
     public void SetIsGrounded(bool value)
