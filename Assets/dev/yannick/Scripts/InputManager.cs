@@ -117,6 +117,13 @@ public class InputManager : MonoBehaviour
                 bothJoined = true;
             }
         }
+
+        //when entering a new scene update the players
+        if (!gameManager.PlayersFound())
+        {
+            gameManager.SetPlayersInventory(playerOneInventory, playerTwoInventory);
+            gameManager.SetupPlayersPositions(pos1, pos2);
+        }
     }
 
     private void SetupUIElements(PlayerInput player, bool isPlayerOne)
