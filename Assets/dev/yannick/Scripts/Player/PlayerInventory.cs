@@ -22,10 +22,8 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private GameObject shieldObject;
     private Coroutine shieldRoutine;
     public bool hasShield = false;
-    private ItemObject currentPowerup;
+    [SerializeField] private ItemObject currentPowerup;
     private Coroutine scrollRoutine = null;
-    
-
 
     public enum PlayerPosition 
     {
@@ -76,6 +74,8 @@ public class PlayerInventory : MonoBehaviour
         {
             StopCoroutine(scrollRoutine);
         }
+        Debug.Log("randomize");
+
         RandomizeItems();
     }
 
@@ -173,6 +173,8 @@ public class PlayerInventory : MonoBehaviour
 
     private IEnumerator ScrollThroughItems(int finalIndex)
     {
+        Debug.Log("scroll");
+
         float interval = 0.03f;
         float maxInterval = 0.5f;
         float acceleration = 1.12f;
@@ -268,31 +270,31 @@ public class PlayerInventory : MonoBehaviour
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(0));
             }
-            else if (roll < 0)  //Boost [0%]
+            else if (roll >= 12 && roll < 22)  //Boost [10%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(1));
             }
-            else if (roll >= 12f && roll < 19f) //Invert controls [7%]
+            else if (roll >= 22f && roll < 29f) //Invert controls [7%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(2));
             }
-            else if (roll >= 19f && roll < 31.5)//Lane switch [12.5%]
+            else if (roll >= 29f && roll < 29)//Lane switch [0%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(3));
             }
-            else if (roll >= 31.5f && roll < 51.5f)//Pos switch [20%]
+            else if (roll >= 29f && roll < 49f)//Pos switch [20%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(4));
             }
-            else if (roll >= 51.5f && roll < 57.5f) //Shield [6%]
+            else if (roll >= 55f && roll < 61f) //Shield [6%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(5));
             }
-            else if (roll >= 57.5f && roll < 70) //Spikes [12.5%]
+            else if (roll >= 63.5f && roll < 86) //Spikes [12.5%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(6));
             }
-            else if (roll >= 70f && roll <= 100) //Coins [30%]
+            else if (roll >= 86f && roll <= 100) //Coins [30%]
             {
                 scrollRoutine = StartCoroutine(ScrollThroughItems(7));
             }

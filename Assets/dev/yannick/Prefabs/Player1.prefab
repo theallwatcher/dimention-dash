@@ -370,6 +370,7 @@ MonoBehaviour:
   powerupSpawnPoint: {fileID: 7963911052667637131}
   shieldObject: {fileID: 6119439910502506321}
   hasShield: 0
+  currentPowerup: {fileID: 0}
   currentPosition: 0
 --- !u!114 &1407497354098030752
 MonoBehaviour:
