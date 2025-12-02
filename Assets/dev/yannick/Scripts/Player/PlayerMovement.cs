@@ -140,11 +140,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetIsGrounded(false);
         if (isSliding)
         {
-            /* animator.SetIsSliding(false);
-             standingCollider.enabled = true;
-             slidingCollider.enabled = false;
-             //change position
-             slidePosition.position = new Vector3(slidePosition.position.x, slideStartY, slidePosition.position.z);*/
             EndSlide();
         }
 
@@ -153,13 +148,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground") )
-        {
-            isGrounded = true; 
-            animator.SetIsGrounded(true);
-        }
-    }
+     {
+         if (collision.gameObject.CompareTag("Ground") && isJumping)
+         {
+             isJumping = false;
+             isGrounded = true; 
+             animator.SetIsGrounded(true);
+         }
+     }
+
     public void OnDuck(InputAction.CallbackContext context)
     {
         if (!gameStarted) return;

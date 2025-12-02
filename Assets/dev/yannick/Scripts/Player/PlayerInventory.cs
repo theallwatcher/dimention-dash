@@ -171,8 +171,6 @@ public class PlayerInventory : MonoBehaviour
 
     private IEnumerator ScrollThroughItems(int finalIndex)
     {
-        Debug.Log("scroll");
-
         float interval = 0.03f;
         float maxInterval = 0.5f;
         float acceleration = 1.12f;

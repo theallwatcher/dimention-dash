@@ -120,4 +120,16 @@ public class GameManager : MonoBehaviour
     {
         roadSpeed += roadSpeed / 10;
     }
+
+    public bool PlayersFound()
+    {
+        if(playerOneInventory == null &&  playerTwoInventory == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }
