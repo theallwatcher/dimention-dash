@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PickupPowerupBox : MonoBehaviour
 {
@@ -6,11 +7,13 @@ public class PickupPowerupBox : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("box");
             PlayerInventory inventory = other.gameObject.GetComponent<PlayerInventory>();
 
-            if(inventory != null)
+           // if(inventory != null) 
             inventory.PickupRandomItem();
-            Destroy(gameObject);
+            GameObject parent = gameObject.transform.parent.gameObject;
+            Destroy(parent);
         }
     }
 }
