@@ -6,6 +6,7 @@ public class BombPowerup : BasePowerup
 {
     Vector3 startPoint;
     Vector3 endPoint;
+    [SerializeField] GameObject explosionPrefab;
 
     [Header("Curve config")]
     [SerializeField] float radius;
@@ -84,17 +85,17 @@ public class BombPowerup : BasePowerup
     void Explode()
     {
         float distance = Vector3.Distance(transform.position, opponent.transform.position);
-
+        GameObject explosion = Instantiate(explosionPrefab,transform.position, transform.rotation);
         //player effect
 
-        if(distance < explosionRange)
+        if (distance < explosionRange)
         {
             PlayerMovement moveScript = opponent.GetComponent<PlayerMovement>();
             PlayerInventory inventory = opponent.GetComponent<PlayerInventory>();
 
             if (moveScript != null)
             {
-                if (inventory.hasShield)
+                if (!inventory.hasShield)
                 {
                     moveScript.MovePlayerZ(explosionForce);
                 }
