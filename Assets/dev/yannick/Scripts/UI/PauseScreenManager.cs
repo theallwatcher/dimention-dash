@@ -23,6 +23,7 @@ public class PauseScreenManager : MonoBehaviour
 
     public void ReturnToStart()
     {
+        settings.IsPaused = false;
         SceneManager.LoadScene("start");
     }
 }

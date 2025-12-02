@@ -110,9 +110,12 @@ public class InputManager : MonoBehaviour
 
         if(player1Spawned && player2Spawned && !bothJoined)
         {
-            ShowControls showControlScript = countDownUI.GetComponentInChildren<ShowControls>();
-            showControlScript.SetupPlayerControls(usingKeys1, usingKeys2);
-            bothJoined = true;
+            if(countDownUI != null)
+            {
+                ShowControls showControlScript = countDownUI.GetComponentInChildren<ShowControls>();
+                showControlScript.SetupPlayerControls(usingKeys1, usingKeys2);
+                bothJoined = true;
+            }
         }
     }
 

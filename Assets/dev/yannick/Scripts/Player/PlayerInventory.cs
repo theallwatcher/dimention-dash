@@ -74,9 +74,8 @@ public class PlayerInventory : MonoBehaviour
         {
             StopCoroutine(scrollRoutine);
         }
-        Debug.Log("randomize");
-
-        RandomizeItems();
+        StartCoroutine(ScrollThroughItems(0));
+       // RandomizeItems();
     }
 
     public void UsePowerup()
@@ -198,6 +197,7 @@ public class PlayerInventory : MonoBehaviour
 
         //when scroll is over pass in the final items
         itemSlotImage.sprite = itemObjects[finalIndex].UI_sprite ;
+        currentPowerup = itemObjects[finalIndex];
         currentPowerup = itemObjects[finalIndex];
         itemName.text = itemObjects[finalIndex].Type.ToString();
     } 
