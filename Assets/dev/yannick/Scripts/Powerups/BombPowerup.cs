@@ -83,7 +83,7 @@ public class BombPowerup : BasePowerup
     void Explode()
     {
         float distance = Vector3.Distance(transform.position, opponent.transform.position);
-        GameObject explosion = Instantiate(explosionPrefab,transform.position, transform.rotation);
+        GameObject explosion = Instantiate(explosionPrefab,transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
         //player effect
 
         if (distance < explosionRange)

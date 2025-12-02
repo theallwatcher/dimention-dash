@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] PlayerObject _playerSO;
     [SerializeField] Rigidbody rb;
+    [SerializeField] GameObject dizzyParticals;
     //movement
     private Vector2 moveDirection;
     private InputAction jumpAction;
@@ -399,6 +400,8 @@ public class PlayerMovement : MonoBehaviour
     public IEnumerator SwitchControls()
     {
         controlDirection = -1f;
+        Vector3 particalPosition = new Vector3(transform.position.x,transform.position.y+6,transform.position.z);
+        GameObject dizzy = Instantiate(dizzyParticals,particalPosition, Quaternion.Euler(new Vector3(-90, 0, 0)),this.transform);
 
         yield return new WaitForSeconds(5);
         controlDirection = 1f;
