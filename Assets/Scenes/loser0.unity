@@ -514,6 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d76b3a67ebb67140ae5b8a0f78d80e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::buttons
+  panel: {fileID: 0}
 --- !u!114 &382927427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,8 +668,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: quit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 120cc2a3311dd4740a95091c2786d531, type: 2}
+  m_sharedMaterial: {fileID: 6791732551184153189, guid: 120cc2a3311dd4740a95091c2786d531, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -803,8 +804,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: player 2 wins!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 120cc2a3311dd4740a95091c2786d531, type: 2}
+  m_sharedMaterial: {fileID: 6791732551184153189, guid: 120cc2a3311dd4740a95091c2786d531, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -939,8 +940,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 120cc2a3311dd4740a95091c2786d531, type: 2}
+  m_sharedMaterial: {fileID: 6791732551184153189, guid: 120cc2a3311dd4740a95091c2786d531, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1068,6 +1069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d76b3a67ebb67140ae5b8a0f78d80e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::buttons
+  panel: {fileID: 0}
 --- !u!114 &1493089758
 MonoBehaviour:
   m_ObjectHideFlags: 0
