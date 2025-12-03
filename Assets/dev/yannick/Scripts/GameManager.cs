@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,18 +20,21 @@ public class GameManager : MonoBehaviour
     public float roadSpeed = 4f;
     public float startSpeed;
     private float speedTimer = 0f;
-    private float speedUpInterval = 10;
+
+    [SerializeField] private float speedUpInterval = 7;
 
     //singleton class
     private void Awake()
     {
         if(Instance != null)
         {
-            Destroy(Instance);
+            Destroy(gameObject);
         }
         else 
         Instance = this;
         DontDestroyOnLoad(this);
+        SceneManager.activeSceneChanged += OnActiveSceneChanged;
+
     }
 
     private void Update()
@@ -49,12 +53,19 @@ public class GameManager : MonoBehaviour
             PlayerTwoZPos = "Player 2 not found";
         }
 
+        //increase speed over time
         speedTimer += Time.deltaTime;
         if(speedTimer > speedUpInterval)
         {
             IncreaseSpeed();
             speedTimer = 0f;
         }
+    }
+
+    private void OnActiveSceneChanged(Scene oldScene, Scene newScene)
+    {
+        InputManager input = FindFirstObjectByType<InputManager>();
+        input.SetupPlayers();
     }
 
     private void UpdateLeader()
@@ -64,20 +75,29 @@ public class GameManager : MonoBehaviour
             
             leader = "Player 1";
             playerOneInventory.SetPosition(PlayerInventory.PlayerPosition.FirstPlace);
+            playerOneInventory.ShowCrown();
+
             playerTwoInventory.SetPosition(PlayerInventory.PlayerPosition.LastPlace);
+            playerTwoInventory.HideCrown();
         }
         else if (_playerOnePos.position.z < _playerTwoPos.position.z)//check if player two is in front
         {
             leader = "Player 2";
             playerOneInventory.SetPosition(PlayerInventory.PlayerPosition.LastPlace);
+            playerOneInventory.HideCrown();
+
             playerTwoInventory.SetPosition(PlayerInventory.PlayerPosition.FirstPlace);
+            playerTwoInventory.ShowCrown();
         }
         else if (_playerOnePos.position.z == _playerTwoPos.position.z)//players are tied
         {
             //tie
             leader = "tie";
             playerOneInventory.SetPosition(PlayerInventory.PlayerPosition.Tie);
+            playerOneInventory.HideCrown();
+
             playerTwoInventory.SetPosition(PlayerInventory.PlayerPosition.Tie);
+            playerTwoInventory.HideCrown();
         }
     }
 
@@ -123,13 +143,6 @@ public class GameManager : MonoBehaviour
 
     public bool PlayersFound()
     {
-        if(playerOneInventory == null &&  playerTwoInventory == null)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return playerOneInventory != null && playerTwoInventory != null;
     }
 }

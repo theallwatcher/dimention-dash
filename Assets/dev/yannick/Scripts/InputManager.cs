@@ -34,6 +34,9 @@ public class InputManager : MonoBehaviour
     private bool usingKeys1 = false;
     private bool usingKeys2 = false;
 
+    private Transform p1Pos;
+    private Transform p2Pos;
+
     [SerializeField] private GameObject countDownUI
         ;
     private void Start()
@@ -103,10 +106,10 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
 
-        Transform pos1 = playerOneInventory.transform;
-        Transform pos2 = playerTwoInventory.transform;
+         p1Pos = playerOneInventory.transform;
+         p2Pos = playerTwoInventory.transform;
 
-        gameManager.SetupPlayersPositions(pos1, pos2);
+        gameManager.SetupPlayersPositions(p1Pos, p2Pos);
 
         if(player1Spawned && player2Spawned && !bothJoined)
         {
@@ -121,8 +124,9 @@ public class InputManager : MonoBehaviour
         //when entering a new scene update the players
         if (!gameManager.PlayersFound())
         {
+            Debug.Log("Added players");
             gameManager.SetPlayersInventory(playerOneInventory, playerTwoInventory);
-            gameManager.SetupPlayersPositions(pos1, pos2);
+            gameManager.SetupPlayersPositions(p1Pos, p2Pos);
         }
     }
 
@@ -150,5 +154,12 @@ public class InputManager : MonoBehaviour
             inventory.itemSlotImage = itemSlot2;
             counter.counter = coinCounter2;
         }
+    }
+
+    public void SetupPlayers()
+    {
+        Debug.Log("Added players");
+        gameManager.SetPlayersInventory(playerOneInventory, playerTwoInventory);
+        gameManager.SetupPlayersPositions(p1Pos, p2Pos);
     }
 }

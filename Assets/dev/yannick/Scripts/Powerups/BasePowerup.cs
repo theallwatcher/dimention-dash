@@ -6,7 +6,7 @@ public abstract class BasePowerup : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Activate(other.GetComponent<PlayerMovement>());
+            Activate(other.GetComponentInParent<PlayerMovement>());
 
             //add effect?
 
