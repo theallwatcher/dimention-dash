@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private List<ItemObject> itemObjects = new List<ItemObject>();
+    [SerializeField] private GameObject crown;
 
     [Header("In scene references")]
     public Image itemSlotImage = null;
@@ -37,7 +38,7 @@ public class PlayerInventory : MonoBehaviour
     private void Start()
     {
         movementScript = GetComponent<PlayerMovement>();     
-        
+        crown.SetActive(false);
         itemName = itemSlotImage.gameObject.GetComponentInChildren<TextMeshProUGUI>();
         if(itemName  != null)
         itemName.text = " ";
@@ -85,6 +86,7 @@ public class PlayerInventory : MonoBehaviour
         SpawnPowerup(currentPowerup.Type);
         itemSlotImage.sprite = null;
         currentPowerup = null;
+        itemName.text =" ";
     }
 
     private void SpawnPowerup(ItemObject.ItemType type) //every powerup type spawns in a different way
@@ -334,5 +336,15 @@ public class PlayerInventory : MonoBehaviour
             }
         }
         #endregion
+    }
+
+    public void ShowCrown()
+    {
+        crown.SetActive(true);
+    }
+
+    public void HideCrown()
+    {
+        crown.SetActive(false);
     }
 }
