@@ -135,6 +135,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!isGrounded) return;
 
+        audioManagerSam.Instance.Play(audioManagerSam.SoundType.Jump);
         isJumping = true;
         isGrounded = false;
         animator.SetIsGrounded(false);
