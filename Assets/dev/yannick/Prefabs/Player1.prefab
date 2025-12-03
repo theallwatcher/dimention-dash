@@ -311,6 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   _playerSO: {fileID: 11400000, guid: b32636b5dd63df843be610bbbb572ca0, type: 2}
   rb: {fileID: 5253203177031904216}
+  dizzyParticals: {fileID: 3058276983549357352, guid: 3b8544319ec6f9548b21e930075dc312, type: 3}
   gameStarted: 0
   CurrentLane: 0
   standingCollider: {fileID: 2192084939452315243}
