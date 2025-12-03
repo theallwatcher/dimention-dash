@@ -26,4 +26,9 @@ public class PauseScreenManager : MonoBehaviour
         settings.IsPaused = false;
         SceneManager.LoadScene("start");
     }
+
+    public void PlayerUISound()
+    {
+        audioManagerSam.Instance.Play(audioManagerSam.SoundType.buton);
+    }
 }
