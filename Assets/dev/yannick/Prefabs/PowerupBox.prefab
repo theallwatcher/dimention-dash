@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::obstacleMover
   endPoint: {fileID: 6431830537345292096, guid: 5747767b69114a84ebdcac8957a0606b, type: 3}
+  particalPrefab: {fileID: 0}
+  isCoin: 1
 --- !u!114 &5346303947843781731
 MonoBehaviour:
   m_ObjectHideFlags: 0

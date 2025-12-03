@@ -2993,6 +2993,7 @@ MonoBehaviour:
   PlayerOneZPos: 
   PlayerTwoZPos: 
   roadSpeed: 5
+  startSpeed: 0
 --- !u!4 &1747859031
 Transform:
   m_ObjectHideFlags: 0
@@ -3916,14 +3917,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: coin sparcle
       objectReference: {fileID: 0}
-    - target: {fileID: 4624585266063554244, guid: 17cde2a2f47d2734eac539c4955e0214, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4624585266063554244, guid: 17cde2a2f47d2734eac539c4955e0214, type: 3}
-      propertyPath: 'm_Materials.Array.data[1]'
-      value: 
-      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
