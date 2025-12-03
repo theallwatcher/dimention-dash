@@ -158,7 +158,6 @@ public class InputManager : MonoBehaviour
 
     public void SetupPlayers()
     {
-        Debug.Log("Added players");
         gameManager.SetPlayersInventory(playerOneInventory, playerTwoInventory);
         gameManager.SetupPlayersPositions(p1Pos, p2Pos);
     }

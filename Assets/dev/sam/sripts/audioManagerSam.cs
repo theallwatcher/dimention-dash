@@ -8,7 +8,12 @@ public class audioManagerSam : MonoBehaviour
 
         Jump,
         Break,
-        buton
+        buton,
+        Coin,
+        Explosion,
+        PowerupPickup,
+        Boost,
+        PowerupUse
     }
 
     [System.Serializable]

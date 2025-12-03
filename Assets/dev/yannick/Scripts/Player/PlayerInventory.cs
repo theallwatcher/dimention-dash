@@ -62,6 +62,7 @@ public class PlayerInventory : MonoBehaviour
     }
     public void PickupRandomItem()
     {
+        audioManagerSam.Instance.Play(audioManagerSam.SoundType.PowerupPickup);
         //empty current item in slot
         if (itemSlotImage != null && currentPowerup != null)
         {
@@ -80,6 +81,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void UsePowerup()
     {
+        audioManagerSam.Instance.Play(audioManagerSam.SoundType.PowerupUse);
         //set powerup spawnPoint 
         if (currentPowerup == null) return;
 

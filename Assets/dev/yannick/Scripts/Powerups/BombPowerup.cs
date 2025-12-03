@@ -85,6 +85,8 @@ public class BombPowerup : BasePowerup
         float distance = Vector3.Distance(transform.position, opponent.transform.position);
         GameObject explosion = Instantiate(explosionPrefab,transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
         //player effect
+        audioManagerSam.Instance.Play(audioManagerSam.SoundType.Explosion);
+
 
         if (distance < explosionRange)
         {
