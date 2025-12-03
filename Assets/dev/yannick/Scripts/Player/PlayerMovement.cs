@@ -142,9 +142,8 @@ public class PlayerMovement : MonoBehaviour
         {
             EndSlide();
         }
-
-
-        rb.AddForce(Vector3.up * _playerSO.JumpHeight, ForceMode.Impulse);
+        Physics.gravity = new Vector3(0, _playerSO.Gravity, 0);
+        rb.AddForce(Vector3.up * _playerSO.JumpForce, ForceMode.Impulse);
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -167,7 +167,6 @@ GameObject:
   - component: {fileID: 897981321289127973}
   - component: {fileID: 6231949390090167076}
   - component: {fileID: 642718394328357681}
-  - component: {fileID: 4927503277568809460}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -326,7 +325,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7010112727408364013}
   serializedVersion: 5
-  m_Mass: 110
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -426,27 +425,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimator
   animator: {fileID: 6234833661818336658}
---- !u!65 &4927503277568809460
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7010112727408364013}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.81, y: 2.14, z: 1}
-  m_Center: {x: 0, y: 0.96, z: 0}
 --- !u!1 &7642800434345436256
 GameObject:
   m_ObjectHideFlags: 0
