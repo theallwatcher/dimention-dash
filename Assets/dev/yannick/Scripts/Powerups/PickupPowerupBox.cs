@@ -10,7 +10,7 @@ public class PickupPowerupBox : MonoBehaviour
             PlayerInventory inventory = other.gameObject.GetComponentInParent<PlayerInventory>();
 
            // if(inventory != null) 
-            inventory.PickupRandomItem();
+            inventory.EmptyItemSlot();
             Destroy(gameObject);
         }
     }

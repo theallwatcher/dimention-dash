@@ -60,7 +60,7 @@ public class PlayerInventory : MonoBehaviour
     {
         currentPosition = position;
     }
-    public void PickupRandomItem()
+    public void EmptyItemSlot()
     {
         audioManagerSam.Instance.Play(audioManagerSam.SoundType.PowerupPickup);
         //empty current item in slot
