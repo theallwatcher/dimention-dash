@@ -11,7 +11,6 @@ public class PlayerInventory : MonoBehaviour
 
     [Header("In scene references")]
     public Image itemSlotImage = null;
-    private TextMeshProUGUI itemName;
 
     [Header("Script links")]
     private PlayerMovement movementScript;
@@ -39,9 +38,6 @@ public class PlayerInventory : MonoBehaviour
     {
         movementScript = GetComponent<PlayerMovement>();     
         crown.SetActive(false);
-        itemName = itemSlotImage.gameObject.GetComponentInChildren<TextMeshProUGUI>();
-        if(itemName  != null)
-        itemName.text = " ";
     }
 
     private void Update()
@@ -68,7 +64,6 @@ public class PlayerInventory : MonoBehaviour
         {
             itemSlotImage.sprite = null;
             currentPowerup = null;
-            itemName.text = " ";
         }
 
         //stop routine if already running
@@ -88,7 +83,6 @@ public class PlayerInventory : MonoBehaviour
         SpawnPowerup(currentPowerup.Type);
         itemSlotImage.sprite = null;
         currentPowerup = null;
-        itemName.text =" ";
     }
 
     private void SpawnPowerup(ItemObject.ItemType type) //every powerup type spawns in a different way
@@ -200,7 +194,6 @@ public class PlayerInventory : MonoBehaviour
         itemSlotImage.sprite = itemObjects[finalIndex].UI_sprite ;
         currentPowerup = itemObjects[finalIndex];
         currentPowerup = itemObjects[finalIndex];
-        itemName.text = itemObjects[finalIndex].Type.ToString();
     } 
 
     public void SetOtherMoveScript(PlayerMovement movement)
