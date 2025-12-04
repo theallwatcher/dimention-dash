@@ -6823,6 +6823,7 @@ MonoBehaviour:
   spawners:
   - {fileID: 332057367}
   - {fileID: 1367138853}
+  - {fileID: 300644427}
   roundDuration: 60
 --- !u!1 &2138181669
 GameObject:

@@ -1584,15 +1584,12 @@ MonoBehaviour:
   obstacles:
   - {fileID: 1280408372001429099, guid: 85383b701a7c8d445809a0e9ce7af7b4, type: 3}
   - {fileID: 1280408372001429099, guid: d87274dfd3bac8b46869157655ad076d, type: 3}
-  - {fileID: 3226474889198316784, guid: 0ea2df30f35e655468d68653cca15bbf, type: 3}
+  - {fileID: 3934460804211255692, guid: b97a5cb5be8eaba47af2effbfd4a5e37, type: 3}
   spawnPoints:
-  - {fileID: 1659853989}
-  - {fileID: 295673164}
-  - {fileID: 203400330}
   - {fileID: 1229479109}
   - {fileID: 1241985165}
   - {fileID: 758515045}
-  spawnDelay: 2
+  spawnDelay: 1
 --- !u!1 &354966936
 GameObject:
   m_ObjectHideFlags: 0
@@ -2762,6 +2759,7 @@ Transform:
   m_Children:
   - {fileID: 1355202572}
   - {fileID: 332057368}
+  - {fileID: 1137878718}
   - {fileID: 1367138854}
   - {fileID: 2126760881}
   - {fileID: 988942095}
@@ -3593,6 +3591,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5580691036639889433, guid: 985edf24f6a6e8f45b451fd7d9e8a8cb, type: 3}
   m_PrefabInstance: {fileID: 1994191474}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1137878717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1137878718}
+  - component: {fileID: 1137878719}
+  m_Layer: 0
+  m_Name: spawn manager (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1137878718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137878717}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -9.05425, y: 7.01, z: -396.9691}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 784707890}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1137878719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137878717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb4027b7a7fdacb4aa497635f2614308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::spawnManager
+  obstacles:
+  - {fileID: 1280408372001429099, guid: 85383b701a7c8d445809a0e9ce7af7b4, type: 3}
+  - {fileID: 1280408372001429099, guid: d87274dfd3bac8b46869157655ad076d, type: 3}
+  - {fileID: 3934460804211255692, guid: b97a5cb5be8eaba47af2effbfd4a5e37, type: 3}
+  spawnPoints:
+  - {fileID: 1659853989}
+  - {fileID: 295673164}
+  - {fileID: 203400330}
+  spawnDelay: 1
 --- !u!1001 &1138387778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4554,6 +4605,7 @@ MonoBehaviour:
   obstacles:
   - {fileID: 8128825658735750631, guid: 87a81c0f89a49664dad90e729bf109bf, type: 3}
   - {fileID: 8128825658735750631, guid: 87a81c0f89a49664dad90e729bf109bf, type: 3}
+  - {fileID: 3226474889198316784, guid: 0ea2df30f35e655468d68653cca15bbf, type: 3}
   spawnPoints:
   - {fileID: 1659853989}
   - {fileID: 295673164}
@@ -4561,7 +4613,7 @@ MonoBehaviour:
   - {fileID: 1229479109}
   - {fileID: 1241985165}
   - {fileID: 758515045}
-  spawnDelay: 5
+  spawnDelay: 1.5
 --- !u!1 &1391805337
 GameObject:
   m_ObjectHideFlags: 0
@@ -4608,8 +4660,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SectionTrigger
   _roadSectionList:
-  - {fileID: 2537904020836020709, guid: 4ce245273593d294ab86982926b79323, type: 3}
-  spawnPoint: {fileID: 0}
+  - {fileID: 3539993149561876251, guid: 228594c32eb9491489abb6f69fd5d063, type: 3}
+  spawnPoint: {fileID: 94585895228690194}
 --- !u!65 &1391805340
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6754,6 +6806,7 @@ MonoBehaviour:
   spawners:
   - {fileID: 332057367}
   - {fileID: 1367138853}
+  - {fileID: 1137878717}
   roundDuration: 60
 --- !u!1 &2138181669
 GameObject:
