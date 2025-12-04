@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4697449772489147846}
   - component: {fileID: 198739096166536526}
-  - component: {fileID: 7603339092217405149}
+  - component: {fileID: 4110630189331591003}
   m_Layer: 6
   m_Name: BasicRoadSectionNacht
   m_TagString: RoadSectionTrigger
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -26,12 +26,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072270594140648868}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 65.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6853417637187278159}
   - {fileID: 6242847825827252198}
   - {fileID: 3919631525833594816}
   - {fileID: 6299712586824023364}
@@ -64,7 +63,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 118
   m_CollisionDetection: 1
---- !u!114 &7603339092217405149
+--- !u!114 &4110630189331591003
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,62 +72,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2072270594140648868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c638fa6e76b56e242ae5a314de7741b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e72d3a9db4657741befd32bbf50ea2e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MoveRoad
---- !u!1 &5775001878969894323
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6853417637187278159}
-  - component: {fileID: 5066134929171466439}
-  m_Layer: 6
-  m_Name: NewSectionTrigger
-  m_TagString: RoadSectionTrigger
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6853417637187278159
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5775001878969894323}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4697449772489147846}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5066134929171466439
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5775001878969894323}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 15, y: 50, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::buildingmover
+  startPoint: {fileID: 0}
+  endPoint: {fileID: 6431830537345292096, guid: 5747767b69114a84ebdcac8957a0606b, type: 3}
 --- !u!1 &6596651322570243838
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +104,7 @@ Transform:
   m_GameObject: {fileID: 6596651322570243838}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -28.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -240,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4153939165477400042, guid: 341440f305b7d134094b69a6f7551a3a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -28.02
       objectReference: {fileID: 0}
     - target: {fileID: 4153939165477400042, guid: 341440f305b7d134094b69a6f7551a3a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -302,7 +250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4153939165477400042, guid: 341440f305b7d134094b69a6f7551a3a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -27.89
+      value: -56.06
       objectReference: {fileID: 0}
     - target: {fileID: 4153939165477400042, guid: 341440f305b7d134094b69a6f7551a3a, type: 3}
       propertyPath: m_LocalRotation.w

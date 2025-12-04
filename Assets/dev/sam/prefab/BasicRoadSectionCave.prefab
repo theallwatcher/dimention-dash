@@ -1,58 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &683343757369627000
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8853028305893369780}
-  - component: {fileID: 7720170674667448030}
-  m_Layer: 6
-  m_Name: NewSectionTrigger (1)
-  m_TagString: RoadSectionTrigger
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8853028305893369780
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683343757369627000}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.04}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2495772402409931113}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7720170674667448030
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683343757369627000}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 15, y: 50, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1342981140880228353
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1342981140880228353}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.03999996, z: -28.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -100,11 +47,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2495772402409931113}
   - component: {fileID: 7521890286931279420}
-  - component: {fileID: 5438007450526493624}
+  - component: {fileID: 8165201738756930640}
   m_Layer: 6
   m_Name: BasicRoadSectionCave
   m_TagString: RoadSectionTrigger
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -121,7 +68,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8853028305893369780}
   - {fileID: 70573658608336449}
   - {fileID: 1784724532281795974}
   - {fileID: 5948300364842365805}
@@ -155,7 +101,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 118
   m_CollisionDetection: 1
---- !u!114 &5438007450526493624
+--- !u!114 &8165201738756930640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,10 +110,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3539993149561876251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c638fa6e76b56e242ae5a314de7741b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e72d3a9db4657741befd32bbf50ea2e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MoveRoad
-  rb: {fileID: 7521890286931279420}
+  m_EditorClassIdentifier: Assembly-CSharp::buildingmover
+  startPoint: {fileID: 0}
+  endPoint: {fileID: 6431830537345292096, guid: 5747767b69114a84ebdcac8957a0606b, type: 3}
 --- !u!1 &6615500269807873433
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +140,7 @@ Transform:
   m_GameObject: {fileID: 6615500269807873433}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.03999996, z: -28.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -230,7 +177,7 @@ Transform:
   m_GameObject: {fileID: 7894728121310968833}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.03999996, z: -28.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -267,15 +214,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 162777709962578674, guid: 9012cf0a72cc31146868f62cbb01e101, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0809
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 162777709962578674, guid: 9012cf0a72cc31146868f62cbb01e101, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.96
       objectReference: {fileID: 0}
     - target: {fileID: 162777709962578674, guid: 9012cf0a72cc31146868f62cbb01e101, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.047
+      value: -28.15
       objectReference: {fileID: 0}
     - target: {fileID: 162777709962578674, guid: 9012cf0a72cc31146868f62cbb01e101, type: 3}
       propertyPath: m_LocalRotation.w

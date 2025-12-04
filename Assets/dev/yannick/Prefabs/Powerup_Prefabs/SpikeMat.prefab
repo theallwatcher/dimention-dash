@@ -127,6 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1205090273924855781}
   - component: {fileID: 4013850502208761112}
+  - component: {fileID: 2044896426967065017}
   m_Layer: 0
   m_Name: SpikeMat
   m_TagString: Untagged
@@ -158,11 +159,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5500243749058550579}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c638fa6e76b56e242ae5a314de7741b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveRoad
+  rb: {fileID: 0}
+--- !u!114 &2044896426967065017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5500243749058550579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bfc1ad5b5a06a54d9032c99546de6d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::obstacleMover
+  endPoint: {fileID: 6431830537345292096, guid: 5747767b69114a84ebdcac8957a0606b, type: 3}
+  particalPrefab: {fileID: 0}
+  isCoin: 1
 --- !u!1001 &8963347212848114374
 PrefabInstance:
   m_ObjectHideFlags: 0
