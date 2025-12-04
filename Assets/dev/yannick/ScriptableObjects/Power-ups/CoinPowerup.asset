@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fe031162d3cb04d85b9546a3777ba4, type: 3}
   m_Name: CoinPowerup
   m_EditorClassIdentifier: Assembly-CSharp::ItemObject
-  UI_sprite: {fileID: 21300000, guid: 463f6d3cbe90fc6409823d884cada427, type: 3}
+  UI_sprite: {fileID: 21300000, guid: 880c93445d112eb429eff4bfea7141b6, type: 3}
   Prefab: {fileID: 0}
   Type: 7

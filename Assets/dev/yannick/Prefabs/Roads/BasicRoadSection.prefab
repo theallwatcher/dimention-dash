@@ -74,6 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c638fa6e76b56e242ae5a314de7741b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveRoad
+  rb: {fileID: 7538258506866370543}
 --- !u!1 &3664315800160382218
 GameObject:
   m_ObjectHideFlags: 0

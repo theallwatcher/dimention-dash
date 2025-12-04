@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public string PlayerOneZPos = "";
     public string PlayerTwoZPos = "";
 
-    public float roadSpeed = 4f;
+    public float roadSpeed;
     public float startSpeed;
     private float speedTimer = 0f;
 
@@ -64,8 +64,18 @@ public class GameManager : MonoBehaviour
 
     private void OnActiveSceneChanged(Scene oldScene, Scene newScene)
     {
+        Scene scene = SceneManager.GetActiveScene();
+        if(scene.name == "start")
+        {
+            roadSpeed = 10;
+        }
+
+
         InputManager input = FindFirstObjectByType<InputManager>();
-        input.SetupPlayers();
+        if(input != null)
+        {
+            input.SetupPlayers();
+        }
     }
 
     private void UpdateLeader()
