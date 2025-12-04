@@ -6,7 +6,7 @@ public class SectionTrigger : MonoBehaviour
     [SerializeField] private List<GameObject> _roadSectionList;
 
     [SerializeField] Transform spawnPoint;
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("RoadSectionTrigger"))
         {

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fe031162d3cb04d85b9546a3777ba4, type: 3}
   m_Name: BoostPad
   m_EditorClassIdentifier: Assembly-CSharp::ItemObject
-  UI_sprite: {fileID: 21300000, guid: fc29c1382a2ed9c48b8ba929b3818f38, type: 3}
+  UI_sprite: {fileID: 21300000, guid: 6f2374c8312f52347a16255946eb557c, type: 3}
   Prefab: {fileID: 7629297408895275237, guid: e1460896a3afac247b907301ebb7d5a9, type: 3}
   Type: 2

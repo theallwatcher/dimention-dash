@@ -2448,7 +2448,7 @@ MonoBehaviour:
   leader: ' '
   PlayerOneZPos: 
   PlayerTwoZPos: 
-  roadSpeed: 5
+  roadSpeed: 10
   startSpeed: 0
   speedUpInterval: 7
 --- !u!1 &403675094
@@ -2534,6 +2534,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7603339092217405149, guid: 2be44c0e21f74794cbf558d4196dc16f, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 436648892}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2542,6 +2546,11 @@ PrefabInstance:
 --- !u!4 &436648891 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4697449772489147846, guid: 2be44c0e21f74794cbf558d4196dc16f, type: 3}
+  m_PrefabInstance: {fileID: 436648890}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &436648892 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 198739096166536526, guid: 2be44c0e21f74794cbf558d4196dc16f, type: 3}
   m_PrefabInstance: {fileID: 436648890}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &456890439
@@ -6788,6 +6797,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7603339092217405149, guid: 2be44c0e21f74794cbf558d4196dc16f, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1695231852}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6796,6 +6809,11 @@ PrefabInstance:
 --- !u!4 &1695231851 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4697449772489147846, guid: 2be44c0e21f74794cbf558d4196dc16f, type: 3}
+  m_PrefabInstance: {fileID: 1695231850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1695231852 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 198739096166536526, guid: 2be44c0e21f74794cbf558d4196dc16f, type: 3}
   m_PrefabInstance: {fileID: 1695231850}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1751494798

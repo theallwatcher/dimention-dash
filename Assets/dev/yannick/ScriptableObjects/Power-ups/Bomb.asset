@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fe031162d3cb04d85b9546a3777ba4, type: 3}
   m_Name: Bomb
   m_EditorClassIdentifier: Assembly-CSharp::ItemObject
-  UI_sprite: {fileID: 21300000, guid: 09abf8f3ce919994ba0285e236bc1708, type: 3}
+  UI_sprite: {fileID: 21300000, guid: c9823ce3ab08f9e458ef48fd617b1552, type: 3}
   Prefab: {fileID: 6994266929810347259, guid: 05d975f325b88c046aa2d8546f242cc5, type: 3}
   Type: 0
