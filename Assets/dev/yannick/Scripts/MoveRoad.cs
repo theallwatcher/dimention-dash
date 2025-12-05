@@ -9,7 +9,7 @@ public class MoveRoad : MonoBehaviour
     {
         //roadspeed gets updated in gameManager singleton
         rb.position -= new Vector3(0, 0, GameManager.Instance.roadSpeed) * Time.deltaTime;
-       // transform.position -= v
+        // transform.position -= new Vector3(0, 0, GameManager.Instance.roadSpeed) * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
