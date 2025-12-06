@@ -3782,6 +3782,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: dizzy stars
       objectReference: {fileID: 0}
+    - target: {fileID: 5940754065768096787, guid: 3b8544319ec6f9548b21e930075dc312, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6847418732874451034, guid: 3b8544319ec6f9548b21e930075dc312, type: 3}
       propertyPath: m_LocalPosition.x
       value: -86.57743
